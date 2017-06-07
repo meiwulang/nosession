@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.BannerDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	banner_id,banner_path,title,skip_url,category_id,
+			remark,update_version,update_user,status,init_date,init_time,create_user,update_date,update_time,sort,is_skip,app_url,content_type,type,update_user_name,create_user_name
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+        #{banner_id},#{banner_path},#{title},#{skip_url},#{category_id},
+        #{remark},#{update_version},#{update_user},#{status},#{init_date},#{init_time},#{create_user},#{update_date},#{update_time},#{sort},#{is_skip},#{app_url},#{content_type},#{type},
+		#{update_user_name},#{create_user_name}
+	</sql>
+	<sql id="fullWhere">
+		<where>	
+			<if test="banner_id !=null">
+			AND banner_id=#{banner_id}
+			</if>
+			<if test="banner_path !=null">
+			AND banner_path=#{banner_path}
+			</if>
+			<if test="title !=null">
+			AND title=#{title}
+			</if>
+			<if test="skip_url !=null">
+			AND skip_url=#{skip_url}
+			</if>
+			<if test="category_id !=null">
+			AND category_id=#{category_id}
+			</if>
+
+	    <if test="remark != null">
+				AND remark = #{remark}
+		</if>
+		<if test="update_version != null">
+				AND update_version = #{update_version}
+		</if>
+		<if test="update_user != null">
+				AND update_user = #{update_user}
+		</if>
+		<if test="status != null">
+				AND status = #{status}
+		</if>
+		<if test="init_date != null">
+				AND init_date = #{init_date}
+		</if>
+		<if test="init_time != null">
+				AND init_time = #{init_time}
+		</if>
+		
+		<if test="create_user != null">
+				AND create_user = #{create_user}
+		</if>
+		<if test="update_date != null">
+				AND update_date = #{update_date}
+		</if>
+		<if test="update_time != null">
+				AND update_time = #{update_time}
+		</if>
+		<if test="is_skip != null">
+				AND is_skip = #{is_skip}
+		</if>
+		
+		<if test="app_url != null">
+				AND app_url = #{app_url}
+		</if>
+		<if test="content_type != null">
+				AND content_type = #{content_type}
+		</if>
+		
+		<if test="type != null">
+				AND type = #{type}
+		</if>
+		
+		<if test="update_user_name != null">
+				AND update_user_name = #{update_user_name}
+		</if>
+		
+		<if test="create_user_name != null">
+				AND create_user_name = #{create_user_name}
+		</if>
+		<if test="sort != null">
+				AND sort = #{sort}
+		</if>
+				 
+		</where>
+	</sql>
+	
+	<sql id="fullSet">
+		<set>	
+			<if test="banner_id !=null">
+			banner_id=#{banner_id},
+			</if>
+			<if test="banner_path !=null">
+			banner_path=#{banner_path},
+			</if>
+			<if test="title !=null">
+			title=#{title},
+			</if>
+			<if test="skip_url !=null">
+			skip_url=#{skip_url},
+			</if>
+			<if test="category_id !=null">
+			category_id=#{category_id},
+			</if>
+	
+          <if test="remark != null">
+				remark = #{remark},
+		  </if>
+		  <if test="update_version != null">
+				update_version = #{update_version},
+		  </if>
+		  <if test="update_user != null">
+				update_user = #{update_user},
+		  </if>
+          <if test="status != null">
+				status = #{status},
+		</if>
+		<if test="init_date != null">
+				init_date = #{init_date},
+		</if>
+		<if test="init_time != null">
+				init_time = #{init_time},
+		</if>
+		
+		<if test="create_user != null">
+				create_user = #{create_user},
+		</if>
+		<if test="update_date != null">
+				update_date = #{update_date},
+		</if>
+		<if test="update_time != null">
+				update_time = #{update_time},
+		</if>
+		<if test="sort != null">
+				sort = #{sort},
+		</if>
+		<if test="is_skip != null">
+				is_skip = #{is_skip},
+		</if>
+		<if test="app_url != null">
+				app_url = #{app_url},
+		</if>
+		<if test="content_type != null">
+				content_type = #{content_type},
+		</if>
+		
+		<if test="type != null">
+				type = #{type},
+		</if>
+		
+		<if test="update_user_name != null">
+				update_user_name = #{update_user_name},
+		</if>
+		
+		<if test="create_user_name != null">
+				create_user_name = #{create_user_name}
+		</if>			  
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into banner ( 
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update 	banner 
+		<include refid="fullSet"></include>
+		where banner_id=#{banner_id}		
+	</update>
+	
+	<delete id="delete">
+		delete 
+		from banner 
+		where banner_id=#{key}	
+	</delete>
+
+	<select id="get" resultType="Banner">
+		select
+		<include refid="fullColumns" />
+		from banner
+		where banner_id=#{key}		
+	</select>
+	
+	<select id="query" resultType="Banner">
+		select
+		<include refid="fullColumns" />
+		from banner 
+		<include refid="fullWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(banner_id)
+		from banner
+		<include refid="fullWhere"></include>
+	</select>
+	
+	<select id="getBannerList" resultType="Map">
+		select 
+		<include refid="fullColumns" />
+		from banner
+		<include refid="fullWhere"></include>
+		order by banner_id desc,sort asc
+		<include refid="sortAndPage" /> 
+	</select> 
+	
+	<select id="getBannerListNew" resultType="Map">
+		select 
+		<include refid="fullColumns" />
+		from banner
+		<include refid="fullWhere"></include>
+		order by sort asc
+		<include refid="sortAndPage" /> 
+	</select> 
+	
+	<select id="getBannerListByCategoryId" resultType="Map">
+		select 
+		<include refid="fullColumns" />
+		from banner
+		where category_id = #{category_id} and status = '1'
+		order by sort asc
+		
+	</select>
+
+</mapper>

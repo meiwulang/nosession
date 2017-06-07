@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	  xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://code.alibabatech.com/schema/dubbo 
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+     http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean id="dubboResources" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>classpath:conf/dubbo/dubbo.properties</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="dubboPropertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations" ref="dubboResources" />
+	</bean>
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="${dubbo.applicationName}" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry protocol="${dubbo.registryProtocol}" address="${dubbo.registryAddress}" />
+    <!-- 启动不检查提供者 -->
+	<dubbo:consumer check="false" />
+	<dubbo:annotation  package="com.hjh.mall.controller" />
+	<dubbo:annotation  package="com.hjh.mall.service.impl" />
+	
+
+</beans>

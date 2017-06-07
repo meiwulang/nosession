@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjh.mall.bizapi.biz.goods.middle.dao.ShoppingCartDao" >
+  <sql id="tableName" >
+    shopping_cart
+  </sql>
+  <resultMap id="BaseResultMap" type="com.hjh.mall.bizapi.biz.goods.middle.entity.ShoppingCart" >
+    <id column="shopping_cart_id" property="shoppingCartId" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goods_id" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goods_name" jdbcType="VARCHAR" />
+    <result column="show_url" property="show_url" jdbcType="VARCHAR" />
+    <result column="brand_name" property="brand_name" jdbcType="VARCHAR" />
+    <result column="client_id" property="clientId" jdbcType="VARCHAR" />
+    <result column="standard_ids" property="standardIds" jdbcType="VARCHAR" />
+    <result column="init_date" property="initDate" jdbcType="VARCHAR" />
+    <result column="init_time" property="initTime" jdbcType="VARCHAR" />
+    <result column="init_date" property="initDate" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+    <result column="brand_spell" property="brand_spell" jdbcType="VARCHAR" />
+    <result column="brand_id" property="brand_id" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="fullColumns" >
+    shopping_cart_id, goods_id, goods_name, show_url, brand_name, client_id, 
+    standard_ids, init_date, init_time,update_date,update_time,brand_spell,brand_id
+  </sql>
+  <sql id="fullColumnsValues" >
+    #{shoppingCartId}, #{goods_id}, #{goods_name}, #{show_url}, #{brand_name}, #{clientId}, 
+    #{standardIds}, #{initDate}, #{initTime},#{updateDate},#{updateTime},#{brand_spell},#{brand_id}
+  </sql>
+  <select id="get" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="fullColumns" />
+    from shopping_cart
+    where shopping_cart_id = #{shoppingCartId}
+  </select>
+  <select id="queryStandardIds" resultType="java.lang.String" parameterType="java.lang.String" >
+   SELECT GROUP_CONCAT(standard_ids) standard_ids from 
+   shopping_cart WHERE shopping_cart_id in (
+	<foreach item="item" collection="ids" separator=",">
+		#{item}
+	</foreach>
+	)
+  </select>
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from shopping_cart
+    where shopping_cart_id = #{shoppingCartId}
+  </delete>
+  <delete id="batchDel"  >
+    delete from shopping_cart
+    where shopping_cart_id in (
+    <foreach collection="ids" item="item" separator=",">
+    	#{item}
+    </foreach>	
+    )
+  </delete>
+  <update id="update" parameterType="com.hjh.mall.bizapi.biz.goods.middle.entity.ShoppingCart" >
+    update shopping_cart
+    <set >
+      <if test="goods_id != null" >
+        goods_id = #{goods_id},
+      </if>
+      <if test="goods_name != null" >
+        goods_name = #{goods_name},
+      </if>
+      <if test="show_url != null" >
+        show_url = #{show_url},
+      </if>
+      <if test="brand_name != null" >
+        brand_name = #{brand_name},
+      </if>
+      <if test="clientId != null" >
+        client_id = #{clientId},
+      </if>
+      <if test="standardIds != null" >
+        standard_ids = #{standardIds},
+      </if>
+      <if test="initDate != null" >
+        init_date = #{initDate},
+      </if>
+      <if test="initTime != null" >
+        init_time = #{initTime},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="brand_spell != null" >
+        brand_spell = #{brand_spell},
+      </if>
+      <if test="brand_id != null" >
+        brand_id = #{brand_id},
+      </if>
+    </set>
+    where shopping_cart_id = #{shoppingCartId}
+  </update>
+  <sql id="fullWhere" >
+    <where >
+      <if test="shoppingCartId != null" >
+         and shopping_cart_id = #{shoppingCartId}
+      </if>
+      <if test="goods_id != null" >
+         and goods_id = #{goods_id}
+      </if>
+      <if test="goods_name != null" >
+         and goods_name = #{goods_name}
+      </if>
+      <if test="show_url != null" >
+         and show_url = #{show_url}
+      </if>
+      <if test="brand_name != null" >
+         and brand_name = #{brand_name}
+      </if>
+      <if test="clientId != null" >
+         and client_id = #{clientId}
+      </if>
+      <if test="standardIds != null" >
+         and standard_ids = #{standardIds}
+      </if>
+      <if test="initDate != null" >
+         and init_date = #{initDate}
+      </if>
+      <if test="initTime != null" >
+         and init_time = #{initTime}
+      </if>
+      <if test="updateDate != null" >
+         and update_date = #{updateDate}
+      </if>
+      <if test="updateTime != null" >
+        and update_time = #{updateTime}
+      </if>
+      <if test="brand_spell != null" >
+        and brand_spell = #{brand_spell}
+      </if>
+      <if test="brand_id != null" >
+        and brand_id = #{brand_id}
+      </if>
+    </where>
+  </sql>
+  <sql id="likeWhere" >
+    <where >
+      <if test="shoppingCartId != null" >
+         and shopping_cart_id like '%${shoppingCartId}%'
+      </if>
+      <if test="goods_id != null" >
+         and goods_id like '%${goods_id}%'
+      </if>
+      <if test="goods_name != null" >
+         and goods_name like '%${goods_name}%'
+      </if>
+      <if test="show_url != null" >
+         and show_url like '%${show_url}%'
+      </if>
+      <if test="brand_name != null" >
+         and brand_name like '%${brand_name}%'
+      </if>
+      <if test="clientId != null" >
+         and client_id like '%${clientId}%'
+      </if>
+      <if test="standardIds != null" >
+         and standard_ids like '%${standardIds}%'
+      </if>
+      <if test="startTime != null" >
+         and init_date &gt;=${startTime}
+      </if>
+      <if test="endTime != null" >
+         and init_date &lt;=${endTime}
+      </if>
+      <if test="brand_id != null" >
+         and brand_id like '%${brand_id}%'
+      </if>
+    </where>
+  </sql>
+  <select id="query" resultMap="BaseResultMap" >
+    select <include refid="fullColumns"/> from 
+	<include refid="tableName"/> 
+	<include refid="fullWhere"/> 
+	<include refid="sortAndPage"></include>
+  </select>
+  <select id="queryReturnMap" resultType="map" >
+    select <include refid="fullColumns"/> from 
+	<include refid="tableName"/> 
+	<include refid="fullWhere"/> 
+	<include refid="sortAndPage"></include> 
+  </select>
+  <sql id="sortAndPage" >
+    <if test="null != sortMarkers"> order by 
+		<foreach collection="sortMarkers" item="sortMarker" separator=","> 
+			${sortMarker.field} ${sortMarker.direction} 
+		</foreach> 
+	</if> 
+	<if test="null != page"> 
+		limit #{page.offset}, #{page.page_size} 
+	</if>
+  </sql>
+  <select id="countByLike" resultType="int" >
+    select count(1) from
+	<include refid="tableName"/>
+	<include refid="likeWhere"></include>
+  </select>
+  <select id="count" resultType="int" >
+    select count(1) from
+	<include refid="tableName"/>
+	<include refid="fullWhere"></include>
+  </select>
+  <select id="queryByLike" resultType="map" >
+    select <include refid="fullColumns" /> from
+	<include refid="tableName"/>
+	<include refid="likeWhere"></include>
+	<include refid="sortAndPage"></include>
+  </select>
+  <insert id="save" useGeneratedKeys="true" >
+    insert into <include refid="tableName"/>
+	( <include refid="fullColumns"></include> )
+	values( <include refid="fullColumnsValues"></include> )
+  </insert>
+    <select id="getLastshopCart" resultType="Map">
+	  SELECT
+		s.shopping_cart_id,
+		s.brand_id,
+		g.brand_name,
+		g.goods_id,
+		g.goods_name,
+		g.show_url,
+		g.unit_name,
+		g.pay_type,
+		g.font_money_rate,
+		g.goods_status
+	  FROM
+		goods AS g ,
+		shopping_cart AS s
+	  WHERE
+		s.client_id = #{clientId} AND
+		s.shopping_cart_id =#{shoppingCartId} AND 
+		s.goods_id = g.goods_id
+  </select>
+</mapper>

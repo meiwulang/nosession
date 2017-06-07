@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjh.mall.order.dao.LogisticsDao">
+	<resultMap id="BaseResultMap" type="com.hjh.mall.order.model.LogisticsDomain">
+		<id column="LOGISTICS_ID" property="logisticsId" jdbcType="INTEGER" />
+		<result column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+		<result column="CREATE_USER_ID" property="createUserId"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_NO" property="orderNo" jdbcType="INTEGER" />
+		<result column="LOGISTICS_NO" property="logisticsNo" jdbcType="VARCHAR" />
+		<result column="LOGISTICS_NOTE_SNAPSHOT" property="logisticsNoteSnapshot"
+			jdbcType="VARCHAR" />
+		<result column="SENDER_NAME" property="senderName" jdbcType="VARCHAR" />
+		<result column="SENDER_MOBILE" property="senderMobile"
+			jdbcType="VARCHAR" />
+		<result column="LOGISTICS_COMPANY" property="logisticsCompany"
+			jdbcType="VARCHAR" />
+		<result column="DELIVERY_DATE" property="deliveryDate"
+			jdbcType="TIMESTAMP" />
+		<result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+		<result column="CREATE_USER_NAME" property="createUserName"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="fullColumns">
+		LOGISTICS_ID, ORDER_ID,CREATE_USER_ID,
+		ORDER_NO,LOGISTICS_NO,
+		LOGISTICS_NOTE_SNAPSHOT,
+		SENDER_NAME,
+		SENDER_MOBILE, LOGISTICS_COMPANY,
+		DELIVERY_DATE, CREATE_DATE,
+		CREATE_USER_NAME
+	</sql>
+
+	<sql id="fullColumnsValues">
+		#{logisticsId,jdbcType=INTEGER},
+		#{orderId,jdbcType=INTEGER},
+		#{createUserId,jdbcType=INTEGER},
+		#{orderNo,jdbcType=INTEGER},
+		#{logisticsNo,jdbcType=VARCHAR},
+		#{logisticsNoteSnapshot,jdbcType=VARCHAR},
+		#{senderName,jdbcType=VARCHAR},
+		#{senderMobile,jdbcType=VARCHAR},
+		#{logisticsCompany,jdbcType=VARCHAR},
+		#{deliveryDate,jdbcType=TIMESTAMP},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createUserName,jdbcType=VARCHAR}
+	</sql>
+
+	<select id="get" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="fullColumns" />
+		from t_logistics
+		where LOGISTICS_ID = #{logisticsId,jdbcType=INTEGER}
+	</select>
+
+	<select id="getLogisticsByOrderId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="fullColumns" />
+		from t_logistics
+		where ORDER_ID = #{orderId,jdbcType=INTEGER}
+	</select>
+
+
+	<insert id="insert" useGeneratedKeys="true"
+		parameterType="com.hjh.mall.order.model.LogisticsDomain">
+		insert into t_logistics(
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+	</insert>
+
+	<sql id="fullSet">
+		<set>
+			<if test="orderId != null">
+				ORDER_ID = #{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null">
+				ORDER_NO = #{orderNo,jdbcType=INTEGER},
+			</if>
+			<if test="logisticsNo != null">
+				LOGISTICS_NO = #{logisticsNo,jdbcType=VARCHAR},
+			</if>
+			<if test="logisticsNoteSnapshot != null">
+				LOGISTICS_NOTE_SNAPSHOT =
+				#{logisticsNoteSnapshot,jdbcType=VARCHAR},
+			</if>
+			<if test="senderName != null">
+				SENDER_NAME = #{senderName,jdbcType=VARCHAR},
+			</if>
+			<if test="senderMobile != null">
+				SENDER_MOBILE = #{senderMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="logisticsCompany != null">
+				LOGISTICS_COMPANY = #{logisticsCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="deliveryDate != null">
+				DELIVERY_DATE = #{deliveryDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserName != null">
+				CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+			</if>
+		</set>
+	</sql>
+
+	<update id="update" parameterType="com.hjh.mall.order.model.LogisticsDomain">
+		update t_logistics
+		<include refid="fullSet"></include>
+		where LOGISTICS_ID = #{logisticsId,jdbcType=INTEGER}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from t_logistics
+		where
+		LOGISTICS_ID = #{logisticsId,jdbcType=INTEGER}
+	</delete>
+
+	<sql id="fullWhere">
+		<where>
+			<if test="orderId != null">
+				AND ORDER_ID = #{orderId,jdbcType=INTEGER}
+			</if>
+			<if test="createUserId != null">
+				AND CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR}
+			</if>
+			<if test="orderNo != null">
+				AND ORDER_NO = #{orderNo,jdbcType=INTEGER}
+			</if>
+			<if test="logisticsNo != null">
+				AND LOGISTICS_NO = #{logisticsNo,jdbcType=VARCHAR}
+			</if>
+			<if test="logisticsNoteSnapshot != null">
+				AND LOGISTICS_NOTE_SNAPSHOT =
+				#{logisticsNoteSnapshot,jdbcType=VARCHAR}
+			</if>
+			<if test="senderName != null">
+				AND SENDER_NAME = #{senderName,jdbcType=VARCHAR}
+			</if>
+			<if test="senderMobile != null">
+				AND SENDER_MOBILE = #{senderMobile,jdbcType=VARCHAR}
+			</if>
+			<if test="logisticsCompany != null">
+				AND LOGISTICS_COMPANY =
+				#{logisticsCompany,jdbcType=VARCHAR}
+			</if>
+			<if test="deliveryDate != null">
+				AND DELIVERY_DATE = #{deliveryDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createDate != null">
+				AND CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createUserName != null">
+				AND CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+	<select id="query" resultMap="BaseResultMap"
+		parameterType="com.hjh.mall.order.model.LogisticsDomain">
+		select
+		<include refid="fullColumns" />
+		from goods
+		<include refid="fullWhere"></include>
+	</select>
+
+
+</mapper>

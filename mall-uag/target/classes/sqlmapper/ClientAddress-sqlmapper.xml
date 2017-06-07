@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.ClientAddressDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	client_address_id,client_id,provicne,city,area,detail_address,consignee,consignee_tel,address_info,is_default,init_date,init_time,
+			status
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+        #{client_address_id},#{client_id},#{provicne},#{city},#{area},#{detail_address},#{consignee},#{consignee_tel},#{address_info},#{is_default},#{init_date},#{init_time},
+        #{status}
+	</sql>
+	<sql id="fullWhere">
+		<where>	
+			<if test="client_address_id !=null">
+			AND client_address_id=#{client_address_id}
+			</if>
+			<if test="client_id !=null">
+			AND client_id=#{client_id}
+			</if>
+			<if test="provicne !=null">
+			AND provicne=#{provicne}
+			</if>
+			<if test="city !=null">
+			AND city=#{city}
+			</if>
+			<if test="area !=null">
+			AND area=#{area}
+			</if>
+			<if test="detail_address !=null">
+			AND detail_address=#{detail_address}
+			</if>
+			<if test="consignee !=null">
+			AND consignee=#{consignee}
+			</if>
+			<if test="consignee_tel !=null">
+			AND consignee_tel=#{consignee_tel}
+			</if>
+			<if test="address_info !=null">
+			AND address_info=#{address_info}
+			</if>
+			<if test="is_default !=null">
+			AND is_default=#{is_default}
+			</if>
+
+		<if test="init_date != null">
+				AND init_date = #{init_date}
+		</if>
+		<if test="init_time != null">
+				AND init_time = #{init_time}
+		</if>
+		<if test="status != null">
+				AND status = #{status}
+		</if>		 
+		</where>
+	</sql>
+	
+	<sql id="fullSet">
+		<set>	
+			<if test="client_id !=null">
+			client_id=#{client_id},
+			</if>
+			<if test="provicne !=null">
+			provicne=#{provicne},
+			</if>
+			<if test="city !=null">
+			city=#{city},
+			</if>
+			<if test="area !=null">
+			area=#{area},
+			</if>
+			<if test="detail_address !=null">
+			detail_address=#{detail_address},
+			</if>
+			<if test="consignee !=null">
+			consignee=#{consignee},
+			</if>
+			<if test="consignee_tel !=null">
+			consignee_tel=#{consignee_tel},
+			</if>
+			<if test="address_info !=null">
+			address_info=#{address_info},
+			</if>
+			<if test="is_default !=null">
+			is_default=#{is_default},
+			</if>
+		  <if test="init_date != null">
+				init_date = #{init_date},
+		  </if>
+		  <if test="init_time != null">
+				init_time = #{init_time},
+		  </if>
+          <if test="status != null">
+				status = #{status},
+		</if>			  
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into client_address ( 
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update 	client_address 
+		<include refid="fullSet"></include>
+		where client_address_id=#{client_address_id}		
+	</update>
+	
+	<delete id="delete">
+		delete 
+		from client_address 
+		where client_address_id=#{key}	
+	</delete>
+
+	<select id="get" resultType="ClientAddress">
+		select
+		<include refid="fullColumns" />
+		from client_address
+		where client_address_id=#{key}		
+	</select>
+	
+	<select id="query" resultType="ClientAddress">
+		select
+		<include refid="fullColumns" />
+		from client_address 
+		<include refid="fullWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from client_address
+		<include refid="fullWhere"></include>
+	</select>	
+
+	
+</mapper>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.ClientDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	client_id,
+        	password,
+        	mobile_tel,
+        	email,
+        	remark,
+        	update_version,
+        	status,
+        	init_date,
+        	init_time,
+        	invite_code,
+        	client_code
+	    ]]>
+	</sql>
+
+	<sql id="fullWhere">
+		<where>
+			<if test="client_id != null">
+				AND client_id = #{client_id}
+			</if>
+			<if test="password != null">
+				AND password = #{password}
+			</if>
+			<if test="mobile_tel != null">
+				AND mobile_tel = #{mobile_tel}
+			</if>
+			<if test="email != null">
+				AND email = #{email}
+			</if>
+			<if test="remark != null">
+				AND remark = #{remark}
+			</if>
+			<if test="update_version != null">
+				AND update_version = #{update_version}
+			</if>
+			<if test="status != null">
+				AND status = #{status}
+			</if>
+			<if test="init_date != null">
+				AND init_date = #{init_date}
+			</if>
+			<if test="init_time != null">
+				AND init_time = #{init_time}
+			</if>
+			
+			<if test="invite_code != null">
+				AND invite_code = #{invite_code}
+			</if>
+			<if test="client_code != null">
+				AND client_code = #{client_code}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="fullSet">
+		<set>
+			<if test="client_id != null">
+				client_id = #{client_id}
+			</if>
+			<if test="password != null">
+				,password = #{password}
+			</if>
+			<if test="mobile_tel != null">
+				,mobile_tel = #{mobile_tel}
+			</if>
+			<if test="email != null">
+				,email = #{email}
+			</if>
+			<if test="remark != null">
+				,remark = #{remark}
+			</if>
+			<if test="update_version != null">
+				,update_version = #{update_version}
+			</if>
+			<if test="status != null">
+				,status = #{status}
+			</if>
+			<if test="init_date != null">
+				,init_date = #{init_date}
+			</if>
+			<if test="init_time != null">
+				,init_time = #{init_time}
+			</if>
+			
+			<if test="invite_code != null">
+				,invite_code = #{invite_code}
+			</if>
+			<if test="client_code != null">
+				,client_code = #{client_code}
+			</if>
+		</set>
+	</sql>
+	
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	
+	<insert id="save" useGeneratedKeys="true">
+		insert into client ( 
+		<include refid="fullColumns"></include>
+		) values(
+			#{client_id},
+        	#{password},
+        	#{mobile_tel},
+        	#{email},
+        	#{remark},
+        	#{update_version},
+        	#{status},
+        	#{init_date},
+        	#{init_time},
+        	#{invite_code},
+        	#{client_code}
+		)
+	</insert>
+
+	<insert id="batchSave" useGeneratedKeys="true">
+		insert into client (
+		<include refid="fullColumns"></include>
+		) values
+		<foreach item="item" collection="clients" separator=",">
+			(#{item.client_id},#{item.password},#{item.mobile_tel},#{item.email},#{item.remark},#{item.update_version},#{item.status},#{item.init_date},#{item.init_time})
+		</foreach>
+	</insert>
+	<update id="update">
+		update client <include refid="fullSet"></include> 
+		where client_id = #{client_id}		
+	</update>
+
+	<delete id="delete">
+		delete from client where client_id = #{client_id}
+	</delete>
+
+	<select id="get" resultType="client">
+		select
+		<include refid="fullColumns" />
+		from client
+		where client_id = #{client_id}  				
+	</select>	
+	
+	<select id="query" resultType="client">
+		select
+		<include refid="fullColumns" />
+		from client 
+		<include refid="fullWhere"></include>
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(client_id)
+		from client
+		<include refid="fullWhere"></include>
+	</select>
+
+	<select id="getClientByTel" resultType="client">
+		select
+		<include refid="fullColumns" />
+		from client
+		where mobile_tel = #{mobile_tel} limit 1
+	</select>	
+	
+	<sql id="judgeNull">
+		<where>
+			<if test="client_id != null">
+				and c.client_id=#{client_id}
+			</if>
+			<if test="status != null">
+				and c.status=#{status}
+			</if>
+			<if test="nick_name != null">
+				and d.nick_name like concat('%',#{nick_name},'%')
+			</if>
+			<if test="mobile_tel != null">
+				and c.mobile_tel like concat('%',#{mobile_tel},'%')
+			</if>
+			<if test="start_date != null">
+				and CONCAT(c.init_date,c.init_time) &gt;= #{start_date}
+			</if>
+			<if test="end_date != null">
+				and CONCAT(c.init_date,c.init_time) &lt;= #{end_date}
+			</if>
+			
+			<if test="invite_code != null">
+				and c.invite_code like concat('%',#{invite_code},'%')
+			</if>
+			<if test="invite_code_start != null">
+				and c.invite_code &gt;= #{invite_code_start}
+			</if>
+			<if test="invite_code_end != null">
+				and c.invite_code &lt;= #{invite_code_end}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="checkpage">
+		<if test="null != pagination">
+			order by c.init_date desc,c.init_time desc,c.client_id desc
+			limit #{pagination.offset}, #{pagination.page_size}
+		</if>
+	</sql>
+	
+	<select id="countClient" resultType="int">
+		select count(c.client_id)
+		from client c
+		LEFT JOIN client_detail d ON c.client_id = d.client_id
+		<include refid="judgeNull" />
+	</select>
+	
+	<select id="getClientList" resultType="map">
+		select c.client_id,c.client_code,c.invite_code,d.nick_name,c.mobile_tel,d.sex,d.address,c.status,d.area_code,c.init_date,c.init_time,c.remark
+		from client c
+		LEFT JOIN client_detail d ON c.client_id = d.client_id
+		<include refid="judgeNull" />
+		<include refid="checkpage" />
+	</select>
+	
+	<update id="updateStatus">
+		update client set status = #{status}
+		where client_id = #{client_id}		
+	</update>
+	
+	<update id="resetPwd">
+		update client set password = #{password}
+		where client_id = #{client_id}		
+	</update>
+	<select id="queryNickNamesByMobile" resultType="map">
+	SELECT CONCAT(c.mobile_tel,'(',d.nick_name,')') mobile_nick_name ,c.client_id FROM client c,client_detail d WHERE c.client_id = d.client_id  
+	<if test="mobile_tel != null">
+		and (mobile_tel like concat('%',#{mobile_tel},'%')
+		or nick_name like concat('%',#{mobile_tel},'%'))
+	</if>
+	</select>
+	
+		<sql id="queryByMobileAndNameWhere">
+		<where>
+			<if test="mobile_tel !=null">
+				and	c.mobile_tel LIKE  concat('%',#{mobile_tel},'%') || d.nick_name LIKE  concat('%',#{mobile_tel},'%')
+			</if>
+		</where>
+		</sql>
+	
+	<select id="queryByMobileAndName" resultType="map">
+		SELECT
+			c.client_id,CONCAT()c.mobile_tel,"()",d.nick_name,")") as showName
+		FROM
+			client c
+		LEFT JOIN client_detail d ON c.client_id = d.client_id
+		<include refid="queryByMobileAndNameWhere" />
+		<include refid="sortAndPage" />
+	</select>
+	
+	
+</mapper>
+

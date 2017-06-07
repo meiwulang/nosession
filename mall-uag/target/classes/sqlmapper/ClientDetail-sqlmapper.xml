@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.ClientDetailDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+			address,
+			street,
+			avatar_path,
+			real_name,
+			sex,
+			signature,
+			client_id,
+			nick_name,
+			remark,
+        	update_version,
+        	update_user,
+        	status,
+        	area_code
+	    ]]>
+	</sql>
+
+	<sql id="fullWhere">
+		<where>	
+		<if test="address !=null">
+				AND address=#{address}
+		</if>
+		<if test="street !=null">
+				AND street=#{street}
+		</if>
+		<if test="avatar_path!=null">
+				AND avatar_path=#{avatar_path}
+		</if>
+		<if test="real_name!=null">
+				AND real_name=#{real_name}
+		</if>
+		<if test="sex!=null">
+				AND sex=#{sex}
+		</if>
+		<if test="signature!=null">
+				AND signature=#{signature}
+		</if>
+		<if test="client_id!=null">
+				AND client_id=#{client_id}
+		</if>
+		<if test="nick_name !=null">
+				AND nick_name=#{nick_name}
+		</if>
+
+	    <if test="remark!=null">
+				AND remark = #{remark}
+		</if>
+		<if test="update_version!=null">
+				AND update_version = #{update_version}
+		</if>
+		<if test="update_user!=null">
+				AND update_user = #{update_user}
+		</if>
+		<if test="status != null">
+				AND status = #{status}
+		</if>
+		<if test="area_code != null">
+				AND area_code = #{area_code}
+		</if>	
+		
+		</where>
+	</sql>
+	
+	<sql id="fullSet">
+		<set>	
+			<if test="address !=null">
+			address=#{address},
+			</if>
+			<if test="street !=null">
+			street=#{street},
+			</if>
+			<if test="avatar_path !=null">
+			avatar_path=#{avatar_path},
+			</if>
+			<if test="real_name !=null">
+			real_name=#{real_name},
+			</if>
+			<if test="sex !=null">
+			sex=#{sex},
+			</if>
+			<if test="signature !=null">
+			signature=#{signature},
+			</if>
+			<if test="client_id !=null">
+			client_id=#{client_id},
+			</if>
+			<if test="nick_name !=null">
+				nick_name=#{nick_name},
+			</if>
+	
+          <if test="remark != null">
+				remark = #{remark},
+		  </if>
+		  <if test="update_version != null">
+				update_version = #{update_version},
+		  </if>
+		  <if test="update_user != null">
+				update_user = #{update_user},
+		  </if>
+          <if test="status != null">
+				status = #{status},
+		</if>	
+		<if test="area_code != null">
+				area_code = #{area_code},
+		</if>	
+			  
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into client_detail ( 
+		<include refid="fullColumns"></include>
+		) values(
+			#{address},
+			#{street},
+			#{avatar_path},
+			#{real_name},
+			#{sex},
+			#{signature},
+			#{client_id},
+			#{nick_name},
+            #{remark},
+        	#{update_version},
+        	#{update_user},
+        	#{status},
+        	#{area_code}
+   	
+		)
+
+	</insert>
+
+	<update id="update">				
+	</update>
+	
+	<update id="updateClientById">
+		update client_detail <include refid="fullSet"></include> 
+		where client_id = #{client_id}
+	</update>
+	
+	<delete id="delete">	
+	</delete>
+
+	<select id="get" resultType="ClientDetail">
+		select
+		<include refid="fullColumns" />
+		from client_detail	 where client_id = #{client_id}	
+	</select>
+	
+	<select id="getByClientId" resultType="map">
+		select
+			client_id,
+			address,
+			street,
+			avatar_path,
+			real_name,
+			sex,
+			signature,
+			nick_name,
+			area_code
+		from client_detail	where client_id = #{client_id}		
+	</select>
+	
+	<select id="query" resultType="ClientDetail">
+		select
+		<include refid="fullColumns" />
+		from client_detail 
+		<include refid="fullWhere"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(client_id)
+		from client_detail 
+		where 
+		client_id in
+			<foreach item="item" collection="ids" 
+	                       open="(" separator="," close=")">
+	                #{item}
+	        </foreach>			
+	</select>	
+	
+	<select id="countByCommunity" resultType="int">
+		select count(client_id)
+		from client_detail 
+		where 
+		client_id in
+			<foreach item="item" collection="ids" 
+	                       open="(" separator="," close=")">
+	                #{item}
+	        </foreach>			
+	</select>	
+	
+	<select id="getClientByIds" resultType="map">
+		select
+			client_id,
+			address,
+			avatar_path,
+			real_name,
+			sex,
+			signature,
+			nick_name,
+			area_code
+		from client_detail	where client_id in
+			<foreach item="item" collection="ids" 
+	                       open="(" separator="," close=")">
+	                #{item}
+	        </foreach>	
+	        order by client_id desc
+			limit #{page.offset}, #{page.page_size}
+	</select>
+
+	<insert id="batchSave" useGeneratedKeys="true">
+		insert into client_detail (
+		<include refid="fullColumns"></include>
+		) values
+		<foreach item="item" collection="clientDetails" separator=",">
+			(#{item.address},#{item.street},#{item.avatar_path},#{item.real_name},#{item.sex},#{item.signature},#{item.client_id},#{item.nick_name},#{item.remark},#{item.update_version},#{item.update_user},#{item.status},#{item.area_code}))
+		</foreach>
+	</insert>
+	
+</mapper>

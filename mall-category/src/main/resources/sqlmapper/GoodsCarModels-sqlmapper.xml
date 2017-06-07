@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.category.dao.GoodsCarModelsDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	goods_car_models_id,goods_id,car_models_id,create_date,create_time,create_user_name
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+		#{goods_car_models_id},#{goods_id},#{car_models_id},#{create_date},#{create_time},#{create_user_name}
+	</sql>
+	<sql id="fullWhere">
+		<where>
+			<if test="goods_car_models_id !=null"> AND goods_car_models_id=#{goods_car_models_id}
+			</if>
+			<if test="goods_id !=null">
+				AND goods_id=#{goods_id}
+			</if>
+			<if test="car_models_id !=null">
+				AND car_models_id=#{car_models_id}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="fullSet">
+		<set>
+			<if test="goods_id !=null"> goods_id=#{goods_id},
+			</if>
+			<if test="car_models_id !=null">
+				car_models_id=#{car_models_id},
+			</if>
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into goods_car_models (
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update goods_car_models
+		<include refid="fullSet"></include>
+		where goods_car_models_id=#{goods_car_models_id}
+	</update>
+
+	<delete id="delete">
+		delete
+		from goods_car_models
+		where
+		goods_car_models_id=#{key}
+	</delete>
+
+	<select id="get" resultType="GoodsCarModels">
+		select
+		<include refid="fullColumns" />
+		from goods_car_models
+		where goods_car_models_id=#{key}
+	</select>
+
+	<select id="query" resultType="GoodsCarModels">
+		select
+		<include refid="fullColumns" />
+		from goods_car_models
+		<include refid="fullWhere"></include>
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from goods_car_models
+		<include refid="fullWhere"></include>
+	</select>
+	<insert id="saveBatchGoodsCar" useGeneratedKeys="true">
+		insert into goods_car_models (
+		<include refid="fullColumns"></include>
+		) values
+		<foreach item="item" collection="list" separator=",">
+			(#{item.goods_car_models_id},#{item.goods_id},#{item.car_models_id},#{item.create_date},#{item.create_time},#{item.create_user_name})
+		</foreach>
+	</insert>
+
+	<select id="queryModelIds" resultType="String">
+		select
+		car_models_id
+		from goods_car_models
+		<include refid="fullWhere"></include>
+	</select>
+
+	<delete id="batchDelete">
+		delete from goods_car_models where goods_id=#{goods_id}
+		<if test="ids.size() &gt; 0">
+			and car_models_id in
+			<foreach item="item" index="index" collection="ids" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</delete>
+
+	<insert id="batchSave" useGeneratedKeys="true">
+		insert into goods_car_models (
+		<include refid="fullColumns"></include>
+		) values
+		<foreach item="item" collection="list" separator=",">
+			(#{item.goods_car_models_id},#{item.goods_id},#{item.car_models_id},#{item.create_date},#{item.create_time},#{item.create_user_name})
+		</foreach>
+	</insert>
+	
+	<select id="queryNamesByGoodsId" resultType="Map">
+	SELECT
+	REPLACE (GROUP_CONCAT(DISTINCT c.car_models_name),' ','') car_models_names,
+	GROUP_CONCAT(DISTINCT b.brand_name) brand_names,
+	GROUP_CONCAT(DISTINCT m.metadata_name) car_types,
+	g.goods_id
+	FROM
+	`goods_car_models` g,
+	car_models c,
+	car_brand b,
+	metadata m
+	WHERE
+	g.car_models_id = c.car_models_id
+	AND c.brand_id = b.brand_id
+	AND c.metadata_id = m.metadata_id
+	AND goods_id = #{goods_id}
+	</select>
+	<select id="queryGoodsByCarId" resultType="String">
+	
+	SELECT goods_id  FROM `goods_car_models` WHERE car_models_id=#{car_models_id};
+	</select>
+	
+	<select id="queryGoodsByCarIds" resultType="String">
+		SELECT goods_id  FROM `goods_car_models` 
+		WHERE car_models_id in(
+		<foreach collection="ids" item="item" index="index" separator=",">
+	   		#{item}
+		</foreach>)
+	</select>
+</mapper>

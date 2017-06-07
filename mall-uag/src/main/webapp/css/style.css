@@ -1,0 +1,1740 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#wrap {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	z-index: 9;
+}
+
+#left {
+	width: 240px;
+	overflow: hidden;
+	background-color: #293541;
+	position: fixed;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 99;
+}
+
+#left img {
+	width: 100%;
+}
+
+#left h1 {
+	width: 100%;
+	height: 65px;
+	overflow: hidden;
+	position: relative;
+	background: url(../images/logo.png) 28px center no-repeat #e6e6e6;
+}
+
+.leftNavi {
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	color: #fff;
+	cursor: pointer;
+}
+
+.leftNavi .leftNaviOn {
+	background: url(../images/naviIco.png) 22px center no-repeat, url(../images/naviUp.png) right center no-repeat;
+}
+
+.leftNavi dl {
+	width: 240px;
+}
+
+.leftNavi dl dt {
+	font-size: 18px;
+	width: 200px;
+	height: 55px;
+	line-height: 55px;
+	border-bottom: 1px solid #3c4754;
+	background: url(../images/naviIco.png) 22px center no-repeat, url(../images/naviDown.png) right center no-repeat;
+	text-indent: 60px;
+	margin-left: 10px;
+}
+
+.leftNavi .leftNaviOns {
+	color: #fdae60;
+	text-indent: 66px;
+	border-left: 2px solid #fdae60;
+	box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.leftNavi dl dd {
+	width: 240px;
+	font-size: 16px;
+	height: 40px;
+	line-height: 40px;
+	display: none;
+	text-indent: 68px;
+	margin-top: 3px;
+}
+
+#right {
+	float: right;
+	position: relative;
+	height: 100%;
+	background-color: #f0f1f5;
+}
+
+.exit {
+	width: 100%;
+	height: 64px;
+	position: relative;
+	background-color: #fff;
+}
+
+.exitBot {
+	position: absolute;
+	width: 22px;
+	height: 22px;
+	right: 86px;
+	top: 21px;
+	cursor: pointer;
+}
+
+.rightPos {
+	width: 98%;
+	margin-left: 2%;
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	color: #808080;
+	background: url(../images/rightPos.png) left center no-repeat;
+}
+
+.rightPosTit {
+	margin-left: 22px;
+}
+
+.main {
+	width: 98%;
+	margin-left: 2%;
+	background-color: #fff;
+	overflow-x: auto;
+	overflow-y: auto;
+	position: relative;
+}
+
+.mainTitle {
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+}
+
+.mainTitle h2 {
+	margin-left: 16px;
+	padding: 0 15px;
+	font-size: 14px;
+	min-width: 100px;
+	height: 60px;
+	display: inline-block;
+}
+
+.mainOperation {
+	width: 100%;
+	height: 80px;
+	clear: both;
+	overflow-x: auto;
+	white-space: nowrap;
+	position: relative;
+	overflow-y: hidden;
+}
+
+.mainOperationInput select {
+	width: 180px;
+	font-size: 14px;
+	z-index: 99;
+	height: 32px;
+}
+
+.add {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+}
+
+.add input {
+	margin-left: 20px;
+}
+
+.add .marT1 {
+	margin-top: 20px;
+}
+
+.mainOperationInput {
+	display: inline-block;
+	margin-top: 24px;
+	margin-left: 20px;
+	position: relative;
+}
+.mainOperationInput span{
+	position: relative;
+	display: inline-block;
+}
+
+.mainOperationInput input {
+	display: inline-block;
+}
+
+.mainLists {
+	width: 100%;
+	clear: both;
+	overflow-x: auto;
+	overflow-y: auto;
+	position: relative;
+}
+
+.list dt,
+dd,
+ul,
+li {
+	display: inline-block;
+}
+
+.list {
+	margin: 20px 20px 50px 20px;
+}
+
+.list table {
+	border: 1px solid #c6cedb;
+	text-align: center;
+	word-break: keep-all;
+	width: 100%;
+}
+
+.list table td {
+	border: 1px solid #c6cedb
+}
+
+.list table th {
+	height: 46px;
+	line-height: 46px;
+	color: #333;
+	font-size: 18px;
+	text-align: center;
+	background-color: #f1f4f7;
+	border: 1px solid #c6cedb;
+	padding: 0 10px;
+	word-break: keep-all;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.list table .checkBox {
+	width: 20px;
+	padding: 0 10px;
+}
+
+.list table td {
+	height: 38px;
+	line-height: 38px;
+	font-size: 14px;
+	padding: 0 10px;
+	max-width: 360px;
+	word-break: keep-all;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.list table .productTd {
+	max-width: 490px;
+	min-width: 470px;
+	overflow: auto;
+}
+
+.list table .productO {
+	max-width: 400px;
+	min-width: 400px;
+	overflow: auto;
+}
+
+.list table .showImg img {
+	margin-top: 10px;
+}
+
+.list table td .productDESC {
+	text-align: center;
+	font-size: 14px;
+	box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	overflow: hidden;
+}
+
+.list table td .productImg {
+	float: left;
+	margin: 10px;
+	width: 70px;
+	height: 80px;
+}
+
+.list table td .productImg img {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.list table td .productName {
+	width: 140px;
+	word-break: break-all;
+	white-space: normal;
+	margin: 10px;
+	text-align: left;
+	text-overflow: ellipsis;
+}
+
+.list table td .productName1 {
+	margin-top: 10px;
+	max-width: 140px;
+	text-align: left;
+	line-height: 18px;
+}
+
+.list table td .productName2 {
+	color: #D9D9D9;
+	text-align: left;
+	line-height: 18px;
+	margin-top: 15px;
+}
+
+.list table td .productClass {
+	margin: 10px;
+	width: 170px;
+	text-align: left;
+	word-break: keep-all;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.list table td .productName3 {
+	text-indent: 10px;
+	text-align: left;
+	line-height: 24px;
+	word-break: normal;
+	width: auto;
+	display: block;
+	word-wrap: break-word;
+	overflow: hidden;
+}
+
+.list table td .productName3 .emFirst {
+	width: 140px;
+	display: inline-block;
+}
+
+.list table td .productName3 .standard_detail {
+	max-width: 180px;
+	min-width: 120px;
+	display: inline-block;
+	word-break: keep-all;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.list table td .productName3 .prdt_price {
+	width: 90px;
+	display: inline-block;
+	word-break: keep-all;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.list table td .productName3 .prdt_price i{
+	color: red;
+}
+
+.list table td .productName3 .prdt_num {
+	width: 50px;
+	display: inline-block;
+	word-break: keep-all;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: red;
+}
+
+.list table td img {
+	width: 80px;
+	height: 30px;
+	overflow: hidden;
+}
+
+.list .carParameter {
+	height: 55px;
+    min-width: 1500px;
+    font-size: 14px;
+    margin: 20px 0;
+    overflow-x: auto;
+    background-color: #F4F4F4;
+    border: 1px solid #D9D9D9;
+}
+
+.list .goodsParameter {
+	height: 105px;
+	min-width: 1500px;
+	font-size: 14px;
+	margin: 20px 0;
+	text-align: center;
+	background-color: #F4F4F4;
+	border: 1px solid #D9D9D9;
+}
+.list .goodsParameter label {
+	width: 90px;
+	line-height: 34px;
+	display: inline-block;
+	float: left;
+	margin: 30px;
+}
+.list .goodsParameter .leftParameter {
+	float: left;
+	width: 600px;
+}
+
+.list .goodsParameter .rightParameter {
+	float: left;
+	width: 600px;
+}
+
+.list .goodsParameter .rightParameter .rightLabel {
+	width: 60px;
+}
+.list .goodsParameter .rightParameter textarea {
+	float: left;
+	width: 280px;
+	height: 80px;
+	margin: 10px;
+	resize: none;
+}
+.list p {
+	width: 100%;
+	font-size: 14px;
+	margin: 20px 10px 20px 0;
+}
+
+.list p img {
+	margin-left: 10px;
+	width: 15px;
+	height: 10px;
+	overflow: hidden;
+}
+
+.list .carParameter label {
+	width: 90px;
+	line-height: 34px;
+	display: inline-block;
+	float: left;
+	margin: 10px;
+}
+.list .carParameter .label1 {
+	width: auto;
+	line-height: 34px;
+	display: inline-block;
+	float: left;
+	margin: 10px;
+}
+
+.list .carParameter label em,.leftParameter label em{
+	color: red;
+	text-align: center;
+}
+
+.list .carParameter img {
+	width: 100px;
+	height: 25px;
+	overflow: hidden;
+	margin: 15px 10px;
+}
+
+.list .carParameter span {
+	line-height: 34px;
+	display: inline-block;
+	float: left;
+	margin: 10px;
+}
+
+.list .carParameter .leftParameter {
+	float: left;
+	width: 600px;
+}
+
+.list .carParameter .rightParameter {
+	float: left;
+	width: 600px;
+}
+
+.list .carParameter .rightParameter .rightLabel {
+	width: 60px;
+}
+
+.list .addParameter,
+.list .addParameter2 {
+	height: 55px;
+	width: 100%;
+	font-size: 14px;
+	margin: 20px 0;
+	text-align: center;
+	color: #D9D9D9;
+	border: 1px dashed #cccccc;
+	border-radius: 3px;
+	line-height: 55px;
+}
+
+.list .addParameter,
+.list .addStandard {
+	height: 55px;
+	min-width: 1500px;
+	font-size: 14px;
+	margin: 20px 0;
+	text-align: center;
+	color: #D9D9D9;
+	border: 1px dashed #cccccc;
+	border-radius: 3px;
+	line-height: 55px;
+}
+
+.addCarType {
+	width: 100%;
+	height: 50px;
+	text-align: center;
+}
+
+.page {
+	position: relative;
+	bottom: 40px;
+	right: 20px;
+	text-align: right;
+	color: #fdae60;
+}
+
+.pageList {
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.page span {
+	border: 1px solid #c6cedb;
+	display: inline-block;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	line-height: 22px;
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	margin-right: 5px;
+}
+
+.page ul li {
+	border: 1px solid #c6cedb;
+	display: inline-block;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	line-height: 22px;
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	margin-right: 5px;
+}
+
+.page .pageListOn {
+	color: #fff;
+	background-color: #fdae60;
+}
+
+.page span:hover {
+	color: #fff;
+	background-color: #fdae60;
+}
+
+.pageSelect {
+	border: 1px solid #c6cedb;
+	display: inline-block;
+	height: 24px;
+	line-height: 24px;
+	margin-right: 5px;
+}
+
+.page .pageGo {
+	display: inline-block;
+}
+
+.page .pageGo input {
+	width: 40px;
+	height: 24px;
+	line-height: 24px;
+	margin: 0 5px;
+	text-align: center;
+	color: #fdae60;
+	border: 1px solid #fdae60;
+}
+
+.resultNum {
+	margin-left: 40px;
+}
+
+.resultNum label {
+	color: #faae60;
+}
+
+.shade,
+.shadeShow,
+.shadePro,
+.shadeImg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 100;
+	display: none;
+}
+
+.shade {
+	z-index: 101;
+}
+
+.shadeImg{
+	z-index: 102;
+}
+
+.shadeCon,
+.shadeCons,
+.shadeConst,
+.shadeM,
+.shadeWord {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	display: none;
+	overflow: hidden;
+}
+
+.shadeMain {
+	width: 80%;
+	min-height: 400px;
+	margin: 100px auto 0;
+	background-color: #fff;
+	position: relative;
+	overflow: hidden;
+}
+
+.shadeMain h4 {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 18px;
+	text-align: center;
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+
+.shadeMain1 {
+	width: 60%;
+	min-height: 400px;
+	margin: 100px auto 0;
+	background-color: #fff;
+	position: relative;
+	overflow: hidden;
+}
+
+.shadeMain1 h4 {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 18px;
+	text-align: center;
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+
+.shadeMain1 .marB0 {
+	margin-bottom: 0;
+}
+
+.shadeBotPos {
+	width: 100%;
+	margin: 20px auto 20px;
+	overflow: hidden;
+	text-align: center;
+}
+
+.shadeBotPos span {
+	display: inline-block;
+}
+
+.addInvite {
+	width: 100%;
+	overflow: auto;
+	max-height: 500px;
+	/*min-height: 500px;*/
+	margin: 0 auto;
+}
+
+.shadeConst .addInvite {
+	border-bottom: 1px solid #D9D9D9;
+	padding-bottom: 20px;
+}
+
+.shadeConst .showImage,.shadeWord .showImage {
+	width: 100%;
+	overflow-y: auto;
+	max-height: 500px;
+	margin: 50px auto;
+	text-align: center;
+}
+
+.shadeConst .showImage img,.shadeWord .showImage img {
+	max-width: 80%;
+	max-height: 500px;
+	overflow: hidden;
+}
+
+.addInvite li {
+	width: 90%;
+    min-width: 1150px;
+    margin: 20px;
+    display: block;
+    padding: 10px 0;
+}
+
+.addInvite .parameter {
+	border: none;
+	width: 90%;
+	margin: 20px;
+	display: block;
+	margin-bottom: 1px;
+}
+
+.addInvite .goodsParameter {
+	width: 90%;
+	display: block;
+	text-align: center;
+	background-color: #F4F4F4;
+	border: 1px solid #D9D9D9;
+}
+
+.addInvite .words {
+	padding: 10px 50px;
+}
+
+.addInvite .addP,
+.addInvite .addPP {
+	border: 1px dashed #D0D0D0;
+	width: 90%;
+	margin: 20px;
+	text-align: center;
+	display: block;
+	color: #5E96DB;
+}
+
+.addInvite .parameter img {
+	margin-left: 10px;
+	width: 14px;
+	height: 14px;
+	overflow: hidden;
+}
+
+.addInvite .addCheck {
+	width: 15px;
+	margin-left: 5%;
+	margin-right: 10px;
+}
+
+.addInvite li label {
+	display: inline-block;
+	width: 12%;
+	vertical-align: middle;
+	margin-left: 60px;
+}
+
+.addInvite li textarea {
+	display: inline-block;
+	width: 280px;
+	height: 80px;
+	vertical-align: middle;
+	overflow: auto;
+}
+.addInvite li .jxlabel {
+	display: inline-block;
+	width: 12%;
+	position: relative;
+	top: 0;
+	margin-left: 60px;
+}
+
+.addInvite li .jylabel {
+	display: inline-block;
+	width: 22%;
+	position: relative;
+	top: 0;
+	margin-left: 60px;
+}
+
+.addInvite li .paraLabel {
+	display: inline-block;
+	width: 6%;
+	margin-left: 5%;
+}
+
+.addInvite li span {
+	display: inline-block;
+	width: 50%;
+	vertical-align: middle;
+}
+
+.addInvite li .spantext {
+	width: 100px;
+	word-break: normal;
+	display: inline-block;
+	white-space:pre-wrap;
+	overflow: hidden;
+	word-wrap: break-word;
+	vertical-align: middle;
+}
+
+.addInvite li .addDESC {
+	display: inline-block;
+	width: 80%;
+}
+
+.addInvite li .addDESC .jixing {
+	width: 30%;
+	padding-right: 2%;
+	display: inline-block;
+	margin: 0 auto;
+}
+
+.addInvite li .describe {
+	width: 15%;
+	display: inline-block;
+	margin: 0 auto;
+}
+
+.addInvite li .indexDD {
+	color: #C9C9C9;
+	margin-left: 80px;
+	width: 5%;
+	display: inline-block;
+}
+
+.addInvite li .describe1 {
+	margin-left: 20px;
+	width: 8%;
+	display: inline-block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	vertical-align: middle;
+}
+
+.addInvite li img {
+	width: 100px;
+	height: 25px;
+	overflow: auto;
+}
+
+.addInvite li .zhanwei {
+	width: 335px;
+	height: auto;
+	overflow: auto;
+}
+
+.addInvite li label span {
+	display: inline-block;
+	width: 10px;
+	color: #ff0000;
+}
+
+.addInvite li input {
+	display: inline-block;
+	width: 200px;
+	overflow: hidden;
+	height: 30px;
+	line-height: 30px;
+}
+
+.addInvite li select {
+	display: inline-block;
+	width: 200px;
+	overflow: hidden;
+	height: 30px;
+	line-height: 30px;
+}
+
+.addInvite li .inviteNum2 {
+	display: inline-block;
+	width: 120px;
+	overflow: hidden;
+	height: 30px;
+	line-height: 30px;
+}
+
+.addInvite li .deletePara {
+	width: auto;
+	height: 30px;
+	float: right;
+	margin: 0 15px;
+}
+
+.addInvite li .deletePa{
+	width: auto;
+	height: 30px;
+	float: right;
+	margin: 20px 15px;
+}
+
+.addInvite .imgShowD {
+	width: 100%;
+	height: 210px;
+	margin: 0 auto;
+	text-align: center;
+	overflow: auto;
+}
+
+.addInvite .imgShowD .bannerS {
+	float: left;
+	margin: 40px 20px;
+	position: relative;
+}
+
+.addInvite .imgShowD .bannerSh {
+	float: left;
+	margin: 40px 0;
+	position: relative;
+}
+
+.addInvite .imgShowD .bannerShow {
+	float: left;
+	margin: 20px 10px;
+	position: relative;
+}
+.addInvite .imgShowD .detail_form_show{
+	margin-bottom: 60px;
+}
+
+.addInvite .imgShowD .bannerShow img,
+.addInvite .imgShowD .bannerS img,
+.addInvite .imgShowD .bannerSh img {
+	width: 110px;
+	height: 110px;
+	overflow: hidden;
+}
+
+.addInvite .imgShowD .bannerShow .delete,
+.addInvite .imgShowD .bannerShow .edit {
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    left: -20px;
+    top: -45px;
+}
+.addInvite .imgShowD .bannerS .delete,
+.addInvite .imgShowD .bannerS .edit {
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    top: -45px;
+}
+
+.addInvite .imgShowD .bannerShow .inputText5 {
+	width: 120px;
+	height: 32px;
+	line-height: 32px;
+	text-indent: 10px;
+	border: 1px solid #c6cedb;
+	/* float: left; */
+	border-radius: 3px;
+	text-overflow: ellipsis;
+	word-wrap: inherit;
+	overflow: hidden;
+	position: relative;
+	bottom: -80px;
+	margin-left: -100px;
+}
+
+.addInvite .imgShowD .addIco {
+	float: left;
+	margin: 80px 40px;
+}
+
+.addInvite .imgShowD .addIco img {
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+}
+
+.list .imgShow {
+	height: 270px;
+	min-width: 1500px;
+	font-size: 14px;
+	margin: 20px 0;
+	border: 1px solid #D9D9D9
+}
+
+.list .imgShow .carParameter {
+	border: none;
+	margin: 0;
+}
+
+.list .imgShow .imgShowD {
+	width: 100%;
+	height: 210px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.list .imgShow .imgShowD .bannerShow {
+	float: left;
+	margin: 30px 20px;
+}
+
+.list .imgShow .imgShowD .bannerShow img {
+	width: 110px;
+	height: 110px;
+	overflow: hidden;
+}
+
+.list .imgShowD .bannerShow .inputText5 {
+	width: 120px;
+	height: 32px;
+	line-height: 32px;
+	text-indent: 10px;
+	border: 1px solid #c6cedb;
+	/* float: left; */
+	border-radius: 3px;
+	text-overflow: ellipsis;
+	word-wrap: inherit;
+	overflow: hidden;
+	position: relative;
+	bottom: -30px;
+	margin-left: -115px;
+}
+.list .imgShowD .bannerShow textarea {
+	width: 130px;
+	height: 48px;
+	line-height: 24px;
+	border: 1px solid #c6cedb;
+	border-radius: 3px;
+	overflow: auto;
+	position: relative;
+	bottom: -60px;
+	margin-left: -120px;
+	resize: none;
+}
+.addInvite .imgShowD .bannerShow textarea{
+	width: 130px;
+	height: 60px;
+	line-height: 24px;
+	border: 1px solid #c6cedb;
+	border-radius: 3px;
+	overflow: auto;
+	position: relative;
+	bottom: -100px;
+	margin-left: -110px;
+	resize: none;
+}
+
+.list .imgShow .imgShowD .bannerShow .delete,
+.list .imgShow .imgShowD .bannerShow .edit {
+	width: 15px;
+	height: 15px;
+	overflow: hidden;
+	position: relative;
+	display: inline-block;
+	margin-left: 5px;
+	top: -90px;
+}
+
+.list .imgShow .imgShowD .addIco {
+	float: left;
+	margin: 60px 50px;
+}
+
+
+/*selectClass1*/
+
+.selectClass3 {
+	position: absolute;
+	width: 680px;
+	height: 400px;
+	left: 50%;
+	margin-left: -380px;
+	top: 25%;
+	background-color: white;
+	border: 1px solid #D9D9D9;
+	border-radius: 5px;
+}
+
+.selectClass31 {
+	height: 50px;
+	width: 100%;
+	border-bottom: 1px solid #D9D9D9;
+}
+
+.selectClass31 span {
+	text-align: center;
+	margin: 17px 20px;
+	float: left;
+	font-size: 16px;
+	font-weight: 600;
+	color: #3c4754;
+}
+
+.selectClass32 {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	height: 300px;
+	border-bottom: 1px solid #D9D9D9;
+}
+
+.floatL {
+	float: left;
+}
+
+.clearfloat:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0;
+}
+
+.clearfloat {
+	zoom: 1;
+	border-bottom: 3px solid #ff9800;
+}
+
+.inputbtn {
+	width: 60px;
+	height: 20px!important;
+	line-height: 20px!important;
+	margin: 6px 0;
+	background: #fd8f00!important;
+	color: #fff!important;
+	font-size: 12px!important;
+	border-radius: 4px;
+}
+
+.inputbtn-b {
+	width: 60px;
+	height: 20px!important;
+	line-height: 20px!important;
+	margin: 6px 0;
+	background: #fff!important;
+	color: #808080!important;
+	font-size: 12px!important;
+	border-radius: 4px;
+	border: 1px #ccc solid;
+}
+
+.tc-btn {
+	width: 660px;
+	float: left;
+	margin-top: 5px;
+	text-align: right;
+}
+
+.tc-btn li {
+	width: 60px;
+	text-align: center;
+	font-size: 14px;
+	padding: 5px;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.set-okbtn {
+	background: #fd8f00!important;
+	border-radius: 3px;
+	color: #fff!important;
+}
+
+.cancel-btn {
+	border: 1px #cccccc solid;
+	border-radius: 3px;
+	margin-left: 12px;
+}
+
+
+/*====================================================*/
+
+.set2 {
+	width: 652px;
+	height: 400px;
+	background: #fff;
+	border: 1px #c2c2c2 solid;
+	-webkit-box-shadow: 0 0 10px #ddd;
+	-moz-box-shadow: 0 0 10px #ddd;
+	box-shadow: 0 0 10px #ddd;
+	padding: 1%;
+	position: absolute;
+}
+
+.s-1,
+.s-1-select {
+	width: 22%;
+	margin-left: 15px;
+	border-left: 1px solid #D9D9D9;
+}
+
+.s-1-select {
+	border-right: 1px solid #D9D9D9;
+}
+
+.s-2 {
+	width: 22%;
+	border-left: 1px solid #D9D9D9;
+}
+
+.s-3 {
+	width: 22%;
+	border-left: 1px solid #D9D9D9;
+	border-right: 1px solid #D9D9D9;
+}
+
+.s-3 li,
+.s-2 li,
+.s-1 li,
+.s-1-select li {
+	line-height: 22px;
+	height: 22px;
+	padding: 0 5%;
+}
+
+.s-3 li:hover,
+.s-2 li:hover,
+.s-1 li:hover,
+.s-1-select li:hover {
+	background: #fce7cc;
+}
+
+.s-pu_active {
+	background: #fce7cc;
+}
+
+.s-pu {
+	float: left;
+	height: 300px;
+	background: #fff;
+	outline: none;
+	font-size: 12px;
+	overflow-y: auto;
+}
+
+.inpuw-cp {
+	width: 60px;
+	height: auto;
+	float: left;
+	margin: 45px 10px;
+}
+
+.cho-name {
+	width: 180px;
+	margin: 0!important;
+	float: left;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.cho-name-t {
+	width: 180px;
+	text-indent: 10px;
+	margin: 0!important;
+	float: left;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.chk_1,
+.chk_2,
+.chk_3,
+.chk_4,
+.chk_5,
+.chk_6,
+.chk_7,
+.chk_8,
+.chk_9,
+.chk_10,
+.chk_12,
+.chk_13,
+.chk_14 {
+	display: none;
+}
+
+.radio1,
+.radio2,
+.radio3 {
+	display: none;
+}
+
+
+/*******多选框样式*******/
+
+.chk_2+label {
+	display: inline-block;
+	position: relative;
+	color: #FFF;
+	font-size: 1.7em;
+}
+
+.chk_2+label:hover {
+	/*border-top: 1px solid #FC8C1E;*/
+}
+
+.chk_2+label:active {
+	border-top: none;
+}
+
+.chk_2+label:after {
+	content: ' ';
+	width: 12px;
+	position: absolute;
+	top: 3px;
+	right: 2px;
+	background-image: url("../images/metro.png");
+	background-position: -6px -5px;
+	height: 12px;
+}
+
+.chk_2+label:before {
+	content: ' ';
+	width: 14px;
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	z-index: 999;
+	background-image: url("../images/metro.png");
+	background-position: -26px -4px;
+	height: 13px;
+	display: none;
+}
+
+.chk_2:checked+label:before {
+	display: block;
+}
+
+.checkMT {
+	float: right!important;
+	top: 8%;
+	right: 8%
+}
+
+.checkMT_o {
+	float: left!important;
+	top: -8%;
+	left: -40%
+}
+
+.selected {
+	overflow-y: auto;
+	height: 300px;
+	clear: both;
+	width: 28%;
+}
+
+.selected1 {
+	width: 40%;
+	overflow-y: auto;
+	height: 300px;
+	clear: both;
+}
+
+.selected li,
+.selected1 li {
+	float: left;
+	background-color: #D9D9D9;
+	color: #808080;
+	line-height: 18px;
+	display: block;
+	margin: 10px;
+	padding: 5px 10px;
+	border: 1px solid #E1E5E7;
+	border-radius: 3px;
+}
+
+.selected li img,
+.selected1 li img {
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+}
+
+
+/*selectClass1*/
+
+.shadeThree {
+	width: 90%;
+	margin: 10px auto 0;
+	height: 300px;
+}
+
+.shadeThreeLeft,
+.shadeThreeCenter,
+.shadeThreeRight,
+.shadeThreeChose {
+	width: 22%;
+	height: 300px;
+	overflow-y: auto;
+	float: left;
+	border: 1px solid #c6cedb;
+	box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	margin-right: 3%;
+}
+
+.shadeThreeLeft dl {
+	display: none;
+}
+
+.shadeThreeLeft ul {
+	width: 100%;
+}
+
+.shadeThreeLeft li {
+	width: 100%;
+}
+
+.shadeThreeLeft li span {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-indent: 10px;
+	display: block;
+}
+
+.shadeThreeCenter dt {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-indent: 10px;
+	display: block;
+}
+
+.shadeThreeRight dd {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-indent: 10px;
+	display: block;
+}
+
+.shadeThreeCenter dl dd {
+	display: none;
+}
+
+.shadeThreeChose dd {
+	display: inline-block;
+	margin-left: 10px;
+	margin-top: 10px;
+	padding: 5px 10px;
+	background-color: #393939;
+	color: #fff;
+}
+
+.shadeThree .addColor {
+	background-color: #ff9800;
+	color: #fff;
+}
+
+.datainp {
+	width: 150px;
+}
+
+.pattern_name {
+    display: inline-block;
+    float: left;
+    width: 160px;
+    height: 200px;
+    top: 32px;
+    border: 1px solid #66afe9;
+    border-top: 0px;
+    overflow: auto;
+    display: none;
+    background: wheat;
+    z-index: 9999;
+}
+
+.pattern_item {
+	width: 100%;
+	height: 20px;
+	margin-top: 1px;
+	font-size: 13px;
+	line-height: 20px;
+}
+
+.viewBg{
+	width:100%;
+	height:100%;
+	position:absolute;
+	left:0;
+	top:0;
+	background:rgba(0,0,0,0.6);
+	z-index:99;
+	visibility: hidden;
+}
+.viewBody{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	position:relative;
+}
+.viewIphone{
+	width: 431px;
+	height: 875px;
+	margin: 50px auto 0;
+	background:url(../images/Iphone6-Black.png) center center no-repeat;
+	overflow: hidden;
+}
+.viewIphoneMain{
+	width: 374px;
+	margin: 100px auto 0;
+	height: 670px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	position: relative;
+	padding-bottom: 40px;
+}
+.viewBanner{
+	width: 100%;
+	height: 225px;
+	position: relative;
+	overflow: hidden;
+}
+.viewBanner img{
+	width: 100%;
+	height: 225px;
+}
+.viewCotent{
+	width: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+	clear: both;
+}
+.viewCotent h1{
+	margin: 5px auto 5px;
+	width: 93%;
+}
+.viewAdver{
+	width: 93%;
+	height: 35px;
+	margin: 5px auto 5px;
+	background-color: #fff;
+}
+.viewAdver img{
+	width: 100%;
+	height: 100%;
+}
+.viewBgColor{
+	width: 100%;
+	height: 10px;
+	background-color: #f0eeec;
+}
+.shopIntroduce{
+	width: 100%;
+	overflow: hidden;
+}
+.shopIntroduce dl{
+	width: 100%;
+	overflow: hidden;
+}
+.shopIntroduce dl dt{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	font-size: 18px;
+	color: #333;
+	font-weight: bold;
+	margin: 0 auto;
+	text-indent: 3.5%;
+	border-bottom: 1px solid #333;
+}
+.shopIntroduce dl dd{
+	width: 100%;
+	clear: both;
+	overflow: hidden;
+	line-height: 30px;
+}
+.shopIntroduce dl dd label{
+	width: 25%;
+	text-indent: 3.5%;
+	display: inline-block;
+	float: left;
+}
+.shopIntroduce dl dd span{
+	width: 75%;
+	display: inline-block;
+	float: right;
+}
+.shopIntroduce dl li{
+	width: 100%;
+	overflow: hidden;
+}
+.shopIntroduce dl li h5{
+	width: 93%;
+	line-height: 24px;
+	margin: 0 auto;
+}
+.shopIntroduce dl li img{
+	width: 93%;
+	display: block;
+	margin: 0 auto;
+}
+.detailsNavi{
+	width: 100%;
+	overflow: hidden;
+	word-break: break-all;
+}
+.detailsNaviTop{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	overflow: hidden;
+	border-bottom: 1px solid #ec283f;
+}
+.detailsNaviLeft{
+	width: 50%;
+	text-indent: 3.5%;
+	float: left;
+	background-size: 1px 25px;
+}
+.detailsNaviRight{
+	width: 50%;
+	float: right;
+}
+.closeView{
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+.closeView img{
+	width: 100%;
+	height: 100%;
+}
+.viewFooter{
+	width: 374px;
+	height: 40px;
+	position: fixed;
+	left: 50%;
+	top: 800px;
+	margin-left: -67px;
+}
+.viewFooterLeft{
+	width: 80px;
+	height: 40px;
+	float: left;
+	background: url(../images/detail_contact.png) center center no-repeat #fff;
+	background-size: 24px 26px;
+}
+.viewFooterRight{
+	width: 294px;
+	float: left;
+	float: left;
+	text-align: center;
+	height: 40px;
+	color: #fff;
+	font-size: 18px;
+	background-color: #EC283F;
+	position: relative;
+}
+.viewFooterNav{
+	width: 374px;
+	position: absolute;
+	top: -200px;
+	right: 0;
+	z-index: 99;
+	background-color: #fff;
+	color: #333;
+	display: none;
+	height: 200px;
+	overflow-y: auto;
+}
+.viewFooterNav li{
+	width: 100%;
+}
+.viewFooterPend ul li{
+	width: 100%;
+}
+.viewFooterPend{
+	width: 100%;
+}
+.viewFooterPend h4{
+	font-size: 16px;
+}
+.viewFooterPend h4 span{
+    float: right;
+    margin-right: 5px;
+    margin-left: 0;
+}
+.viewFooterPend dt{
+	border-bottom: 1px solid #dbdbdb;
+	width: 100%;
+	line-height: 25px;
+	text-align: left;
+	text-indent: 3.5%;
+}
+.viewFooterPend span{
+	margin-left: 15px;
+}
+.viewFooter .viewFooterPend li dl dd{
+	width: 100%;
+	height: 25px;
+	line-height: 25px;
+	text-align: left;
+	font-size: 14px;
+	margin: 0;
+}
+.detailsCon{
+	width: 93%;
+	margin: 0 auto 40px;
+	overflow: hidden;
+	display: block;
+}
+.detailsFit{
+	width: 93%;
+	margin: 0 auto 40px;
+	overflow: hidden;
+	display: block;
+	line-height: 24px;
+}
+.detailsCon img{
+	width: 100%;
+}
+.detailsFit li{
+	width: 100%;
+	display: block;
+}

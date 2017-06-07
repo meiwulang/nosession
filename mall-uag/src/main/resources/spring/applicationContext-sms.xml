@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                          http://www.springframework.org/schema/context 
+                        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                        "
+	default-autowire="byName">
+	<context:annotation-config />
+	<bean id="smsResource" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>classpath:conf/sms/sms.properties</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="smsCFG"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations" ref="smsResource" />
+	</bean>
+	<bean id="sms" class="com.hjh.mall.common.sms.alibaba.SendMessageImp">
+		<!-- <property name="appkey" value="${sms_app_key}" /> -->
+		<property name="secret" value="${sms_app_secret}" />
+		<property name="url" value="${sms_request_url}" />
+		<property name="login_code" value="${sms_template_code_login}" />
+		<property name="regis_code" value="${sms_template_code_regis}" />
+		<property name="activity_code" value="${sms_template_code_activity}" />
+		<property name="update_password_code" value="${sms_template_code_update_password}" />
+		<property name="update_info_code" value="${sms_template_code_update_info}" />
+		<property name="login_unusual_code" value="${sms_template_code_login_unusual}" />
+		<property name="request_times" value="${sms_request_times}" />
+		<property name="verify_failure" value="${sms_verify_failure}" />
+		<property name="request_interval" value="${sms_request_interval}" />
+		<property name="valid_tim" value="${sms_valid_time}" />
+		<property name="request_tatla" value="${sms_request_tatla}" />
+		<property name="request_time" value="${sms_request_time}" />
+		<property name="sign" value="${sms_sign}" />
+		<property name="product" value="${sms_product}" />
+	</bean>
+
+	<bean id="smsConfig" class="com.hjh.mall.common.sms.config.SmsConfig">
+		<property name="url" value="${sms_request_url}" />
+		<property name="appkey" value="${sms_app_key}" />
+		<property name="secret" value="${sms_app_secret}" />
+		<property name="proxyHost" value="${http_proxy_ip}" />
+		<property name="proxyPort" value="${http_proxy_port}" />
+	</bean>
+
+	<!--工程中只存在一个此对象 -->
+	<bean id="smsClient" class="com.hjh.mall.common.sms.factory.HJHSMSClientFactory"
+		factory-method="getTaobaoClient">
+		<constructor-arg name="smsConfig" ref="smsConfig" />
+	</bean>
+	
+	<bean id="smsSendMessageService" class="com.hjh.mall.util.SmsMessageImpl"></bean>
+
+</beans>

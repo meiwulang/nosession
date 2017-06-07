@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjh.mall.order.dao.OrderPaymentProofDao" >
+    <resultMap id="BaseResultMap" type="com.hjh.mall.order.model.OrderPaymentProofDomain" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+        <result column="PAYMENT_USER_NAME" property="paymentUserName" jdbcType="VARCHAR" />
+        <result column="PAYMENT_PROOF_SNAPSHOT" property="paymentProofSnapshot" jdbcType="VARCHAR" />
+        <result column="BANK_ACCOUNT" property="bankAccount" jdbcType="VARCHAR" />
+        <result column="PAYMENT_ACCOUNT" property="paymentAccount" jdbcType="VARCHAR" />
+        <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+    
+    <sql id="fullWhere">
+		<where>
+			<if test="orderId != null">
+				AND ORDER_ID = #{orderId,jdbcType=INTEGER}
+			</if>
+			<if test="paymentProofSnapshot != null">
+				AND PAYMENT_PROOF_SNAPSHOT = #{paymentProofSnapshot,jdbcType=VARCHAR}
+			</if>
+			<if test="bankAccount != null">
+				AND BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="paymentAccount != null">
+				AND PAYMENT_ACCOUNT = #{paymentAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="amount != null">
+				AND AMOUNT = #{amount,jdbcType=DECIMAL}
+			</if>
+			<if test="createDate != null">
+				AND CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+</sql>
+
+    <sql id="Base_Column_List" >
+        ID, ORDER_ID, PAYMENT_USER_NAME,PAYMENT_PROOF_SNAPSHOT, BANK_ACCOUNT, PAYMENT_ACCOUNT, AMOUNT, CREATE_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_order_payment_proof
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.hjh.mall.order.model.OrderPaymentProofDomain" >
+        insert into t_order_payment_proof (ID, ORDER_ID, PAYMENT_USER_NAME,PAYMENT_PROOF_SNAPSHOT,
+            BANK_ACCOUNT, PAYMENT_ACCOUNT, AMOUNT, 
+            CREATE_DATE)
+        values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER},
+          #{paymentUserName,jdbcType=VARCHAR},
+          #{paymentProofSnapshot,jdbcType=VARCHAR},
+            #{bankAccount,jdbcType=VARCHAR}, #{paymentAccount,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
+            #{createDate,jdbcType=TIMESTAMP})
+    </insert>
+    
+    <select id="get" resultMap="BaseResultMap" parameterType="string" >
+        select 
+      	  <include refid="Base_Column_List" />
+        from t_order_payment_proof
+       	where ID = #{orderId,jdbcType=INTEGER}
+    </select>
+    
+    <select id="query" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select 
+      	  <include refid="Base_Column_List" />
+        from t_order_payment_proof
+       	 <include refid="fullWhere" />
+    </select>
+    
+    <select id="getOrderPayProof" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select 
+      	  <include refid="Base_Column_List" />
+        from t_order_payment_proof
+       	where ORDER_ID = #{orderId,jdbcType=INTEGER}
+    </select>
+
+    <update id="update" parameterType="com.hjh.mall.order.model.OrderPaymentProofDomain" >
+        update t_order_payment_proof
+        <set >
+            <if test="orderId != null" >
+                ORDER_ID = #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="paymentUserName != null" >
+                PAYMENT_USER_NAME = #{paymentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="paymentProofSnapshot != null" >
+                PAYMENT_PROOF_SNAPSHOT = #{paymentProofSnapshot,jdbcType=VARCHAR},
+            </if>
+            <if test="bankAccount != null" >
+                BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="paymentAccount != null" >
+                PAYMENT_ACCOUNT = #{paymentAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null" >
+                AMOUNT = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from t_order_payment_proof
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="${dubbo.applicationName}" />
+
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry protocol="${dubbo.registryProtocol}"
+                    address="${dubbo.registryAddress}" />
+
+    <dubbo:protocol name="${dubbo.protocolName}" port="${dubbo.protocolPort}"
+                    threadpool="${dubbo.protocolThreadpool}" threads="${dubbo.protocolThreads}" />
+
+    <dubbo:provider retries="${dubbo.providerRetries}"
+                    timeout="${dubbo.providerTimeout}" />
+
+
+    <dubbo:service
+            interface="com.hjh.mall.order.api.OrderCloudService"
+            ref="orderCloudService" version="1.0.0" />
+
+</beans>

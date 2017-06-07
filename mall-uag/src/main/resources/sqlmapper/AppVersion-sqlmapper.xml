@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.AppVersionDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	version_id,version_info,package_url,update_date,update_time,version_no,app_type,force_update,version_status,version_title,creater_name,creater_id,status,app_name
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+        #{version_id},#{version_info},#{package_url},#{update_date},#{update_time},#{version_no},#{app_type},#{force_update}
+        ,#{version_status},#{version_title},#{creater_name},#{creater_id},#{status},#{app_name}
+	</sql>
+	<sql id="fullWhere">
+		<where>	
+			<if test="version_id !=null">
+			AND version_id=#{version_id}
+			</if>
+			<if test="version_info !=null">
+			AND version_info=#{version_info}
+			</if>
+			<if test="package_url !=null">
+			AND package_url=#{package_url}
+			</if>
+			<if test="update_date !=null">
+			AND update_date=#{update_date}
+			</if>
+			<if test="version_no !=null">
+			AND version_no=#{version_no}
+			</if>
+			<if test="app_type !=null">
+			AND app_type=#{app_type}
+			</if>
+			<if test="force_update !=null">
+			AND force_update=#{force_update}
+			</if>
+			<if test="version_status !=null">
+			AND version_status=#{version_status}
+			</if>
+			<if test="version_title !=null">
+			AND version_title=#{version_title}
+			</if>
+			<if test="creater_name !=null">
+			AND creater_name=#{creater_name}
+			</if>
+			<if test="creater_id !=null">
+			AND creater_id=#{creater_id}
+			</if>
+			<if test="status !=null">
+			AND status=#{status}
+			</if>
+			<if test="app_name !=null">
+			AND app_name=#{app_name}
+			</if>
+	 
+		</where>
+	</sql>
+	
+	<sql id="fullSet">
+		<set>	
+			<if test="version_id !=null">
+			version_id=#{version_id},
+			</if>
+			<if test="version_info !=null">
+			version_info=#{version_info},
+			</if>
+			<if test="package_url !=null">
+			package_url=#{package_url},
+			</if>
+			<if test="update_date !=null">
+			update_date=#{update_date},
+			</if>
+			<if test="update_time !=null">
+			update_time=#{update_time},
+			</if>
+			<if test="version_no !=null">
+			version_no=#{version_no},
+			</if>
+			<if test="app_type !=null">
+			app_type=#{app_type},
+			</if>
+			<if test="force_update !=null">
+			force_update=#{force_update},
+			</if>
+		  	<if test="version_status !=null">
+			version_status=#{version_status},
+			</if>
+			<if test="version_title !=null">
+			version_title=#{version_title},
+			</if>
+			<if test="creater_name !=null">
+			creater_name=#{creater_name},
+			</if>
+			<if test="creater_id !=null">
+			creater_id=#{creater_id},
+			</if>
+			<if test="status !=null">
+			status=#{status},
+			</if>
+			<if test="app_name !=null">
+			app_name=#{app_name}
+			</if>
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into app_version ( 
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update 	app_version 
+		<include refid="fullSet"></include>	
+	</update>
+	
+	<delete id="delete">
+		delete 
+		from app_version 
+		where version_id=#{key}	
+	</delete>
+
+	<select id="get" resultType="AppVersion">
+		select
+		<include refid="fullColumns" />
+		from app_version
+		where version_id=#{key}		
+	</select>
+	
+	<select id="query" resultType="AppVersion">
+		select
+		<include refid="fullColumns" />
+		from app_version 
+		<include refid="fullWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from app_version
+		<include refid="fullWhere"></include>
+	</select>	
+	<select id="queryLastVersion" resultType="appversion">
+		select
+		version_id,version_info,package_url,update_date,version_no,force_update,app_name,version_title
+		from app_version  where app_type=#{app_type} and app_name=#{app_name} and version_status='1' and status='1' order by update_date desc limit 1
+	</select>
+	
+	<sql id="whereLike">
+		<where>
+			<if test="version_status !=null">
+				AND version_status like CONCAT('%',#{version_status},'%')
+			</if>
+			<if test="app_type !=null">
+				AND app_type like CONCAT('%',#{app_type},'%')
+			</if>
+			<if test="force_update !=null">
+				AND force_update like CONCAT('%',#{force_update},'%')
+			</if>
+			<if test="version_title !=null">
+				AND version_title like CONCAT('%',#{version_title},'%')
+			</if>
+			<if test="version_no !=null">
+				AND version_no like CONCAT('%',#{version_no},'%')
+			</if>
+			<if test="creater_name !=null">
+				AND creater_name like CONCAT('%',#{creater_name},'%')
+			</if>
+			<if test="date_end !=null">
+				AND  CONCAT(update_date,update_time) <![CDATA[<=]]> #{date_end}
+			</if>
+			<if test="date_start !=null">
+				AND CONCAT(update_date,update_time) <![CDATA[>=]]> #{date_start}
+			</if>
+			<if test="status !=null">
+				AND status=#{status}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="checkpage">
+		<if test="null != page">
+			order by version_id desc
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	
+	
+	<select id="getAppVersionList" resultType="appversion">
+		select
+		version_id,version_info,package_url,update_date,version_no,app_type,force_update,version_status,
+		version_title,creater_name,creater_id,status,app_name
+		from app_version  
+		<include refid="whereLike" />
+		<include refid="checkpage" />
+	</select>
+	
+	<select id="countAppVersionList" resultType="int">
+		select
+		count(version_id)
+		from app_version
+		<include refid="whereLike" /> 
+	</select>
+	
+	<select id="queryBlur" resultType="appversion">
+		select
+		version_id,version_info,package_url,update_date,version_no,app_type,force_update,version_status,
+		version_title,creater_name,creater_id,status,app_name
+		from app_version  
+		<include refid="whereLike" />
+		<include refid="checkpage" />
+	</select>
+	
+	<select id="queryCountBlur" resultType="int">
+		select
+		count(version_id)
+		from app_version
+		<include refid="whereLike" /> 
+	</select>
+	
+	<update id="updateVersionStatus">
+		update 	app_version 
+		set version_status = #{version_status} 
+		where version_id = #{version_id}
+	</update>	
+	
+	<update id="updateVersion">
+		update 	app_version 
+		<include refid='fullSet' />
+		where version_id = #{version_id}
+	</update>
+	
+	<update id="falseDelete">
+		update 	app_version 
+		set status = #{status}
+		where version_id = #{version_id}
+	</update>
+</mapper>

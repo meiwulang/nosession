@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="robots" content="all">
+    <meta name="author" content="sn">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width,target-densitydpi=medium-dpi,user-scalable=no,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>后台管理系统</title>
+    <link type="text/css" rel="stylesheet" href="./lib/simditor/styles/simditor.css">
+</head>
+<body>
+	<div id="app" class="hjh-wrap">
+		<div id="left" class="hjh-left">
+			<h1></h1>
+			<div id="menu" class="hjh-menu">
+				<el-menu default-active="defaultActive" :unique-opened="uniqueOpened" class="el-menu-vertical-demo" theme="dark">
+					<el-submenu :index="index+'-'" v-for="(item,index) in menuList" :key="item.group">
+						<template slot="title"><i :class="'el-icon-'+ (item.icon || 'menu')"></i>{{item.group}}</template>
+						<el-menu-item v-for="(child,k) in item.list" :index="index+'-'+k" :key="child.link" v-if="!child.list">
+							<a :href="'#'+child.link">{{child.title}}</a>
+						</el-menu-item>
+						<el-submenu v-for="(child,k) in item.list" :index="index+'-'+k" v-if="child.list">
+							<template slot="title">{{child.title}}</template>
+							<el-menu-item v-for="(_child,n) in child.list" :index="index+'-'+k+'-'+n" :key="_child.link">
+								<a :href="'#'+_child.link">{{_child.title}}</a>
+							</el-menu-item>
+						</el-submenu>
+					</el-submenu>
+				</el-menu>
+			</div>
+		</div>
+		<div id="right" class="hjh-right">
+			<div class="exit">
+				<div class="exitBot" @click="logout">
+					
+				</div>
+			</div>
+			<div id="container" class="hjh-container">
+				<router-view></router-view>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<!--<script src="./lib/zepto.min.js"></script>-->
+<script src="./lib/simditor/scripts/jquery.min.js"></script>
+<script src="./lib/simditor/scripts/module.js"></script>
+<script src="./lib/simditor/scripts/hotkeys.js"></script>
+<script src="./lib/simditor/scripts/uploader.js"></script>
+<script src="./lib/simditor/scripts/simditor.js"></script>

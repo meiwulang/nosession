@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.InvitationDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	invite_id,invite_code,invite_customer,invite_customer_name,init_date,init_time,
+			remark,update_user,status,update_date,update_time,update_user_name,create_user,create_user_name,business_hotline
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+        #{invite_id},#{invite_code},#{invite_customer},#{invite_customer_name},#{init_date},#{init_time},
+        #{remark},#{update_user},#{status},#{update_date},#{update_time},#{update_user_name},#{create_user},#{create_user_name},#{business_hotline}
+	</sql>
+	<sql id="fullWhere">
+		<where>	
+			<if test="invite_id !=null">
+			AND invite_id=#{invite_id}
+			</if>
+			<if test="invite_code !=null">
+			AND invite_code=#{invite_code}
+			</if>
+			<if test="invite_customer !=null">
+			AND invite_customer=#{invite_customer}
+			</if>
+			<if test="invite_customer_name !=null">
+			AND invite_customer_name=#{invite_customer_name}
+			</if>
+			<if test="remark !=null">
+			AND remark=#{remark}
+			</if>
+			<if test="init_date !=null">
+			AND init_date=#{init_date}
+			</if>
+			<if test="init_time !=null">
+			AND init_time=#{init_time}
+			</if>
+
+	    <if test="remark != null">
+				AND remark = #{remark}
+		</if>
+
+		<if test="update_user != null">
+				AND update_user = #{update_user}
+		</if>
+		<if test="status != null">
+				AND status = #{status}
+		</if>		
+		 
+		 <if test="update_date != null">
+				AND update_date = #{update_date}
+		</if>
+
+		<if test="update_time != null">
+				AND update_time = #{update_time}
+		</if>
+		<if test="update_user_name != null">
+				AND update_user_name = #{update_user_name}
+		</if>	
+		<if test="create_user != null">
+				AND create_user = #{create_user}
+		</if>
+
+		<if test="create_user_name != null">
+				AND create_user_name = #{create_user_name}
+		</if>
+		
+		<if test="business_hotline != null">
+				AND business_hotline = #{business_hotline}
+		</if>
+		</where>
+	</sql>
+	
+	<sql id="blurWhere">
+		<where>	
+			<if test="invite_id !=null">
+			AND invite_id=#{invite_id}
+			</if>
+			<if test="invite_code !=null">
+			AND invite_code like CONCAT('%',#{invite_code},'%') 
+			</if>
+			<if test="invite_code_start !=null">
+			AND invite_code &gt;= #{invite_code_start} 
+			</if>
+			<if test="invite_code_end !=null">
+			AND invite_code &lt;= #{invite_code_end} 
+			</if>
+			<if test="invite_customer !=null">
+			AND invite_customer=#{invite_customer}
+			</if>
+			<if test="invite_customer_name !=null">
+			AND invite_customer_name like CONCAT('%',#{invite_customer_name},'%') 
+			</if>
+			<if test="remark !=null">
+			AND remark like CONCAT('%',#{remark},'%') 
+			</if>
+			<if test="start_date !=null">
+			AND CONCAT(init_date,init_time) &gt;= '${start_date}${start_time}'
+			</if>
+			<if test="end_date !=null">
+			AND CONCAT(init_date,init_time) &lt;= '${end_date}${end_time}'
+			</if>
+		
+		<if test="update_user != null">
+				AND update_user = #{update_user}
+		</if>
+		<if test="status != null">
+				AND status = #{status}
+		</if>
+		<if test="update_date != null">
+				AND update_date = #{update_date}
+		</if>
+
+		<if test="update_time != null">
+				AND update_time = #{update_time}
+		</if>
+		<if test="update_user_name != null">
+				AND update_user_name = #{update_user_name}
+		</if>	
+		<if test="create_user != null">
+				AND create_user = #{create_user}
+		</if>
+
+		<if test="create_user_name != null">
+				AND create_user_name like CONCAT('%',#{create_user_name},'%') 
+		</if>
+		<if test="business_hotline != null">
+				AND business_hotline like CONCAT('%',#{business_hotline},'%') 
+		</if>
+		</where>
+	</sql>
+	
+	<sql id="fullSet">
+		<set>	
+			<if test="invite_id !=null">
+			invite_id=#{invite_id},
+			</if>
+			<if test="invite_code !=null">
+			invite_code=#{invite_code},
+			</if>
+			<if test="invite_customer !=null">
+			invite_customer=#{invite_customer},
+			</if>
+			<if test="invite_customer_name !=null">
+			invite_customer_name=#{invite_customer_name},
+			</if>
+			<if test="remark !=null">
+			remark=#{remark},
+			</if>
+			<if test="init_date !=null">
+			init_date=#{init_date},
+			</if>
+			<if test="init_time !=null">
+			init_time=#{init_time},
+			</if>
+		  <if test="update_user != null">
+				update_user = #{update_user},
+		  </if>
+          <if test="status != null">
+				status = #{status},
+		</if>	
+		<if test="update_date != null">
+				update_date = #{update_date},
+		</if>
+
+		<if test="update_time != null">
+				update_time = #{update_time},
+		</if>
+		<if test="update_user_name != null">
+				update_user_name = #{update_user_name},
+		</if>	
+		<if test="create_user != null">
+				create_user = #{create_user},
+		</if>
+
+		<if test="create_user_name != null">
+				create_user_name = #{create_user_name},
+		</if>
+		
+		<if test="business_hotline != null">
+				business_hotline = #{business_hotline}
+		</if>		  
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into invitation ( 
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update 	invitation 
+		<include refid="fullSet"></include>
+		where invite_id=#{invite_id}		
+	</update>
+	
+	<delete id="delete">
+		delete 
+		from invitation 
+		where invite_id=#{key}	
+	</delete>
+
+	<select id="get" resultType="Invitation">
+		select
+		<include refid="fullColumns" />
+		from invitation
+		where Invite_id=#{key}		
+	</select>
+	
+	<select id="query" resultType="Invitation">
+		select
+		<include refid="fullColumns" />
+		from invitation 
+		<include refid="fullWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from invitation
+		<include refid="fullWhere"></include>
+	</select>
+	
+	<select id="queryBlur" resultType="Invitation">
+		select
+		<include refid="fullColumns" />
+		from invitation 
+		<include refid="blurWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	
+	<select id="countBlur" resultType="int">
+		select count(*)
+		from invitation
+		<include refid="blurWhere"></include>
+	</select>
+
+	
+</mapper>

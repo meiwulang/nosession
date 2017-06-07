@@ -1,0 +1,253 @@
+.boxSizing{
+	box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.borBot1{
+	border-bottom:1px solid #c6cedb;
+}
+.borBot2{
+	border-bottom: 3px solid #ff9800;
+}
+.bor1{
+	border:1px solid #c6cedb;
+}
+.fl-l{
+	float: left;
+}
+.fl-r{
+	float: right;
+}
+.cor1{
+	color: #bfbfbf;
+}
+.cor2{
+	color: #ff9800;
+}
+.inputText1{
+	width: 160px;
+	height: 32px;
+	line-height: 32px;
+	text-indent: 10px;
+	border: 1px solid #c6cedb;
+	box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	text-overflow: ellipsis;
+	word-wrap: inherit;
+	overflow:hidden;
+}
+.inputText2{
+	width: 280px;
+	height: 32px;
+	line-height: 32px;
+	text-indent: 10px;
+	border: 1px solid #c6cedb;
+	float: left;
+	margin: 10px;
+	border-radius: 3px;
+	text-overflow: ellipsis;
+	word-wrap: inherit;
+	overflow:hidden;
+}
+.inputText3{
+	width: 120px;
+	height: 32px;
+	line-height: 32px;
+	text-indent: 10px;
+	border: 1px solid #c6cedb;
+	box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	text-overflow: ellipsis;
+	word-wrap: inherit;
+	overflow:hidden;
+}
+.inputText4{
+	width: 250px;
+	height: 30px;
+	font-size: 14px;
+	line-height: 32px;
+	text-indent: 10px;
+	border-radius: 3px;
+	border: 1px solid #c6cedb;
+	text-overflow: ellipsis;
+	word-wrap: inherit;
+	overflow:hidden;
+	float: right;
+	margin: 10px 20px;
+}
+
+.inputText6{
+	width: 200px;
+	height: 32px;
+	line-height: 32px;
+	text-indent: 10px;
+	border: 1px solid #c6cedb;
+	box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	text-overflow: ellipsis;
+	word-wrap: inherit;
+	overflow:hidden;
+}
+.inputBot1{
+	padding: 0 32px;
+	background-color: #377cb8;
+	color: #fff;
+	font-size: 16px;
+	border: none;
+	line-height: 1;
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	height: 33px;
+	line-height: 33px;
+	display: inline-block;
+	cursor:pointer;
+}
+.inputBot2{
+	padding: 0 32px;
+	background-color: #fdae60;
+	color: #fff;
+	font-size: 16px;
+	border: none;
+	line-height: 1;
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	height: 33px;
+	line-height: 33px;
+	display: inline-block;
+	cursor:pointer;
+}
+.inputBot4{
+	padding: 0 32px;
+	background-color: #eb4234;
+	color: #fff;
+	font-size: 16px;
+	border: none;
+	line-height: 1;
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	height: 33px;
+	line-height: 33px;
+	display: inline-block;
+	cursor:pointer;
+}
+.inputBot3{
+	padding: 0 16px;
+	background-color: #199ED8;
+	color: #fff;
+	font-size: 14px;
+	border: none;
+	line-height: 1;
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	height: 25px;
+	float: right;
+	margin: 15px;
+	display: inline-block;
+	cursor:pointer;
+}
+.marR1{
+	margin-right: 10px;
+}
+.marR2{
+	margin-right: 3px;
+}
+.marR3{
+	margin-right: 100px;
+}
+.marL1{
+	margin-left: 10px;
+}
+.mar1{
+	margin: 10px;
+}
+.mar2{
+	margin: 30px 0;
+}
+.marT1{
+	margin-top: 10px;
+}
+.tableBot1{
+	border: 1px solid #fbbd04;
+	color: #fbbd04;
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 4px 14px;
+	background-color: #fff;
+	cursor:pointer;
+}
+.tableBot2{
+	border: 1px solid #32a951;
+	color: #32a951;
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 4px 14px;
+	background-color: #fff;
+	cursor:pointer;
+}
+.tableBot3{
+	border: 1px solid #4285f5;
+	color: #4285f5;
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 4px 14px;
+	background-color: #fff;
+	cursor:pointer;
+}
+.tableBot4{
+	border: 1px solid #eb4234;
+	color: #eb4234;
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 4px 14px;
+	background-color: #fff;
+	cursor:pointer;
+}
+.shadeBot{
+	width: 100px;
+	height: 32px;
+	background-color: #ff9800;
+	color: #fff;
+	text-align: center;
+	line-height: 32px;
+	cursor:pointer;
+}
+.floatL{
+	float: left;
+}
+.textU{
+	text-decoration:underline;
+	color: #DE5347;
+}
+.mainLists tr:hover{
+	background-color: #eee;
+}
+.trActive{
+	background-color: #eee;
+}
+textarea{
+	resize: none;
+	line-height: 24px;
+}

@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.bizapi.biz.goods.middle.dao.GoodsDao">
+	<sql id="queryJsonColumns">
+        <![CDATA[
+        	goods_id,goods_name,banner_ids,show_url
+	    ]]>
+	</sql>
+	<sql id="fullColumns">
+        <![CDATA[
+        	goods_id,category_id,brand_name,factory_detail,goods_name,price_area,banner_ids,detail_ids,info_ids,standard_ids,tel,goods_status,ad_url,update_date,update_time,
+			remark,update_version,update_user,status,init_date,init_time,sort,brand_id,third_category_id,update_user_name,unit_id,show_url,
+	  		first_category_id,first_category_name,second_category_id,second_category_name,third_category_name,create_user_id,create_user_name,unit_name,min_price,sale_num,adapt_all_models,
+	  		pay_type,font_money_rate
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+		#{goods_id},#{category_id},#{brand_name},#{factory_detail},#{goods_name},#{price_area},#{banner_ids},#{detail_ids},#{info_ids},#{standard_ids},#{tel},#{goods_status},#{ad_url},#{update_date},#{update_time},
+		#{remark},#{update_version},#{update_user},#{status},#{init_date},#{init_time},#{sort},#{brand_id},#{third_category_id},#{update_user_name},#{unit_id},#{show_url},
+		#{first_category_id},#{first_category_name},#{second_category_id},#{second_category_name},#{third_category_name},#{create_user_id},#{create_user_name},#{unit_name},#{min_price},
+		#{sale_num},#{adapt_all_models},#{pay_type},#{font_money_rate}
+	</sql>
+	<sql id="fullWhere">
+		<where>
+			<if test="goods_id !=null"> AND goods_id=#{goods_id}
+			</if>
+			<if test="category_id !=null">
+				AND category_id=#{category_id}
+			</if>
+			<if test="brand_name !=null">
+				AND brand_name=#{brand_name}
+			</if>
+			<if test="factory_detail !=null">
+				AND factory_detail=#{factory_detail}
+			</if>
+			<if test="goods_name !=null">
+				AND goods_name=#{goods_name}
+			</if>
+			<if test="price_area !=null">
+				AND price_area=#{price_area}
+			</if>
+			<if test="banner_ids !=null">
+				AND banner_ids=#{banner_ids}
+			</if>
+			<if test="detail_ids !=null">
+				AND detail_ids=#{detail_ids}
+			</if>
+			<if test="info_ids !=null">
+				AND info_ids=#{info_ids}
+			</if>
+			<if test="standard_ids !=null">
+				AND standard_ids=#{standard_ids}
+			</if>
+			<if test="tel !=null">
+				AND tel=#{tel}
+			</if>
+			<if test="goods_status !=null">
+				AND goods_status=#{goods_status}
+			</if>
+			<if test="ad_url !=null">
+				AND ad_url=#{ad_url}
+			</if>
+			<if test="update_date !=null">
+				AND update_date=#{update_date}
+			</if>
+			<if test="update_time !=null">
+				AND update_time=#{update_time}
+			</if>
+			<if test="remark != null">
+				AND remark = #{remark}
+			</if>
+			<if test="update_version != null">
+				AND update_version = #{update_version}
+			</if>
+			<if test="update_user != null">
+				AND update_user = #{update_user}
+			</if>
+			<if test="status != null">
+				AND status = #{status}
+			</if>
+			<if test="init_date != null">
+				AND init_date = #{init_date}
+			</if>
+			<if test="init_time != null">
+				AND init_time = #{init_time}
+			</if>
+			<if test="update_date != null">
+				AND update_date = #{update_date}
+			</if>
+			<if test="update_time != null">
+				AND update_time = #{update_time}
+			</if>
+			<if test="sort != 0">
+				AND sort = #{sort}
+			</if>
+			<if test="brand_id != null">
+				AND brand_id = #{brand_id}
+			</if>
+			<if test="third_category_id != null">
+				AND third_category_id = #{third_category_id}
+			</if>
+			<if test="update_user_name != null">
+				AND update_user_name = #{update_user_name}
+			</if>
+			<if test="unit_id != null">
+				AND unit_id = #{unit_id}
+			</if>
+			<if test="show_url != null">
+				AND show_url = #{show_url}
+			</if>
+			<if test="first_category_id != null">
+				AND first_category_id = #{first_category_id}
+			</if>
+			<if test="first_category_name != null">
+				AND first_category_name = #{first_category_name}
+			</if>
+			<if test="second_category_id != null">
+				AND second_category_id = #{second_category_id}
+			</if>
+			<if test="second_category_name != null">
+				AND second_category_name = #{second_category_name}
+			</if>
+			<if test="third_category_name != null">
+				AND third_category_name = #{third_category_name}
+			</if>
+			<if test="create_user_id != null">
+				AND create_user_id = #{create_user_id}
+			</if>
+			<if test="create_user_name != null">
+				AND create_user_name = #{create_user_name}
+			</if>
+			<if test="unit_name != null">
+				AND unit_name = #{unit_name}
+			</if>
+			<if test="min_price != null">
+				AND min_price = #{min_price}
+			</if>
+			<if test="sale_num != null">
+				AND sale_num = #{sale_num}
+			</if>
+			<if test="adapt_all_models != null">
+				AND adapt_all_models = #{adapt_all_models}
+			</if>
+			<if test="pay_type != null">
+				AND pay_type = #{pay_type}
+			</if>
+			<if test="font_money_rate != null">
+				AND font_money_rate = #{font_money_rate}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="fullSet">
+		<set>
+			<if test="category_id !=null"> category_id=#{category_id},
+			</if>
+			<if test="brand_name !=null">
+				brand_name=#{brand_name},
+			</if>
+			<if test="factory_detail !=null">
+				factory_detail=#{factory_detail},
+			</if>
+			<if test="goods_name !=null">
+				goods_name=#{goods_name},
+			</if>
+			<if test="price_area !=null">
+				price_area=#{price_area},
+			</if>
+			<if test="banner_ids !=null">
+				banner_ids=#{banner_ids},
+			</if>
+			<if test="detail_ids !=null">
+				detail_ids=#{detail_ids},
+			</if>
+			<if test="info_ids !=null">
+				info_ids=#{info_ids},
+			</if>
+			<if test="standard_ids !=null">
+				standard_ids=#{standard_ids},
+			</if>
+			<if test="tel !=null">
+				tel=#{tel},
+			</if>
+			<if test="goods_status !=null">
+				goods_status=#{goods_status},
+			</if>
+			<if test="ad_url !=null">
+				ad_url=#{ad_url},
+			</if>
+			<if test="update_date !=null">
+				update_date=#{update_date},
+			</if>
+			<if test="update_time !=null">
+				update_time=#{update_time},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>
+			<if test="update_version != null">
+				update_version = #{update_version},
+			</if>
+			<if test="update_user != null">
+				update_user = #{update_user},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="init_date != null">
+				init_date = #{init_date},
+			</if>
+			<if test="init_time != null">
+				init_time = #{init_time},
+			</if>
+			<if test="sort != 0">
+				sort = #{sort},
+			</if>
+			<if test="brand_id != null">
+				brand_id = #{brand_id},
+			</if>
+			<if test="third_category_id != null">
+				third_category_id = #{third_category_id},
+			</if>
+			<if test="update_user_name != null">
+				update_user_name = #{update_user_name},
+			</if>
+			<if test="unit_id != null">
+				unit_id = #{unit_id},
+			</if>
+			<if test="show_url != null">
+				show_url = #{show_url},
+			</if>
+			<if test="first_category_id != null">
+				first_category_id = #{first_category_id},
+			</if>
+			<if test="first_category_name != null">
+				first_category_name = #{first_category_name},
+			</if>
+			<if test="second_category_id != null">
+				second_category_id = #{second_category_id},
+			</if>
+			<if test="second_category_name != null">
+				second_category_name = #{second_category_name},
+			</if>
+			<if test="third_category_name != null">
+				third_category_name = #{third_category_name},
+			</if>
+			<if test="create_user_id != null">
+				create_user_id = #{create_user_id},
+			</if>
+			<if test="create_user_name != null">
+				create_user_name = #{create_user_name},
+			</if>
+			<if test="unit_name != null">
+				unit_name = #{unit_name},
+			</if>
+			<if test="min_price != null">
+				min_price = #{min_price},
+			</if>
+			<if test="sale_num != null">
+				sale_num = #{sale_num},
+			</if>
+			<if test="adapt_all_models != null">
+				adapt_all_models = #{adapt_all_models},
+			</if>
+			<if test="pay_type != null">
+				pay_type = #{pay_type},
+			</if>
+			<if test="font_money_rate != null">
+				font_money_rate = #{font_money_rate},
+			</if>
+		</set>
+	</sql>
+
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into goods (
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update goods
+		<include refid="fullSet"></include>
+		where goods_id=#{goods_id}
+	</update>
+
+	<delete id="delete">
+		delete
+		from goods
+		where goods_id=#{key}
+	</delete>
+
+	<select id="get" resultType="Goods">
+		select
+		<include refid="fullColumns" />
+		from goods
+		where goods_id=#{key}
+	</select>
+
+	<select id="query" resultType="Goods">
+		select
+		<include refid="fullColumns" />
+		from goods
+		<include refid="fullWhere"></include>
+		<include refid="sortAndPage"></include>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*)
+		from goods
+		<include refid="fullWhere"></include>
+	</select>
+
+	<sql id="queryGoodsWhere">
+		<where>
+			<if test="goods_id !=null">
+				AND goods_id=#{goods_id}
+			</if>
+			<if test="category_id !=null">
+				AND category_id=#{category_id}
+			</if>
+			<if test="brand_name !=null">
+				AND brand_name=#{brand_name}
+			</if>
+			<if test="factory_detail !=null">
+				AND factory_detail=#{factory_detail}
+			</if>
+			<if test="goods_name !=null">
+				AND goods_name like concat('%',#{goods_name},'%')
+			</if>
+			<if test="price_area !=null">
+				AND price_area=#{price_area}
+			</if>
+			<if test="banner_ids !=null">
+				AND banner_ids=#{banner_ids}
+			</if>
+			<if test="detail_ids !=null">
+				AND detail_ids=#{detail_ids}
+			</if>
+			<if test="info_ids !=null">
+				AND info_ids=#{info_ids}
+			</if>
+			<if test="standard_ids !=null">
+				AND standard_ids=#{standard_ids}
+			</if>
+			<if test="tel !=null">
+				AND tel=#{tel}
+			</if>
+			<if test="goods_status !=null">
+				AND goods_status=#{goods_status}
+			</if>
+			<if test="ad_url !=null">
+				AND ad_url=#{ad_url}
+			</if>
+			<if test="update_user != null">
+				AND update_user = #{update_user}
+			</if>
+			<if test="status != null">
+				AND status = #{status}
+			</if>
+			<if test="init_date != null">
+				AND init_date = #{init_date}
+			</if>
+			<if test="init_time != null">
+				AND init_time = #{init_time}
+			</if>
+			<if test="sort != 0">
+				AND sort = #{sort}
+			</if>
+			<if test="start_date != null">
+				AND concat(init_date,init_time) &gt;= #{start_date}
+			</if>
+			<if test="end_date != null">
+				AND concat(init_date,init_time) &lt;= #{end_date}
+			</if>
+			<if test="brand_id != null">
+				AND brand_id = #{brand_id}
+			</if>
+			<if test="third_category_id != null">
+				AND third_category_id = #{third_category_id}
+			</if>
+			<if test="update_user_name != null">
+				AND update_user_name = #{update_user_name}
+			</if>
+			<if test="unit_id != null">
+				AND unit_id = #{unit_id}
+			</if>
+			<if test="show_url != null">
+				AND show_url = #{show_url}
+			</if>
+			<if test="first_category_id != null">
+				AND first_category_id = #{first_category_id}
+			</if>
+			<if test="first_category_name != null">
+				AND first_category_name = #{first_category_name}
+			</if>
+			<if test="second_category_id != null">
+				AND second_category_id = #{second_category_id}
+			</if>
+			<if test="second_category_name != null">
+				AND second_category_name = #{second_category_name}
+			</if>
+			<if test="third_category_name != null">
+				AND third_category_name=#{third_category_name}
+			</if>
+			<if test="create_user_id != null">
+				AND create_user_id = #{create_user_id}
+			</if>
+			<if test="create_user_name != null">
+				AND create_user_name=#{create_user_name}
+			</if>
+			<if test="unit_name != null">
+				AND unit_name = #{unit_name}
+			</if>
+			<if test="min_price != null">
+				AND min_price = #{min_price}
+			</if>
+			<if test="sale_num != null">
+				AND sale_num = #{sale_num}
+			</if>
+			<if test="adapt_all_models != null">
+				AND adapt_all_models = #{adapt_all_models}
+			</if>
+			<if test="ids != null">
+				AND goods_id in(
+				<foreach collection="ids" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="update_start_date != null">
+				AND concat(update_date,update_time) &gt;= #{update_start_date}
+			</if>
+			<if test="update_end_date != null">
+				AND concat(update_date,update_time) &lt;= #{update_end_date}
+			</if>
+		</where>
+	</sql>
+
+	<select id="queryGoods" resultType="map">
+		select
+		goods_id,brand_name,goods_name,banner_ids,detail_ids,info_ids,standard_ids,tel,goods_status,ad_url,update_date,update_time,
+		update_user,init_date,init_time,sort,brand_id,update_user_name,unit_id,unit_name,show_url,
+		first_category_id,first_category_name,second_category_id,second_category_name,third_category_id,third_category_name,create_user_id,create_user_name,
+		adapt_all_models,pay_type,font_money_rate
+		from goods
+		<include refid="queryGoodsWhere"></include>
+		<include refid="sortAndPage"></include>
+	</select>
+
+	<select id="countQueryGoods" resultType="int">
+		select count(*)
+		from goods
+		<include refid="queryGoodsWhere"></include>
+		<include refid="sortAndPage"></include>
+	</select>
+
+	<update id="updateStatus">
+		update goods
+		<set>
+			<if test="status !=null">
+				status=#{status},
+			</if>
+			<if test="update_user_name != null">
+				update_user_name = #{update_user_name},
+			</if>
+			<if test="update_user != null">
+				update_user = #{update_user},
+			</if>
+			<if test="update_date != null">
+				update_date = #{update_date},
+			</if>
+			<if test="update_time != null">
+				update_time = #{update_time},
+			</if>
+		</set>
+		where goods_id=#{goods_id}
+	</update>
+
+	<update id="updateGoodsStatus">
+		update goods
+		<set>
+			<if test="goods_status !=null">
+				goods_status=#{goods_status},
+			</if>
+			<if test="update_user_name != null">
+				update_user_name = #{update_user_name},
+			</if>
+			<if test="update_user != null">
+				update_user = #{update_user},
+			</if>
+			<if test="update_date != null">
+				update_date = #{update_date},
+			</if>
+			<if test="update_time != null">
+				update_time = #{update_time},
+			</if>
+		</set>
+		where goods_id=#{goods_id}
+	</update>
+
+	<select id="queryJson" resultType="map">
+		select
+		<include refid="queryJsonColumns" />
+		from goods
+		<where>
+			<if test="goods_id !=0">
+				AND goods_id&lt;#{goods_id}
+			</if>
+			<if test="category_id !=null">
+				AND category_id=#{category_id}
+			</if>
+			<if test="goods_status !=null">
+				AND goods_status=#{goods_status}
+			</if>
+			<if test="status != null">
+				AND status = #{status}
+			</if>
+		</where>
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.page_size}
+		</if>
+	</select>
+
+	<select id="queryPageLimit" resultType="map">
+		select
+		<include refid="queryJsonColumns" />
+		from goods
+		<include refid="queryGoodsWhere"></include>
+		<include refid="sortAndPage"></include>
+	</select>
+
+	<update id="chmodBatch">
+		UPDATE goods
+		<set>
+			<if test="goods_status !=null">
+				goods_status=#{goods_status},
+			</if>
+			<if test="update_user_name != null">
+				update_user_name = #{update_user_name},
+			</if>
+			<if test="update_user != null">
+				update_user = #{update_user},
+			</if>
+			<if test="update_date != null">
+				update_date = #{update_date},
+			</if>
+			<if test="update_time != null">
+				update_time = #{update_time},
+			</if>
+		</set>
+		where goods_id in(
+		<foreach collection="ids" item="item" index="index" separator=",">
+			#{item}
+		</foreach>
+		)
+	</update>
+
+	<select id="getSolrEntity" resultType="map">
+		select
+		goods_id as
+		id,brand_name,goods_name,goods_status,update_date,update_time,sort,show_url,
+		first_category_name,second_category_name,third_category_name,min_price,sale_num,adapt_all_models
+		from goods
+		where goods_id=#{key}
+	</select>
+
+	<select id="queryAllId" resultType="map">
+		select
+		goods_id as
+		id,brand_name,goods_name,goods_status,update_date,sort,show_url,
+		first_category_name,second_category_name,third_category_name,min_price,sale_num,adapt_all_models
+		from goods
+		<where>
+			<if test="goods_status !=null">
+				AND goods_status=#{goods_status}
+			</if>
+			<if test="status != null">
+				AND status = #{status}
+			</if>
+			<if test="start_date != null">
+				AND concat(update_date,update_time) &gt;= #{start_date}
+			</if>
+			<if test="end_date != null">
+				AND concat(update_date,update_time) &lt;= #{end_date}
+			</if>
+		</where>
+	</select>
+
+	<update id="updateGoodsTimer">
+		update goods
+		<include refid="fullSet"></include>
+		<where>
+			<if test="unit_id !=null">
+				AND unit_id=#{unit_id}
+			</if>
+			<if test="brand_id != null">
+				AND brand_id = #{brand_id}
+			</if>
+			<if test="first_category_id != null">
+				AND first_category_id = #{first_category_id}
+			</if>
+			<if test="second_category_id != null">
+				AND second_category_id = #{second_category_id}
+			</if>
+			<if test="third_category_id != null">
+				AND third_category_id = #{third_category_id}
+			</if>
+			<if test="ids != null">
+				AND goods_id in(
+				<foreach collection="ids" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+		</where>
+	</update>
+
+	<select id="queryIdList" resultType="String">
+		select
+		goods_id
+		from goods
+		<include refid="fullWhere"></include>
+		<include refid="sortAndPage"></include>
+	</select>
+
+	<select id="querySolrEntityByids" resultType="map">
+		select
+		goods_id as
+		id,brand_name,goods_name,goods_status,update_date,update_time,sort,show_url,
+		first_category_name,second_category_name,third_category_name,min_price,sale_num,adapt_all_models
+		from goods
+		<where>
+			<if test="ids != null">
+				AND goods_id in(
+				<foreach collection="ids" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="status !=null">
+				AND status=#{status}
+			</if>
+			<if test="goods_status != null">
+				AND goods_status = #{goods_status}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

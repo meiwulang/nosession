@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.OrderDetailDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	order_detail_id,prdt_name,standard_must,optional_first,optional_second,prdt_num,prdt_price,standard_id,metadata_name
+			
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+        #{order_detail_id},#{prdt_name},#{standard_must},#{optional_first},#{optional_second},#{prdt_num},#{prdt_price},#{standard_id},#{metadata_name}
+        
+	</sql>
+	<sql id="fullWhere">
+		<where>	
+			<if test="order_detail_id !=null">
+			AND order_detail_id=#{order_detail_id}
+			</if>
+			<if test="prdt_name !=null">
+			AND prdt_name=#{prdt_name}
+			</if>
+			<if test="standard_must !=null">
+			AND standard_must=#{standard_must}
+			</if>
+			<if test="optional_first !=null">
+			AND optional_first=#{optional_first}
+			</if>
+			<if test="optional_second !=null">
+			AND optional_second=#{optional_second}
+			</if>
+			<if test="prdt_num !=null">
+			AND prdt_num=#{prdt_num}
+			</if>
+			<if test="prdt_price !=null">
+			AND prdt_price=#{prdt_price}
+			</if>
+			<if test="metadata_name !=null">
+			AND metadata_name=#{metadata_name}
+			</if>
+
+		</where>
+	</sql>
+	
+	<sql id="fullSet">
+		<set>	
+			<if test="order_detail_id !=null">
+			order_detail_id=#{order_detail_id},
+			</if>
+			<if test="prdt_name !=null">
+			prdt_name=#{prdt_name},
+			</if>
+			<if test="standard_must !=null">
+			standard_must=#{standard_must},
+			</if>
+			<if test="optional_first !=null">
+			optional_first=#{optional_first},
+			</if>
+			<if test="optional_second !=null">
+			optional_second=#{optional_second},
+			</if>
+			<if test="prdt_num !=null">
+			prdt_num=#{prdt_num},
+			</if>
+			<if test="prdt_price !=null">
+			prdt_price=#{prdt_price},
+			</if>
+			<if test="standard_id !=null">
+			standard_id=#{standard_id},
+			</if>
+			<if test="metadata_name !=null">
+			metadata_name=#{metadata_name},
+			</if>
+	
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into order_detail ( 
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+	<insert id="batchSave" useGeneratedKeys="true">
+		insert into order_detail ( 
+        <include refid="fullColumns"></include>
+        ) values
+        <foreach item="item" collection="list" separator=",">
+            (#{item.order_detail_id},#{item.prdt_name},#{item.standard_must},#{item.optional_first},#{item.optional_second},#{item.prdt_num},#{item.prdt_price},#{item.standard_id},#{item.metadata_name})
+        </foreach>
+
+	</insert>
+
+	<update id="update">
+		update 	order_detail 
+		<include refid="fullSet"></include>
+		where order_detail_id=#{order_detail_id}		
+	</update>
+	
+	<delete id="delete">
+		delete 
+		from order_detail 
+		where order_detail_id=#{key}	
+	</delete>
+
+	<select id="get" resultType="OrderDetail">
+		select
+		<include refid="fullColumns" />
+		from order_detail
+		where order_detail_id=#{key}		
+	</select>
+	
+	<select id="query" resultType="OrderDetail">
+		select
+		<include refid="fullColumns" />
+		from order_detail 
+		<include refid="fullWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from order_detail
+		<include refid="fullWhere"></include>
+	</select>	
+	<select id="queryDetailsByIn" resultType="Map">
+	     select
+		<include refid="fullColumns" />
+		from order_detail
+		where order_detail_id in 
+		<foreach item="item" collection="ids" 
+                           open="(" separator="," close=")">
+                    #{item}
+        </foreach>
+	</select>	
+
+	
+</mapper>

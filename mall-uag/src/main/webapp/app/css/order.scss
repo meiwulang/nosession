@@ -1,0 +1,94 @@
+.order-scope{
+	text-align: left; font-size:12px; line-height:30px;
+}
+.order-scope a{
+	color: #999; margin-right: 30px; cursor: pointer;
+}
+
+.productsList{
+	text-align: left; padding-bottom:20px;
+}
+.productsList li{
+	padding-top: 15px; font-size:12px; overflow:hidden;
+}
+.product-pic{
+	width:80px; height:80px; float:left;
+}
+.product-pic img{
+	width:80px; height:80px !important;
+}
+.product-info{
+	float:left; margin-left:20px; width:300px; cursor:pointer;
+}
+.product-name{
+	display:block; line-height:20px; margin-top:-3px; max-height:40px; color:#20a0ff; 
+	white-space: normal;
+}
+.product-id{
+	color:#999999;
+}
+.product-brand{
+	overflow:hidden;
+}
+.product-brand > div{
+	float:left; margin-left:40px;
+}
+.product-brand > div:first-child{
+	margin-left:0;
+}
+.Especificaciones,.productPrice{
+	min-height:80px; overflow:hidden; margin-top:15px;
+}
+.Especificaciones:first-child,.productPrice:first-child{
+	margin-top:55px;
+}
+.consigneeLink{
+	cursor: pointer;
+}
+.goodsDetail .el-row{
+		padding: 5px 0;
+		overflow: hidden;
+		border: 1px solid #58B7FF;
+		margin: 10px 0;
+		line-height: 24px;
+	}
+	.goodsDetail .el-row em{
+		color: #FF0000;
+	}
+	.carModelList{
+		width: 33.33%; float: left; line-height: 24px;
+	}
+	ol,ul,li{
+		list-style: none; padding: 0; margin: 0;
+	}
+	.banner-list li{
+		float: left; margin-right: 10px; width: 80px; height: 80px; border-radius: 4px; overflow: hidden;
+	}
+	
+	.banner-list li img{
+		width: 100%; height: 100%; display: block;
+	}
+	.detail-list li{
+		float: left; margin-right: 10px; width: 80px;overflow: hidden;
+	}
+	.detail-list li img{
+		width: 80px; height: 80px; display: block; border-radius: 4px;
+	}
+	.detail-list li span{
+		display: block; line-height: 20px; font-size: 12px;
+	}
+	.param-list li >span{
+		display: inline-block; width: 48%;
+	}
+	.param-list li >span span{
+		margin-left: 10px;
+	}
+	.standard-list li >span{
+		display: inline-block; width: 28%;
+	}
+	.standard-list li >span:first-child{
+		width: 42%;
+	}
+	.standard-list li >span span{
+		margin-left: 10px;
+	}

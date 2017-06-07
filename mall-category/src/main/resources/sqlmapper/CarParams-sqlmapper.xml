@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.category.dao.CarParamsDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	car_params_id,car_params_name,car_params_value
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+		#{car_params_id},#{car_params_name},#{car_params_value}
+	</sql>
+	<sql id="fullWhere">
+		<where>
+			<if test="car_params_id !=null"> AND car_params_id=#{car_params_id}
+			</if>
+			<if test="car_params_name !=null">
+				AND car_params_name=#{car_params_name}
+			</if>
+			<if test="car_params_value !=null">
+				AND car_params_value=#{car_params_value}
+			</if>
+			<if test="ids != null"></if>
+			and car_params_id in(
+			<foreach collection="ids" item="item" index="index"
+				separator=",">
+				#{item}
+			</foreach>
+			)
+		</where>
+	</sql>
+
+	<sql id="fullSet">
+		<set>
+			<if test="car_params_name !=null"> car_params_name=#{car_params_name},
+			</if>
+			<if test="car_params_value !=null">
+				car_params_value=#{car_params_value},
+			</if>
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into car_params (
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update car_params
+		<include refid="fullSet"></include>
+		where car_params_id=#{car_params_id}
+	</update>
+
+	<delete id="delete">
+		delete
+		from car_params
+		where car_params_id=#{key}
+	</delete>
+
+	<select id="get" resultType="CarParams">
+		select
+		<include refid="fullColumns" />
+		from car_params
+		where car_params_id=#{key}
+	</select>
+
+	<select id="query" resultType="CarParams">
+		select
+		<include refid="fullColumns" />
+		from car_params
+		<include refid="fullWhere"></include>
+
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from car_params
+		<include refid="fullWhere"></include>
+	</select>
+
+	<select id="queryCarParamsByIds" resultType="Map">
+		select
+		<include refid="fullColumns" />
+		from car_params
+		where car_params_id in(
+		<foreach collection="list" item="item" index="index" separator=",">
+			#{item}
+		</foreach>
+		)
+	</select>
+
+	<update id="batchUpdate" parameterType="list">
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+			update car_params
+			<set>
+				<if test="item.car_params_name != null">
+					car_params_name= #{item.car_params_name},
+				</if>
+				<if test="item.car_params_value != null">
+					car_params_value = #{item.car_params_value},
+				</if>
+			</set>
+			where car_params_id=#{item.car_params_id}
+		</foreach>
+	</update>
+
+	<delete id="batchDeleteCarParams">
+		delete
+		from car_params
+		where car_params_id in(
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			#{item.car_params_id}
+		</foreach>
+		)
+	</delete>
+
+	<insert id="batchSavaCarParams" useGeneratedKeys="true">
+		insert into car_params (
+		<include refid="fullColumns"></include>
+		) values
+		<foreach item="item" collection="list" separator=",">
+			(#{item.car_params_id},#{item.car_params_name},#{item.car_params_value})
+		</foreach>
+	</insert>
+</mapper>

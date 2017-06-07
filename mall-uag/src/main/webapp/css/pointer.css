@@ -1,0 +1,137 @@
+.imgPointer {  
+        cursor: pointer  
+}  
+
+.x-grid-cell .shangjia {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/shangjia.png) center center no-repeat;
+}
+.x-grid-cell .xiajia {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/xiajia.png) center center no-repeat;
+}
+.x-grid-cell .itemIcon1 {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/makeLife.png) center center no-repeat;
+}
+
+.x-grid-cell .itemIcon2 {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/makeDead.png) center center no-repeat;
+}
+.x-grid-cell .upLine {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/upLine.png) center center no-repeat;
+}
+.x-grid-cell .downLine {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/downLine.png) center center no-repeat;
+}
+.x-grid-cell .itemIcon3 {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/del.png) center center no-repeat;
+} 
+
+.x-grid-cell .itemIcon4 {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/update.png) center center no-repeat;
+}
+.x-grid-cell .itemIcon5 {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/link.png) center center no-repeat;
+}
+.x-grid-cell .itemReplay {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/reply.png) center center no-repeat;
+} 
+.x-grid-cell .itemReplayed {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/replyed.png) center center no-repeat;
+}
+.x-grid-cell .disabled {  
+      width:60px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/disabled.png) center center no-repeat;
+}  
+
+.x-grid-cell .enable {  
+      width:60px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/enable.png) center center no-repeat;
+}
+
+.x-grid-cell .resetPwd {  
+      width:60px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/resetPwd.png) center center no-repeat;
+}     
+
+.x-grid-cell .control {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/control.png) center center no-repeat;
+}
+
+.x-grid-cell .reply-disabled {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/reply-disabled.png) center center no-repeat;
+}
+.x-grid-cell .comments-disabled {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/comments-disabled.png) center center no-repeat;
+}
+.x-grid-cell .comments {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/comments.png) center center no-repeat;
+}
+.x-grid-cell .control-disabled {  
+      width:50px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/control-disabled.png) center center no-repeat;
+}
+
+.x-grid-cell .lookFile {  
+      width:78px;
+      margin-left:5px;
+      height:20px;
+      background:url(../images/lookFile.png) center center no-repeat;
+}
+td.x-grid-cell.x-grid-td.orderTd>div {
+    padding: 7px 0 6px;
+}
+td.x-grid-cell.x-grid-td.orderPadding {
+vertical-align: middle;
+}

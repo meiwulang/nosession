@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/tx 
+                        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                        http://www.springframework.org/schema/aop
+                        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                        http://www.springframework.org/schema/context 
+                        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+	default-autowire="byName">
+
+	<context:component-scan base-package="com.hjh.mall.config.swagger" />
+<!-- 	<bean id="restApiConfig" class="com.hjh.mall.util.RestApiConfig"></bean> -->
+	<mvc:default-servlet-handler />
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=UTF-8</value>
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+						<value>application/x-www-form-urlencoded;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+
+			<bean
+				class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+				<property name="features">
+					<list>
+						<!-- <value>WriteMapNullValue</value> -->
+						<value>QuoteFieldNames</value>
+					</list>
+				</property>
+			</bean>
+
+			<bean class="org.springframework.http.converter.FormHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/x-www-form-urlencoded;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<mvc:resources location="/images/" mapping="/images/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/doc/" mapping="/doc/**" />
+	<mvc:resources location="/dist/" mapping="/dist/**" />
+	<mvc:resources location="/dev/" mapping="/dev/**" />
+	<mvc:resources location="/plugin/jedate/" mapping="/plugin/jedate/**" />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="contentType" value="text/html; charset=UTF-8" />
+		<property name="prefix" value="/html/" />
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- 支持上传文件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<context:annotation-config />
+	<aop:aspectj-autoproxy />
+	<bean id="proxyResource" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>classpath:/conf/proxy/proxy.properties</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="proxyCFG"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations" ref="proxyResource" />
+	</bean>
+	<bean id="ossResource" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>classpath:/conf/oss/common.properties</value>
+				<value>classpath:conf/sms/sms.properties</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="ossCFG"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations" ref="ossResource" />
+	</bean>
+	<import resource="applicationContext-dubbo.xml" />
+	<import resource="applicationContext-service.xml" />
+</beans>

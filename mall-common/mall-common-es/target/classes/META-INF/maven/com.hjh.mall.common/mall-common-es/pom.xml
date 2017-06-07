@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hjh.mall</groupId>
+		<artifactId>mall-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../../mall-parent</relativePath>
+	</parent>
+	<groupId>com.hjh.mall.common</groupId>
+	<artifactId>mall-common-es</artifactId>
+	<name>${project.artifactId}</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.hjh.mall.common</groupId>
+			<artifactId>mall-common-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+		</dependency>
+	</dependencies>
+</project>

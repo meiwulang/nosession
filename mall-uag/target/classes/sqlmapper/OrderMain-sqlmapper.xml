@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.OrderMainDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	order_main_id,serialize_num,prdt_id,prdt_name,total_money,consignee,invite_code,consignee_tel,address_info,standard_ids,init_date,init_time,
+			client_id,leaved_word,regist_tel,prdt_img,prdt_tel,prdt_brand,prdt_nav,nick_name
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+        #{order_main_id},#{serialize_num},#{prdt_id},#{prdt_name},#{total_money},#{consignee},#{invite_code},#{consignee_tel},#{address_info},#{standard_ids},#{init_date},#{init_time},
+       #{client_id},#{leaved_word},#{regist_tel},#{prdt_img},#{prdt_tel},#{prdt_brand},#{prdt_nav},#{nick_name}
+	</sql>
+	<sql id="fullWhere">
+		<where>	
+			<if test="order_main_id !=null">
+			AND order_main_id=#{order_main_id}
+			</if>
+			<if test="serialize_num !=null">
+			AND serialize_num=#{serialize_num}
+			</if>
+			<if test="prdt_id !=null">
+			AND prdt_id=#{prdt_id}
+			</if>
+			<if test="prdt_name !=null">
+			AND prdt_name=#{prdt_name}
+			</if>
+			<if test="total_money !=null">
+			AND total_money=#{total_money}
+			</if>
+			<if test="consignee !=null">
+			AND consignee=#{consignee}
+			</if>
+			<if test="invite_code !=null">
+			AND invite_code=#{invite_code}
+			</if>
+			<if test="consignee_tel !=null">
+			AND consignee_tel=#{consignee_tel}
+			</if>
+			<if test="address_info !=null">
+			AND address_info=#{address_info}
+			</if>
+			<if test="standard_ids !=null">
+			AND standard_ids=#{standard_ids}
+			</if>
+			<if test="init_date !=null">
+			AND init_date=#{init_date}
+			</if>
+			<if test="init_time !=null">
+			AND init_time=#{init_time}
+			</if>
+			<if test="prdt_img !=null">
+			AND prdt_img=#{prdt_img}
+			</if>
+
+		<if test="client_id != null">
+				AND client_id = #{client_id}
+		</if>		 
+		<if test="leaved_word != null">
+				AND leaved_word = #{leaved_word}
+		</if>		 
+		<if test="regist_tel != null">
+				AND regist_tel = #{regist_tel}
+		</if>		 
+		<if test="prdt_tel != null">
+				AND prdt_tel = #{prdt_tel}
+		</if>		 
+        <if test="prdt_nav != null">
+                AND prdt_nav = #{prdt_nav}
+        </if>        
+        <if test="prdt_brand != null">
+                AND prdt_brand = #{prdt_brand}
+        </if>
+        <if test="nick_name != null">
+                AND nick_name = #{nick_name}
+        </if>
+		</where>
+	</sql>
+	<sql id="fullLikeWhere">
+		<where>	
+			<if test="order_main_id !=null">
+			AND order_main_id like '%${order_main_id}%'
+			</if>
+			<if test="serialize_num !=null">
+			AND serialize_num like '%${serialize_num}%'
+			</if>
+			<if test="prdt_id !=null">
+			AND prdt_id like '%${prdt_id}%'
+			</if>
+			<if test="prdt_name !=null">
+			AND prdt_name like '%${prdt_name}%'
+			</if>
+			<if test="total_money !=null">
+			AND total_money like '%${total_money}%'
+			</if>
+			<if test="consignee !=null">
+			AND consignee like '%${consignee}%'
+			</if>
+			<if test="consignee_tel !=null">
+			AND consignee_tel like '%${consignee_tel}%'
+			</if>
+			<if test="address_info !=null">
+			AND address_info like '%${address_info}%'
+			</if>
+			<if test="standard_ids !=null">
+			AND standard_ids like '%${standard_ids}%'
+			</if>
+			<if test="start_date !=null">
+			AND concat(init_date,init_time) &gt;=#{start_date}
+			</if>
+			<if test="end_date !=null">
+			AND concat(init_date,init_time) &lt;=#{end_date}
+			</if>
+			<if test="prdt_tel !=null">
+			AND prdt_tel like '%${prdt_tel}%'
+			</if>
+        <if test="prdt_nav != null">
+                AND prdt_nav like '%${prdt_nav}%'
+        </if>        
+        <if test="prdt_brand != null">
+                AND prdt_brand like '%${prdt_brand}%'
+        </if>
+        <if test="invite_code != null">
+                AND invite_code like '%${invite_code}%'
+        </if>
+		<if test="client_id != null">
+				AND client_id like '%${client_id}%'
+		</if>		 
+		<if test="leaved_word != null">
+				AND leaved_word like '%${leaved_word}%'
+		</if>		 
+		<if test="regist_tel != null">
+				AND regist_tel like '%${regist_tel}%'
+		</if>		 
+		<if test="order_invite_code_start != null">
+				AND invite_code &gt;= #{order_invite_code_start}
+		</if>		 
+		<if test="order_invite_code_end != null">
+				AND invite_code &lt;= #{order_invite_code_end}
+		</if>		 
+		<if test="nick_name != null">
+				AND nick_name = #{nick_name}
+		</if>		 
+		</where>
+	</sql>
+	
+	<sql id="fullSet">
+		<set>	
+			<if test="serialize_num !=null">
+			serialize_num=#{serialize_num},
+			</if>
+			<if test="prdt_id !=null">
+			prdt_id=#{prdt_id},
+			</if>
+			<if test="prdt_name !=null">
+			prdt_name=#{prdt_name},
+			</if>
+			<if test="total_money !=null">
+			total_money=#{total_money},
+			</if>
+			<if test="consignee !=null">
+			consignee=#{consignee},
+			</if>
+			<if test="invite_code !=null">
+			invite_code=#{invite_code},
+			</if>
+			<if test="consignee_tel !=null">
+			consignee_tel=#{consignee_tel},
+			</if>
+			<if test="address_info !=null">
+			address_info=#{address_info},
+			</if>
+			<if test="standard_ids !=null">
+			standard_ids=#{standard_ids},
+			</if>
+			<if test="prdt_nav !=null">
+			prdt_nav=#{prdt_nav},
+			</if>
+			<if test="prdt_brand !=null">
+			prdt_brand=#{prdt_brand},
+			</if>
+	
+		  <if test="init_date != null">
+				init_date = #{init_date},
+		  </if>
+          <if test="init_time != null">
+				init_time = #{init_time},
+		  </if>			  
+          <if test="client_id != null">
+				client_id = #{client_id},
+		  </if>			  
+          <if test="leaved_word != null">
+				leaved_word = #{leaved_word},
+		  </if>			  
+          <if test="regist_tel != null">
+				regist_tel = #{regist_tel},
+		  </if>			  
+          <if test="prdt_img != null">
+				prdt_img = #{prdt_img},
+		  </if>			  
+          <if test="prdt_tel != null">
+				prdt_tel = #{prdt_tel},
+		  </if>			  
+          <if test="nick_name != null">
+				nick_name = #{nick_name},
+		  </if>			  
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into order_main ( 
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update 	order_main 
+		<include refid="fullSet"></include>
+		where order_main_id=#{order_main_id}		
+	</update>
+	
+	<delete id="delete">
+		delete 
+		from order_main 
+		where order_main_id=#{key}	
+	</delete>
+
+	<select id="get" resultType="OrderMain">
+		select
+		<include refid="fullColumns" />
+		from order_main
+		where order_main_id=#{key}		
+	</select>
+	
+	<select id="query" resultType="OrderMain">
+		select
+		<include refid="fullColumns" />
+		from order_main 
+		<include refid="fullWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="queryByLike" resultType="Map">
+		select
+		<include refid="fullColumns" />
+		from order_main 
+		<include refid="fullLikeWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="countByLike" resultType="int"> 
+		select count(*)
+		from order_main 
+		<include refid="fullLikeWhere"></include> 
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from order_main
+		<include refid="fullWhere"></include>
+	</select>
+	
+	<select id="queryMinePaged" resultType="map">
+		select
+		<include refid="fullColumns" />
+		from order_main
+		<include refid="judgeNull" />
+		order by order_main_id desc 
+		<include refid="sortAndPageBySelf"></include>
+	</select>	
+	
+	<sql id="sortAndPageBySelf">
+		<if test="0 != page.page_size">
+			limit #{page.page_size}
+		</if>
+	</sql>
+	
+	<sql id="judgeNull">
+		<where>
+			<if test="client_id != null">
+				client_id=#{client_id}
+			</if>
+			<if test="order_main_id != null">
+				and order_main_id&lt;#{order_main_id}
+			</if>
+		</where>
+	</sql>
+
+	
+</mapper>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.category.dao.CarModelsDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	car_models_id,car_models_name,brand_id,metadata_id,create_date,create_time,update_date,update_time,update_user_name,update_version,car_params_ids,
+			remark,update_user,status,create_user,car_model_alias,app_show
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+		#{car_models_id},#{car_models_name},#{brand_id},#{metadata_id},#{create_date},#{create_time},#{update_date},#{update_time},#{update_user_name},#{update_version},#{car_params_ids},
+		#{remark},#{update_user},#{status},#{create_user},#{car_model_alias},#{app_show}
+	</sql>
+	<sql id="fullWhere">
+		<where>
+			<if test="car_models_id !=null"> 
+			AND car_models_id=#{car_models_id}
+			</if>
+			<if test="car_models_name !=null">
+				AND car_models_name=#{car_models_name}
+			</if>
+			<if test="brand_id !=null">
+				AND brand_id=#{brand_id}
+			</if>
+			<if test="metadata_id !=null">
+				AND metadata_id=#{metadata_id}
+			</if>
+			<if test="create_date !=null">
+				AND create_date=#{create_date}
+			</if>
+			<if test="create_time !=null">
+				AND create_time=#{create_time}
+			</if>
+			<if test="update_date !=null">
+				AND update_date=#{update_date}
+			</if>
+			<if test="update_time !=null">
+				AND update_time=#{update_time}
+			</if>
+			<if test="update_user_name !=null">
+				AND update_user_name=#{update_user_name}
+			</if>
+			<if test="car_params_ids !=null">
+				AND car_params_ids=#{car_params_ids}
+			</if>
+			<if test="remark != null">
+				AND remark = #{remark}
+			</if>
+			<if test="update_version != null">
+				AND update_version = #{update_version}
+			</if>
+			<if test="update_user != null">
+				AND update_user = #{update_user}
+			</if>
+			<if test="status != null">
+				AND status = #{status}
+			</if>
+			<if test="create_user != null">
+				AND create_user = #{create_user}
+			</if>
+			<if test="car_model_alias != null">
+				AND car_model_alias = #{car_model_alias}
+			</if>
+			<if test="app_show != null">
+				AND app_show = #{app_show}
+			</if>
+		</where>
+	</sql>
+	<sql id="fullWhereByLike">
+		<if test="car_models_id !=null">
+			AND car_models_id like concat('%',#{car_models_id},'%')
+		</if>
+		<if test="car_models_name !=null">
+			AND car_models_name like concat('%',#{car_models_name},'%')
+		</if>
+		<if test="brand_id !=null">
+			AND brand_id=#{brand_id}
+		</if>
+		<if test="metadata_id !=null">
+			AND metadata_id=#{metadata_id}
+		</if>
+		<if test="start_date !=null ">
+			AND #{start_date} &lt;concat(create_date,create_time)
+		</if>
+		<if test="end_date !=null ">
+			AND #{end_date} &gt;concat(create_date,create_time)
+		</if>
+		<if test="update_user_name !=null">
+			AND update_user_name like concat('%',#{update_user_name},'%')
+		</if>
+		<if test=" is_noparams ==1 ">
+			AND car_params_ids !=""
+		</if>
+		<if test=" is_noparams ==0 ">
+			AND car_params_ids =""
+		</if>
+		<if test=" brand_name !=null ">
+			AND car_model_alias like concat('%',#{brand_name},'%')
+		</if>
+		<if test=" metadata_name !=null ">
+			AND car_model_alias like concat('%',#{metadata_name},'%')
+		</if>
+		<if test="app_show != null">
+				AND app_show = #{app_show}
+		</if>
+	</sql>
+	
+	<sql id="fullWhereByLikeNew">
+		<if test="car_models_id !=null">
+			AND car_models_id like concat('%',#{car_models_id},'%')
+		</if>
+		<if test="car_models_name !=null">
+			AND car_models_name like concat('%',#{car_models_name},'%')
+		</if>
+		<if test="start_date !=null ">
+			AND #{start_date} &lt;concat(create_date,create_time)
+		</if>
+		<if test="end_date !=null ">
+			AND #{end_date} &gt;concat(create_date,create_time)
+		</if>
+		<if test="update_user_name !=null">
+			AND update_user_name like concat('%',#{update_user_name},'%')
+		</if>
+		<if test=" is_noparams ==1 ">
+			AND car_params_ids !=""
+		</if>
+		<if test=" is_noparams ==0 ">
+			AND car_params_ids =""
+		</if>
+		
+		<if test=" metadata_name !=null ">
+			AND car_model_alias like concat('%',#{metadata_name},'%')
+		</if>
+		<if test="app_show != null">
+				AND app_show = #{app_show}
+		</if>
+	</sql>
+	<sql id="fullSet">
+		<set>
+			<if test="car_models_name !=null">
+				 car_models_name=#{car_models_name},
+			</if>
+			<if test="brand_id !=null">
+				brand_id=#{brand_id},
+			</if>
+			<if test="metadata_id !=null">
+				metadata_id=#{metadata_id},
+			</if>
+			<if test="create_date !=null">
+				create_date=#{create_date},
+			</if>
+			<if test="create_time !=null">
+				create_time=#{create_time},
+			</if>
+			<if test="update_date !=null">
+				update_date=#{update_date},
+			</if>
+			<if test="update_time !=null">
+				update_time=#{update_time},
+			</if>
+			<if test="update_user_name !=null">
+				update_user_name=#{update_user_name},
+			</if>
+			<if test="update_version !=null">
+				update_version=#{update_version},
+			</if>
+			<if test="car_params_ids !=null">
+				car_params_ids=#{car_params_ids},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>
+			<if test="update_user != null">
+				update_user = #{update_user},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="create_user != null">
+				create_user = #{create_user},
+			</if>
+			<if test="create_user != null">
+				create_user = #{create_user},
+			</if>
+			<if test="car_model_alias != null">
+				car_model_alias = #{car_model_alias},
+			</if>
+			<if test="app_show != null">
+				 app_show = #{app_show},
+			</if>
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into car_models (
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update car_models
+		<include refid="fullSet"></include>
+		where car_models_id=#{car_models_id}
+	</update>
+
+	<delete id="delete">
+		delete
+		from car_models
+		where
+		car_models_id=#{car_models_id}
+	</delete>
+
+	<select id="get" resultType="CarModels">
+		select
+		<include refid="fullColumns" />
+		from car_models
+		where car_models_id=#{car_models_id}
+	</select>
+
+	<select id="query" resultType="CarModels">
+		select
+		<include refid="fullColumns" />
+		from car_models
+		<include refid="fullWhere"></include>
+		<include refid="sortAndPage"></include>
+	</select>
+
+	<select id="queryCarModelList" resultType="Map">
+		SELECT
+		a.car_models_id,
+		a.car_models_name,
+		a.brand_id,
+		a.metadata_id,
+		a.create_date,
+		a.create_time,
+		a.update_date,
+		a.update_time,
+		a.update_user_name,
+		a.status,
+		a.car_params_ids,
+		a.create_user,
+		a.car_model_alias,
+		a.app_show,
+		b.brand_id,
+		b.brand_name,
+		b.brand_logo,
+		c.metadata_id,
+		c.metadata_name
+		FROM
+		car_models a,
+		car_brand b,
+		metadata c
+		where a.brand_id
+		= b.brand_id
+		AND c.metadata_id = a.metadata_id
+		<include refid="fullWhereByLikeNew"></include>
+		<if test="brand_id !=null">
+			AND a.brand_id=#{brand_id}
+		</if>
+		<if test=" brand_name !=null ">
+			and b.brand_name like concat('%',#{brand_name},'%')
+		</if>
+
+		<if test="status != null">
+		AND a.status=#{status}
+		</if>
+		ORDER BY
+		concat(a.update_date,a.update_time)
+		DESC
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from car_models
+		<include refid="fullWhere"></include>
+	</select>
+
+	<select id="countByLike" resultType="int">
+		select count(c.car_models_id)
+		from car_models c,car_brand b
+		where c.brand_id
+		= b.brand_id
+		<include refid="fullWhereByLikeNew"></include>
+		<if test=" brand_name !=null ">
+			and b.brand_name like concat('%',#{brand_name},'%')
+		</if>
+		<if test="status != null">
+		AND c.status=#{status}
+		</if>
+	</select>
+
+	<select id="queryModelsByLike" resultType="map">
+		select car_models_id,car_models_name,car_model_alias
+		from car_models
+		where 1=1
+		<include refid="fullWhereByLike"></include>
+	</select>
+<!-- 	<select id="queryModelNamesByLike" resultType="map"> -->
+<!-- 		select car_models_id,car_models_name,GROUP_CONCAT(brand_name,metadata_name,car_models_name) -->
+<!-- 		from car_models -->
+<!-- 		where 1=1 -->
+<!-- 		<include refid="fullWhereByLike"></include> -->
+<!-- 	</select> -->
+	<select id="getMetedataIds" resultType="String">
+	SELECT
+	GROUP_CONCAT(DISTINCT metadata_id)
+	FROM
+	car_models
+	WHERE
+	brand_id = #{brand_id}
+	and app_show =1
+	</select>
+	
+	<update id="updateCarStatusBatch">
+			update car_models set status=#{status},update_date=#{update_date},update_time=#{update_time},update_user_name=#{update_user_name},update_user=#{update_user} where car_models_id in(
+	<foreach collection="ids" item="item" index="index" separator=",">
+	   #{item}
+		</foreach>)
+	</update>
+	
+	
+	
+	<select id="getIdsByMetadataOrBrand" resultType="String">
+		select car_models_id
+		from car_models
+		<include refid="fullWhere"></include>
+	</select>
+	
+	<select id="getBrandIdsByIds" resultType="String">
+		select DISTINCT(brand_id)
+		from car_models
+		where car_models_id in(
+			<foreach collection="ids" item="item" index="index" separator=",">
+	   			#{item}
+			</foreach>
+		)
+	</select>
+</mapper>

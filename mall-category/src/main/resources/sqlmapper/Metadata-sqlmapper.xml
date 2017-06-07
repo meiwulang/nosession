@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.category.dao.MetadataDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	metadata_id,metadata_name,alias,type,update_date,update_time,create_user,
+			update_version,update_user,status,init_date,init_time,create_user_id,update_user_id,sort
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+        #{metadata_id},#{metadata_name},#{alias},#{type},#{update_date},#{update_time},#{create_user},
+        #{update_version},#{update_user},#{status},#{init_date},#{init_time},#{create_user_id},#{update_user_id},#{sort}
+	</sql>
+	<sql id="fullWhere">
+		<where>	
+			<if test="metadata_id !=null">
+			AND metadata_id=#{metadata_id}
+			</if>
+			<if test="metadata_name !=null">
+			AND metadata_name=#{metadata_name}
+			</if>
+			<if test="alias !=null">
+			AND alias=#{alias}
+			</if>
+			<if test="type !=null">
+			AND type=#{type}
+			</if>
+			<if test="update_date !=null">
+			AND update_date=#{update_date}
+			</if>
+			<if test="update_time !=null">
+			AND update_time=#{update_time}
+			</if>
+			<if test="create_user !=null">
+			AND create_user=#{create_user}
+			</if>
+
+		<if test="update_version != null">
+				AND update_version = #{update_version}
+		</if>
+		<if test="update_user != null">
+				AND update_user = #{update_user}
+		</if>
+		<if test="status != null">
+				AND status = #{status}
+		</if>	
+		
+		<if test="init_date != null">
+				AND init_date = #{init_date}
+		</if>
+		<if test="init_time != null">
+				AND init_time = #{init_time}
+		</if>
+		
+		<if test="create_user_id != null">
+				AND create_user_id = #{create_user_id}
+		</if>
+		<if test="update_user_id != null">
+				AND update_user_id = #{update_user_id}
+		</if>
+		
+		<if test="sort != null">
+				AND sort = #{sort}
+		</if>
+		</where>
+	</sql>
+	
+	<sql id="fullSet">
+		<set>	
+			<if test="metadata_name !=null">
+			metadata_name=#{metadata_name},
+			</if>
+			<if test="alias !=null">
+			alias=#{alias},
+			</if>
+			<if test="type !=null">
+			type=#{type},
+			</if>
+			<if test="update_date !=null">
+			update_date=#{update_date},
+			</if>
+			<if test="update_time !=null">
+			update_time=#{update_time},
+			</if>
+			<if test="create_user !=null">
+			create_user=#{create_user},
+			</if>
+	
+		  <if test="update_version != null">
+				update_version = #{update_version},
+		  </if>
+		  <if test="update_user != null">
+				update_user = #{update_user},
+		  </if>
+          <if test="status != null">
+				status = #{status},
+		</if>
+		<if test="init_date != null">
+				init_date = #{init_date},
+		</if>
+		<if test="init_time != null">
+				init_time = #{init_time},
+		</if>
+		<if test="create_user_id != null">
+				create_user_id = #{create_user_id},
+		</if>
+		<if test="update_user_id != null">
+				update_user_id = #{update_user_id},
+		</if>
+		
+		<if test="sort != null">
+				 sort = #{sort}
+		</if>
+					  
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into metadata ( 
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update 	metadata 
+		<include refid="fullSet"></include>
+		where metadata_id=#{metadata_id}		
+	</update>
+	
+	<delete id="delete">
+		delete 
+		from metadata 
+		where metadata_id=#{key}	
+	</delete>
+
+	<select id="get" resultType="Metadata">
+		select
+		<include refid="fullColumns" />
+		from metadata
+		where metadata_id=#{key}		
+	</select>
+	
+	<select id="query" resultType="Metadata">
+		select
+		<include refid="fullColumns" />
+		from metadata 
+		<include refid="fullWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from metadata
+		<include refid="fullWhere"></include>
+	</select>	
+	
+	<select id="countBySelf" resultType="int">
+		select count(metadata_id)
+		from metadata
+		<include refid="fullWhereByLike"></include>
+	</select>
+	
+	<select id="getMetadataListByType" resultType="map">
+		select
+		metadata_id,metadata_name,alias,sort
+		from metadata 
+		<include refid="fullWhere"></include>
+		order by sort desc,metadata_id desc
+	</select>
+
+	<select id="getMetadataList" resultType="Metadata">
+		select
+		<include refid="fullColumns" />
+		from metadata 
+		<include refid="fullWhereByLike"></include> 
+		<include refid="checkpage"></include>
+	</select>
+	
+	<select id="getMetadataListByName" resultType="map">
+		select
+		metadata_id,metadata_name,alias
+		from metadata 
+		<include refid="fullWhereByLikeName"></include> 
+		order by sort desc,metadata_id desc
+	</select>
+	
+	<select id="getMetadataById" resultType="map">
+		select
+		metadata_id,metadata_name,alias
+		from metadata 
+		where metadata_id = #{metadata_id}
+	</select>
+	
+	<sql id="fullWhereByLikeName">
+		<where>	
+			<if test="metadata_name !=null">
+			AND metadata_name like concat('%',#{metadata_name},'%')
+			</if>
+			<if test="alias !=null">
+			AND alias like concat('%',#{alias},'%')
+			</if>
+			<if test="type !=null">
+			AND type=#{type}
+			</if>
+			<if test="status != null">
+					AND status = #{status}
+			</if>	
+		</where>
+	</sql>
+	
+	
+	<sql id="checkpage">
+		<if test="null != pagination">
+			order by sort asc, update_date desc,update_time desc,metadata_id desc
+			limit #{pagination.offset}, #{pagination.page_size}
+		</if>
+	</sql>
+	
+	
+	<sql id="fullWhereByLike">
+		<where>	
+			<if test="metadata_name !=null">
+			AND metadata_name like concat('%',#{metadata_name},'%')
+			</if>
+			<if test="alias !=null">
+			AND alias like concat('%',#{alias},'%')
+			</if>
+			<if test="type !=null">
+			AND type like concat('%',#{type},'%')
+			</if>
+			
+			<if test="update_date_start !=null">
+			AND CONCAT(update_date,update_time) &gt;= '${update_date_start}${update_time_start}'
+			</if>
+			<if test="update_date_end !=null">
+			AND CONCAT(update_date,update_time) &lt;= '${update_date_end}${update_time_end}'
+			</if>
+			
+			
+			<if test="create_user !=null">
+			AND create_user like concat('%',#{create_user},'%')
+			</if>
+
+			<if test="update_user != null">
+					AND update_user like concat('%',#{update_user},'%')
+			</if>
+			<if test="status != null">
+					AND status like concat('%',#{status},'%')
+			</if>	
+		</where>
+	</sql>
+	
+</mapper>

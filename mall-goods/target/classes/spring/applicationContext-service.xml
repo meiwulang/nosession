@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/tx 
+                        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                        http://www.springframework.org/schema/aop
+                        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                        http://www.springframework.org/schema/context 
+                        http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+
+	<context:component-scan base-package="com.hjh.mall.bizapi.biz.goods.middle.service" />
+	<context:component-scan base-package="com.hjh.mall.bizapi.biz.goods.middle.bizimpl" />
+
+	<bean id="keyGenerate" class="com.hjh.mall.cache.cache.sequence.KeyGenerate">
+		<!-- <property name="by" value="${by}" /> -->
+		<!-- <property name="length" value="${length}" /> -->
+		<!-- <property name="keylength" value="${keylength}" /> -->
+		<!-- <property name="expireSecs" value="${expireSecs}" /> -->
+	</bean>
+
+	<bean id="logAspectBean" class="com.hjh.mall.common.core.aspect.LogAspect">
+	</bean>
+	<bean id="errorDescAspectBean" class="com.hjh.mall.common.core.aspect.ErrorDescAspect">
+		<property name="errorDescService">
+			<bean class="com.hjh.mall.common.core.service.base.ErrorDescService">
+				<property name="messageSource" ref="extendMessageSource" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="exceptionHandleAspectBean" class="com.hjh.mall.common.core.aspect.ExceptionHandleAspect" />
+	<bean id="validateAspectBean" class="com.hjh.mall.common.core.aspect.ValidateAspect">
+		<property name="exportInner" value="true" />
+	</bean>
+	<bean id="authCheckAspectBean" class="com.hjh.mall.common.core.aspect.AuthCheckAspect" />
+
+	<aop:config>
+		<aop:pointcut id="pc-bizservice"
+			expression="execution(* com.hjh.mall.bizapi.biz.goods.middle.bizimpl.*.*(..))" />
+		<aop:aspect id="errorDescAspect" ref="errorDescAspectBean"
+			order="-9985">
+			<aop:around pointcut-ref="pc-bizservice" method="handleErrorDesc" />
+		</aop:aspect>
+		<aop:aspect id="exceptionHandleAspect" ref="exceptionHandleAspectBean"
+			order="-9980">
+			<aop:around pointcut-ref="pc-bizservice" method="handleException" />
+		</aop:aspect>
+		<aop:aspect id="validateAspect" ref="validateAspectBean"
+			order="-9970">
+			<aop:around pointcut-ref="pc-bizservice" method="validateParam" />
+		</aop:aspect>
+		<!-- <aop:aspect id="authCheckAspect" ref="authCheckAspectBean" -->
+		<!-- order="-9960"> -->
+		<!-- <aop:around pointcut-ref="pc-bizservice" method="checkAuth" /> -->
+		<!-- </aop:aspect> -->
+		<aop:aspect id="logAspect" ref="logAspectBean" order="-9955">
+			<aop:after-returning pointcut-ref="pc-bizservice"
+				method="log" arg-names="rvt" returning="rvt" />
+		</aop:aspect>
+	</aop:config>
+
+
+
+</beans>

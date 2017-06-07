@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjh.mall.category.dao.NavigationDao">
+	<sql id="tableName">
+		navigation
+	</sql>
+	<resultMap id="BaseResultMap" type="com.hjh.mall.category.entity.Navigation">
+		<constructor>
+			<idArg column="category_id" javaType="String" />
+		</constructor>
+		<id column="category_id" property="categoryId" jdbcType="VARCHAR" />
+		<result column="category_name" property="categoryName"
+			jdbcType="VARCHAR" />
+		<result column="sort" property="sort" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="icon" property="icon" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="update_version" property="updateVersion"
+			jdbcType="INTEGER" />
+		<result column="init_date" property="initDate" jdbcType="VARCHAR" />
+		<result column="init_time" property="initTime" jdbcType="VARCHAR" />
+		<result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+		<result column="updater" property="updater" jdbcType="VARCHAR" />
+		<result column="level" property="level" jdbcType="TINYINT" />
+		<result column="father_id" property="fatherId" jdbcType="VARCHAR" />
+		<result column="creater" property="creater" jdbcType="VARCHAR" />
+		<result column="first_char" property="firstChar" jdbcType="VARCHAR" />
+		<result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+		<result column="hot_sort" property="hotSort" jdbcType="INTEGER" />
+		<result column="hot_icon" property="hotIcon" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="fullColumns">
+		category_id, category_name, `sort`, `status`, remark, icon,
+		update_user,
+		update_version,
+		init_date, init_time, update_date,
+		update_time, updater, level, father_id,
+		creater,
+		first_char,
+		nick_name,hot_sort,hot_icon
+	</sql>
+	<sql id="fullColumnsValues">
+		#{categoryId}, #{categoryName}, #{sort}, #{status},
+		#{remark}, #{icon},
+		#{updateUser},
+		#{updateVersion}, #{initDate},
+		#{initTime}, #{updateDate}, #{updateTime}, #{updater},
+		#{level},
+		#{fatherId}, #{creater}, #{firstChar},
+		#{nickName},#{hotSort},#{hotIcon}
+	</sql>
+	<sql id="queryPage">
+		<if test="null != page and null!=limit ">
+			limit ${page},${limit}
+		</if>
+	</sql>
+	<select id="get" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="fullColumns" />
+		from navigation
+		where category_id = #{categoryId}
+	</select>
+	<select id="getReturnMap" resultType="map" parameterType="java.lang.String">
+		select
+		<include refid="fullColumns" />
+		from navigation
+		where category_id = #{categoryId}
+	</select>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from navigation
+		where
+		category_id = #{categoryId}
+	</delete>
+	<update id="update" parameterType="com.hjh.mall.category.entity.Navigation">
+		update navigation
+		<set>
+			<if test="categoryName != null">
+				category_name = #{categoryName},
+			</if>
+			<if test="sort != null">
+				sort = #{sort},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>
+			<if test="icon != null">
+				icon = #{icon},
+			</if>
+			<if test="updateUser != null">
+				update_user = #{updateUser},
+			</if>
+			<if test="updateVersion != null">
+				update_version = #{updateVersion},
+			</if>
+			<if test="initDate != null">
+				init_date = #{initDate},
+			</if>
+			<if test="initTime != null">
+				init_time = #{initTime},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime},
+			</if>
+			<if test="updater != null">
+				updater = #{updater},
+			</if>
+			<if test="level != null">
+				level = #{level},
+			</if>
+			<if test="fatherId != null">
+				father_id = #{fatherId},
+			</if>
+			<if test="creater != null">
+				creater = #{creater},
+			</if>
+			<if test="firstChar != null">
+				first_char = #{firstChar},
+			</if>
+			<if test="nickName != null">
+				nick_name = #{nickName},
+			</if>
+			<if test="hotSort != null">
+				hot_sort = #{hotSort},
+			</if>
+			<if test="hotIcon != null">
+				hot_icon = #{hotIcon},
+			</if>
+		</set>
+		where category_id = #{categoryId}
+	</update>
+	<sql id="fullWhere">
+		<where>
+			<if test="categoryId != null">
+				and category_id = #{categoryId}
+			</if>
+			<if test="categoryName != null">
+				and category_name = #{categoryName}
+			</if>
+			<if test="sort != null">
+				and sort = #{sort}
+			</if>
+			<if test="status != null">
+				and status = #{status}
+			</if>
+			<if test="remark != null">
+				and remark = #{remark}
+			</if>
+			<if test="icon != null">
+				and icon = #{icon}
+			</if>
+			<if test="updateUser != null">
+				and update_user = #{updateUser}
+			</if>
+			<if test="updateVersion != null">
+				and update_version = #{updateVersion}
+			</if>
+			<if test="initDate != null">
+				and init_date = #{initDate}
+			</if>
+			<if test="initTime != null">
+				and init_time = #{initTime}
+			</if>
+			<if test="updateDate != null">
+				and update_date = #{updateDate}
+			</if>
+			<if test="updateTime != null">
+				and update_time = #{updateTime}
+			</if>
+			<if test="updater != null">
+				and updater = #{updater}
+			</if>
+			<if test="level != null">
+				and level = #{level}
+			</if>
+			<if test="fatherId != null">
+				and father_id = #{fatherId}
+			</if>
+			<if test="creater != null">
+				and creater = #{creater}
+			</if>
+			<if test="firstChar != null">
+				and first_char = #{firstChar}
+			</if>
+			<if test="nickName != null">
+				and nick_name = #{nickName}
+			</if>
+			<if test="hotSort != null">
+				and hot_sort = #{hotSort}
+			</if>
+			<if test="hotIcon != null">
+				and hot_icon = #{hotIcon}
+			</if>
+		</where>
+	</sql>
+	<sql id="likeWhere">
+		<where>
+			<if test="categoryId != null">
+				and category_id like '%${categoryId}%'
+			</if>
+			<if test="categoryName != null">
+				and category_name like '%${categoryName}%'
+			</if>
+			<if test="appDisplay != null and appDisplay == false">
+				and sort &lt;= 0
+			</if>
+			<if test="appDisplay != null and appDisplay == true">
+				and sort &gt; 0
+			</if>
+			<if test="status != null">
+				and status like '%${status}%'
+			</if>
+			<if test="remark != null">
+				and remark like '%${remark}%'
+			</if>
+			<if test="icon != null">
+				and icon like '%${icon}%'
+			</if>
+			<if test="updateUser != null">
+				and update_user like '%${updateUser}%'
+			</if>
+			<if test="updateVersion != null">
+				and update_version like '%${updateVersion}%'
+			</if>
+			<if test="startTime != null">
+				and CONCAT(init_date,init_time) &gt;='${startTime}'
+			</if>
+			<if test="endTime != null">
+				and CONCAT(init_date,init_time) &lt;='${endTime}'
+			</if>
+			<if test="updateDate != null">
+				and update_date like '%${updateDate}%'
+			</if>
+			<if test="updateTime != null">
+				and update_time like '%${updateTime}%'
+			</if>
+			<if test="updater != null">
+				and updater like '%${updater}%'
+			</if>
+			<if test="level != null">
+				and level = ${level}
+			</if>
+			<if test="fatherId != null">
+				and father_id like '%${fatherId}%'
+			</if>
+			<if test="creater != null">
+				and creater like '%${creater}%'
+			</if>
+			<if test="firstChar != null">
+				and first_char like '%${firstChar}%'
+			</if>
+			<if test="nickName != null">
+				and nick_name like '%${nickName}%'
+			</if>
+		</where>
+	</sql>
+	<select id="query" resultMap="BaseResultMap">
+		select
+		<include refid="fullColumns" />
+		from
+		<include refid="tableName" />
+		<include refid="fullWhere" />
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="queryReturnMap" resultType="map">
+		select
+		<include refid="fullColumns" />
+		from
+		<include refid="tableName" />
+		<include refid="fullWhere" />
+		<include refid="sortAndPage"></include>
+	</select>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<select id="countByLike" resultType="int">
+		select count(1) from
+		<include refid="tableName" />
+		<include refid="likeWhere"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(1) from
+		<include refid="tableName" />
+		<include refid="fullWhere"></include>
+	</select>
+	<select id="queryByLike" resultType="map">
+		select
+		<include refid="fullColumns" />
+		from
+		<include refid="tableName" />
+		<include refid="likeWhere"></include>
+		<include refid="sortAndPage"></include>
+	</select>
+	<insert id="save" useGeneratedKeys="true">
+		insert into
+		<include refid="tableName" />
+		(
+		<include refid="fullColumns"></include>
+		)
+		values(
+		<include refid="fullColumnsValues"></include>
+		)
+	</insert>
+	<select id="queryFirstLevelNavigations" resultType="map">
+		select
+		<include refid="fullColumns" />
+		from
+		<include refid="tableName" />
+		<include refid="likeWhere"></include>
+		ORDER BY first_char, init_date DESC, init_time DESC
+		<include refid="queryPage" />
+	</select>
+	<select id="querySecondLevelNavigations" resultType="map">
+		SELECT a.category_name AS aname,a.nick_name AS
+		anick_name,a.category_id AS aid, b.category_id AS bid, b.category_name
+		AS bname, b.sort, b.`status`, b.icon, b.remark, b.init_date,
+		b.init_time, b.update_date, b.update_time, b.updater,
+		b.creater,b.nick_name FROM
+		navigation AS a INNER JOIN navigation AS b
+		ON b.father_id =
+		a.category_id
+		<include refid="secondLevelWhere" />
+		ORDER BY a.first_char, b.first_char, b.init_date DESC, b.init_time
+		DESC
+		<include refid="queryPage" />
+	</select>
+	<sql id="secondLevelWhere">
+		<where>
+			b.level=2
+			<if test="fatherName != null">
+				and a.category_name like '%${fatherName}%'
+			</if>
+			<if test="categoryName != null">
+				and b.category_name like '%${categoryName}%'
+			</if>
+			<if test="creater != null">
+				and b.creater like '%${creater}%'
+			</if>
+			<if test="status != null">
+				and b.`status` =${status}
+			</if>
+			<if test="appDisplay != null and appDisplay == false">
+				and b.sort &lt;= 0
+			</if>
+			<if test="appDisplay != null and appDisplay == true">
+				and b.sort &gt; 0
+			</if>
+			<if test="startTime != null">
+				and CONCAT(b.init_date,b.init_time) &gt;='${startTime}'
+			</if>
+			<if test="endTime != null">
+				and CONCAT(b.init_date,b.init_time) &lt;='${endTime}'
+			</if>
+		</where>
+	</sql>
+	<select id="querySecondLevelCount" resultType="int">
+		SELECT count(1)
+		FROM navigation AS a INNER JOIN navigation AS b ON
+		b.father_id =
+		a.category_id
+		<include refid="secondLevelWhere" />
+		ORDER BY a.first_char, b.first_char, b.init_date DESC, b.init_time
+		DESC
+	</select>
+	<select id="queryThirdLevelNavigations" resultType="map">
+		SELECT a.category_id AS aid, b.category_id AS bid, c.category_id AS
+		cid, a.category_name AS aname,a.nick_name AS anick_name,
+		b.category_name
+		AS bname,b.nick_name AS bnick_name, c.category_name AS
+		cname, c.sort, c.`status`, c.icon,
+		c.remark, c.init_date, c.init_time,
+		c.update_date, c.update_time,
+		c.updater, c.creater,c.nick_name,
+		c.hot_sort,c.hot_icon FROM navigation AS a INNER JOIN navigation AS b
+		ON b.father_id = a.category_id INNER JOIN navigation AS c ON
+		c.father_id = b.category_id
+		<include refid="thirdWhere" />
+		ORDER BY a.first_char, b.first_char, c.first_char,c.init_date DESC,
+		c.init_time DESC
+		<include refid="queryPage" />
+	</select>
+	<sql id="thirdWhere">
+		<where>
+			c.level=3
+			<if test="grandName != null">
+				and a.category_name like '%${grandName}%'
+			</if>
+			<if test="fatherName != null">
+				and b.category_name like '%${fatherName}%'
+			</if>
+			<if test="categoryName != null">
+				and c.category_name like '%${categoryName}%'
+			</if>
+			<if test="creater != null">
+				and c.creater like '%${creater}%'
+			</if>
+			<if test="status != null">
+				and c.`status` =${status}
+			</if>
+			<if test="appDisplay != null and appDisplay == false">
+				and c.sort &lt;= 0
+			</if>
+			<if test="appDisplay != null and appDisplay == true">
+				and c.sort &gt; 0
+			</if>
+			<if test="startTime != null">
+				and CONCAT(c.init_date,c.init_time) &gt;='${startTime}'
+			</if>
+			<if test="endTime != null">
+				and CONCAT(c.init_date,c.init_time) &lt;='${endTime}'
+			</if>
+		</where>
+	</sql>
+	<select id="queryThirdLevelCount" resultType="int">
+		SELECT count(1) FROM navigation AS a INNER JOIN navigation AS b
+		ON
+		b.father_id = a.category_id INNER JOIN navigation AS c ON
+		c.father_id =
+		b.category_id
+		<include refid="thirdWhere" />
+		ORDER BY a.first_char, b.first_char, c.first_char,c.init_date DESC,
+		c.init_time DESC
+	</select>
+	<select id="queryNavigationsForApp" resultType="map">
+		select
+		category_id, category_name, `sort`, icon,level,
+		father_id,nick_name,hot_sort,hot_icon
+		from
+		<include refid="tableName" />
+		<where>
+			 sort &gt;0
+			<if test="level !=null">
+				and level=${level}
+			</if>
+			<if test="hotSort !=null ">
+				and hot_sort &gt;0
+			</if>
+		</where>
+		order by
+		<if test="hotSort !=null ">
+			hot_sort ,
+		</if>
+		`sort`
+		<if test="size !=null">
+			limit 0,${size}
+		</if>
+	</select>
+	<select id="queryAllNavigationsForApp" resultType="map">
+		select
+		category_id, category_name, `sort`, icon,level,
+		father_id,nick_name
+		from
+		<include refid="tableName" />
+		where level !=1 and sort &gt; 0
+		order by level, `sort`
+	</select>
+	<update id="batchUpdateStatus" parameterType="Map">
+		update navigation
+		<set>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="updateUser != null">
+				update_user = #{updateUser},
+			</if>
+			<if test="updateVersion != null">
+				update_version = #{updateVersion},
+			</if>
+			<if test="initDate != null">
+				init_date = #{initDate},
+			</if>
+			<if test="initTime != null">
+				init_time = #{initTime},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime},
+			</if>
+			<if test="updater != null">
+				updater = #{updater},
+			</if>
+		</set>
+		where category_id in (
+		<foreach collection="categoryIds" item="categoryId" separator=",">
+			${categoryId}
+		</foreach>
+		)
+	</update>
+</mapper>

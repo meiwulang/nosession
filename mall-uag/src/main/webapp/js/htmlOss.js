@@ -1,0 +1,1 @@
+ossUrl = 'http://test-hjh.oss-cn-shanghai.aliyuncs.com/';

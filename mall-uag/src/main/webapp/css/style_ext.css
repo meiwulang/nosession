@@ -1,0 +1,496 @@
+#login{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+	background: url(../images/background.png) center center no-repeat;
+	background-size: 100% 100%;
+}
+#login .loginAddress{
+	position: absolute;
+	bottom: 50px;
+	text-align: center;
+	width: 100%;
+	left: 0;
+	height: 20px;
+	color: #fff;
+	font-size: 18px;
+}
+#login .content{
+	width: 480px;
+	position: absolute;
+	top: 50%;
+	right: 5%;
+	overflow: hidden;
+	height: 530px;
+	margin-top: -265px;
+	color: #fff;
+	text-align: center;
+}
+#login .content h1{
+	font-size: 80px;
+	font-weight: bold;
+	width: 100%;
+	height: 95px;
+	line-height: 95px;
+	text-align: center;
+	color: #fff;
+	margin-bottom: 25px;
+}
+#login .content .account{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 36px;
+}
+#login .content .account input{
+	width: 372px;
+	height: 50px;
+	background: rgba(255,255,255,0.3);
+	border: none;
+	font-size: 36px;
+	color: #fff;
+	text-indent: .5em;
+}
+#login .content .password{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 36px;
+	margin-top: 30px;
+}
+#login .content .password input{
+	width: 372px;
+	height: 50px;
+	background: rgba(255,255,255,0.3);
+	border: none;
+	font-size: 36px;
+	color: #fff;
+	text-indent: .5em;
+}
+#login .content .forget{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	overflow: hidden;
+	margin: 35px 0 50px;
+	text-align: center;
+	font-size: 20px;
+}
+#login .content .forget label{
+	width: 50%;
+	display: inline-block;
+}
+#login .content .forget a{
+	width: 50%;
+	display: inline-block;
+	text-decoration: underline;
+	color: #fff;
+}
+#login .content .loginButton{
+	width: 100%;
+	height: 70px;
+	border: none;
+	background-color: #fc9721;
+	color: #fff;
+	font-size: 30px;
+	line-height: 70px;
+}
+#login .content .signCompany{
+	width: 218px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border: 3px solid #fff;
+	background: none;
+	color: #fff;
+	margin-top: 50px;
+}
+.chek{
+	margin: -5px 5px 0 0;
+}
+#sign{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+#sign .content{
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+}
+#sign .header{
+	width: 100%;
+	height: 80px;
+	line-height: 80px;
+	overflow: hidden;
+	border-bottom: 1px solid #e1e3e6;
+}
+#sign .logo{
+	width: 295px;
+	height: 80px;
+	color: #fff;
+	background-color: #ff9900;
+	text-align: center;
+	font-size: 38px;
+	overflow: hidden;
+	float: left;
+}
+#sign .login{
+	float: right;
+	height: 80px;
+	font-size: 20px;
+	color: #000;
+	z-index: 999;
+}
+#sign .login .loginBot{
+	width: 160px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #FFFFFF;
+	background-color: #ff9900;
+	border: none;
+	margin: 0 20px;
+	font-size: 20px;
+}
+#sign .loginContent{
+	width: 1000px;
+	margin: 20px auto 0;
+	overflow: hidden;
+}
+.loginContentT{
+	width: 900px;
+	margin: 0 auto;
+}
+#sign .loginContent .loginContentTitle{
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	overflow: hidden;
+	border-bottom: 1px solid #e6e6e6;
+}
+#sign .loginContent .loginContentTitle ul{
+	width: 700px;
+	margin: 0 auto;
+	text-align: center;
+}
+#sign .loginContent .loginContentTitle ul li{
+	float: left;
+	width: 180px;
+	margin: -2px 50px 0 0;
+	color: #b3b3b3;
+}
+#sign .loginContent .loginContentTitle .navOn{
+	border-bottom: 3px solid #ff9900;
+	color: #333;
+}
+#sign .loginContent .loginContentTitle span{
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+	background-color: #b3b3b3;
+	line-height: 24px;
+	color: #fff;
+	margin-right: 10px;
+	font-size: 12px;
+}
+#sign .loginContent .loginContentTitle .navsOn{
+	background-color: #ff9900;
+}
+.loginContent h3{
+	font-size: 18px;
+	color: #ff9900;
+	width: 990px;
+	margin: 20px auto 20px;
+}
+.loginContent h3 span{
+	font-size: 14px;
+	color: #ff0000;
+}
+.loginForm{
+	width: 900px;
+	margin: 0 auto;
+	font-size: 12px;
+	overflow: hidden;
+}
+.loginForm li{
+	width: 900px;
+	height: 34px;
+	line-height: 34px;
+	clear: both;
+	margin-bottom: 20px;
+}
+.loginW1{
+	width: 120px;
+	display: inline-block;
+}
+.loginW2{
+	width: 240px;
+	display: inline-block;
+}
+.loginW3{
+	width: 496px;
+	display: inline-block;
+	margin-left: 20px;
+	font-size: 12px;
+}
+.inp1{
+	height: 28px;
+	border: none;
+	border: 1px solid #ccc;
+	text-indent: 1em;
+}
+.loginCor1{
+	width: 12px;
+	display: inline-block;
+	text-align: center;
+	font-size: 12px;
+	color: #ff0000;
+}
+.loginW4{
+	width: 135px;
+}
+.loginW5{
+	width: 100px;
+	margin-left: 5px;
+	line-height: 28px;
+	height: 28px;
+	background-color: #ff9900;
+	color: #fff;
+	display: inline-block;
+	text-align: center;
+	font-size: 12px;
+}
+.loginKnow{
+	text-align: center;
+}
+.loginKnow a{
+	color: #ff9900;
+}
+.loginNextOne{
+	text-align: center;
+}
+.loginNextOne input{
+	width: 360px;
+	height: 48px;
+	border: none;
+	background-color: #ff9900;
+	text-align: center;
+	color: #fff;
+	border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.pos1{
+	position: relative;
+}
+.pos2{
+	position: absolute;
+	top: -1px;
+	left: 5px;
+	width: 64px;
+	height: 20px;
+	border: none;
+	display: block;
+	line-height: 20px;
+	overflow: hidden;
+	color: #fff;
+}
+.loginW6{
+	width: 82px;
+}
+.loginW7{
+	width: 142px;
+}
+.loginW8{
+	width: 70px;
+	margin-right: 10px;
+	height: 28px;
+	line-height: 28px;
+	border: 1px solid #ccc;
+}
+.loginNextTwo{
+	text-align: center;
+}
+.loginNextTwo input{
+	width: 360px;
+	height: 48px;
+	border: none;
+	background-color: #ff9900;
+	text-align: center;
+	color: #fff;
+	border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.loginNextTwo a{
+	font-size: 22px;
+	color: #333;
+	margin-left: 70px;
+	text-decoration: underline;
+}
+.loginW9{
+	width: 300px;
+	margin-right: 10px;
+	margin-left: -10px;
+}
+.loginForm dl{
+	width: 100%;
+	overflow: hidden;
+	margin: 50px auto 0;
+	text-align: center;
+}
+.loginForm dl dt{
+	font-size: 32px;
+	color: #333;
+}
+.loginForm dl dt img{
+	margin-right: 25px;
+}
+.loginForm dl dd{
+	width: 690px;
+	margin: 65px auto 0;
+	font-size: 28px;
+	color: #333;
+	line-height: 56px;
+}
+.loginForm dl dd span{
+	color: #ff0000;
+}
+.loginForm dl dd input{
+	width: 360px;
+	height: 48px;
+	border: none;
+	background-color: #ff9900;
+	text-align: center;
+	color: #fff;
+	border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+/*
+ * 后台主页
+ */
+#wrap{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+}
+#left{
+	width: 300px;
+	float: left;
+	height: 100%;
+	overflow-y: auto;
+	background-color: #576071;
+}
+#right{
+	width: 75%;
+	float: right;
+	height: 100%;
+	overflow-y: auto;
+	background-color: #f1f2f6;
+}
+#left h1{
+	width: 100%;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	font-size: 40px;
+	color: #FFFFFF;
+	background-color: #ff9900;
+}
+#left dl{
+	text-align: center;
+	font-size: 18px;
+	color: #fff;
+}
+#left dl dt{
+	width: 100%;
+	height: 74px;
+	line-height: 74px;
+}
+#left dl dd{
+	background-color: #4b5465;
+	height: 50px;
+	line-height: 50px;
+}
+#left dl .on{
+	color: #ffcf0d;
+	border-left: 3px solid #ffcf0d;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+}
+#left dl .leftBg1{
+	background: url(../images/leftBg1.png) 20% center no-repeat;
+}
+#left dl .leftBg2{
+	background: url(../images/leftBg2.png) 20% center no-repeat;
+}
+.rightTitle{
+	width: 100%;
+	height: 80px;
+	background-color: #FFFFFF;
+	line-height: 80px;
+	position: relative;
+}
+.rightName{
+	margin-left: 40px;
+	color: #858c92;
+}
+.rightHandle{
+	height: 80px;
+	position: absolute;
+	right: 40px;
+	top: 0;
+	overflow: hidden;
+}
+.rightHandle li{
+	min-width: 44px;
+	float: left;
+	height: 80px;
+	color: #aeaeae;
+	position: relative;
+}
+#right .rightHandle .rightBg1{
+	background: url(../images/message.png) center center no-repeat;
+}
+#right .rightHandle .rightBg2{
+	background: url(../images/exit.png) center center no-repeat;
+}
+.pos3{
+	position: absolute;
+	right: 4px;
+	top: 20px;
+	width: 16px;
+	height: 16px;
+	text-align: center;
+	line-height: 16px;
+	background-color: #ff0000;
+	color: #fff;
+	font-size: 12px;
+}
+.headImg{
+	width: 38px;
+	height: 38px;
+	overflow: hidden;
+	display: inline-block;
+	line-height: 38px;
+	position: absolute;
+	top: 21px;
+}
+.headImg img{
+	width: 100%;
+	height: 100%;
+}
+.headMar{
+	margin: 0 0 0 40px;
+	padding-right: 20px;
+	background: url(../images/icoBg.png) right center no-repeat;
+}

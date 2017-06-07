@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjh.mall.order.dao.OrderItemDao" >
+    <resultMap id="BaseResultMap" type="com.hjh.mall.order.model.OrderItemDomain" >
+        <id column="ORDER_ITEM_ID" property="orderItemId" jdbcType="INTEGER" />
+        <result column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+        <result column="ORDER_NO" property="orderNo" jdbcType="INTEGER" />
+        <result column="PRODUCT_ID" property="productId" jdbcType="INTEGER" />
+        <result column="PRODUCT_ITEM_ID" property="productItemId" jdbcType="INTEGER" />
+        <result column="CATEGORY_ID" property="categoryId" jdbcType="INTEGER" />
+        <result column="CATEGORY_Name" property="categoryName" jdbcType="VARCHAR" />
+        <result column="BRAND_ID" property="brandId" jdbcType="INTEGER" />
+        <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+        <result column="DEPOSIT" property="deposit" jdbcType="DECIMAL" />
+        <result column="PRICE" property="price" jdbcType="DECIMAL"/>
+        <result column="QUANTITY" property="quantity" jdbcType="INTEGER" />
+        <result column="UNIT" property="unit" jdbcType="VARCHAR" />
+        <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+        <result column="PRODUCT_DESC" property="productDesc" jdbcType="LONGVARCHAR" />
+        <result column="PICTURE_CODE" property="pictureCode" jdbcType="VARCHAR" />
+        <result column="BRAND_NAME" property="brandName" jdbcType="VARCHAR" />
+        <result column="PRODUCT_STANDARD_MUST" property="productStandardMust" jdbcType="VARCHAR" />
+        <result column="PRODUCT_OPTIONAL_FIRST" property="productOptionalFirst" jdbcType="VARCHAR" />
+        <result column="PRODUCT_OPTIONAL_SECOND" property="productOptionalSecond" jdbcType="VARCHAR" />
+    </resultMap>
+
+	<sql id="fullWhere">
+		<where>
+			<if test="orderId != null">
+				AND ORDER_ID = #{orderId,jdbcType=INTEGER}
+			</if>
+			<if test="orderNo != null">
+				AND ORDER_NO = #{orderNo,jdbcType=INTEGER}
+			</if>
+			<if test="productId != null">
+				AND PRODUCT_ID = #{productId,jdbcType=INTEGER}
+			</if>
+			<if test="productItemId != null">
+				AND PRODUCT_ITEM_ID = #{productItemId,jdbcType=INTEGER}
+			</if>
+			<if test="categoryId != null">
+				AND CATEGORY_ID = #{categoryId,jdbcType=INTEGER}
+			</if>
+			<if test="brandId != null">
+				AND BRAND_ID = #{brandId,jdbcType=INTEGER}
+			</if>
+			<if test="amount != null">
+				AND AMOUNT = #{amount,jdbcType=DECIMAL}
+			</if>
+			<if test="price != null">
+				AND PRICE = #{price,jdbcType=DECIMAL}
+			</if>
+			<if test="quantity != null">
+				AND QUANTITY = #{quantity,jdbcType=INTEGER}
+			</if>
+			<if test="unit != null">
+				AND UNIT = #{unit,jdbcType=VARCHAR}
+			</if>
+			<if test="productName != null">
+				AND PRODUCT_NAME = #{productName,jdbcType=VARCHAR}
+			</if>
+			<if test="productDesc != null">
+				AND PRODUCT_DESC = #{productDesc,jdbcType=LONGVARCHAR}
+			</if>
+			<if test="pictureCode != null">
+				AND PICTURE_CODE = #{pictureCode,jdbcType=VARCHAR}
+			</if>
+			<if test="brandName != null">
+				AND BRAND_NAME = #{brandName,jdbcType=VARCHAR}
+			</if>
+			<if test="productStandardMust != null">
+				AND PRODUCT_STANDARD_MUST = #{productStandardMust,jdbcType=VARCHAR}
+			</if>
+			<if test="productOptionalFirst != null">
+				AND PRODUCT_OPTIONAL_FIRST = #{productOptionalFirst,jdbcType=VARCHAR}
+			</if>
+			<if test="productOptionalSecond != null">
+				AND PRODUCT_OPTIONAL_SECOND = #{productOptionalSecond,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+    <sql id="Base_Column_List" >
+        ORDER_ITEM_ID, ORDER_ID, ORDER_NO, PRODUCT_ID, PRODUCT_ITEM_ID, CATEGORY_ID,CATEGORY_NAME, BRAND_ID,
+        AMOUNT,DEPOSIT, PRICE, QUANTITY, UNIT, PRODUCT_NAME, PRODUCT_DESC, PICTURE_CODE, BRAND_NAME,
+        PRODUCT_STANDARD_MUST, PRODUCT_OPTIONAL_FIRST, PRODUCT_OPTIONAL_SECOND
+    </sql>
+    
+     <select id="query" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select 
+      	  <include refid="Base_Column_List" />
+        from t_order_item
+       	 <include refid="fullWhere" />
+    </select>
+    
+    <select id="queryOrderItems" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_order_item
+        where ORDER_ID = #{orderId,jdbcType=INTEGER}
+        
+    </select>
+
+    <select id="get" resultMap="BaseResultMap"  >
+        select 
+        <include refid="Base_Column_List" />
+        from t_order_item
+        where ORDER_ITEM_ID = #{orderItemId,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.hjh.mall.order.model.OrderItemDomain" >
+        insert into t_order_item (ORDER_ID, ORDER_NO,
+            PRODUCT_ID, PRODUCT_ITEM_ID, CATEGORY_ID, CATEGORY_NAME,
+            BRAND_ID, AMOUNT,DEPOSIT, PRICE,
+            QUANTITY, UNIT, PRODUCT_NAME, 
+            PRODUCT_DESC, PICTURE_CODE, BRAND_NAME, 
+            PRODUCT_STANDARD_MUST, PRODUCT_OPTIONAL_FIRST, 
+            PRODUCT_OPTIONAL_SECOND)
+        values (#{orderId,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR},
+            #{productId,jdbcType=VARCHAR}, #{productItemId,jdbcType=VARCHAR}, #{categoryId,jdbcType=VARCHAR},#{categoryName,jdbcType=VARCHAR},
+            #{brandId,jdbcType=VARCHAR},
+            #{amount,jdbcType=DECIMAL},
+            #{deposit,jdbcType=DECIMAL},
+             #{price,jdbcType=DECIMAL},
+            #{quantity,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+            #{productDesc,jdbcType=LONGVARCHAR}, #{pictureCode,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
+            #{productStandardMust,jdbcType=VARCHAR}, #{productOptionalFirst,jdbcType=VARCHAR}, 
+            #{productOptionalSecond,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="update" parameterType="com.hjh.mall.order.model.OrderItemDomain" >
+        update t_order_item
+        <set >
+            <if test="orderId != null" >
+                ORDER_ID = #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null" >
+                ORDER_NO = #{orderNo,jdbcType=INTEGER},
+            </if>
+            <if test="productId != null" >
+                PRODUCT_ID = #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="productItemId != null" >
+                PRODUCT_ITEM_ID = #{productItemId,jdbcType=INTEGER},
+            </if>
+            <if test="categoryId != null" >
+                CATEGORY_ID = #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="brandId != null" >
+                BRAND_ID = #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="amount != null" >
+                AMOUNT = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="price != null" >
+                PRICE = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null" >
+                QUANTITY = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="unit != null" >
+                UNIT = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null" >
+                PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productDesc != null" >
+                PRODUCT_DESC = #{productDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="pictureCode != null" >
+                PICTURE_CODE = #{pictureCode,jdbcType=VARCHAR},
+            </if>
+            <if test="brandName != null" >
+                BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="productStandardMust != null" >
+                PRODUCT_STANDARD_MUST = #{productStandardMust,jdbcType=VARCHAR},
+            </if>
+            <if test="productOptionalFirst != null" >
+                PRODUCT_OPTIONAL_FIRST = #{productOptionalFirst,jdbcType=VARCHAR},
+            </if>
+            <if test="productOptionalSecond != null" >
+                PRODUCT_OPTIONAL_SECOND = #{productOptionalSecond,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ORDER_ITEM_ID = #{orderItemId,jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete"  >
+        delete from t_order_item
+        where ORDER_ITEM_ID = #{orderItemId,jdbcType=INTEGER}
+    </delete>
+
+</mapper>

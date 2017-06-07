@@ -1,0 +1,51 @@
+{
+	"error_no" : "0",
+	"error_info" : "",
+	"result_list" : [
+	                 {
+	                	 	"activityId" : "1001",
+	                	 	"title" : "特惠促销",
+	                	 	"sort" : "1",
+	                	 	"img" : "SHUFFLING_PICTURE/1490272289160712.jpg",
+	                	 	"appDisplay" : "1",
+	                	 	"remark" : "",
+	                	 	"initUser" : "admin",
+	                	 	"initDate" : "20150928",
+	                	 	"initTime" : "085008",
+	                	 	"updateUser" : "m1",
+	                	 	"updateDate" : "20170509",
+	                	 	"updateTime" : "175608"
+	                 },
+	                 {
+	                	 	"activityId" : "1002",
+	                	 	"title" : "七折特价",
+	                	 	"sort" : "2",
+	                	 	"img" : "SHUFFLING_PICTURE/1490272289160712.jpg",
+	                	 	"appDisplay" : "0",
+	                	 	"remark" : "",
+	                	 	"text" : "<h1 style=\"text-align: center;\">asdfasdfasdf</h1><ol><li>aaaa</li><li>bbbb</li><li>cccc</li></ol>",
+	                	 	"initUser" : "admin",
+	                	 	"initDate" : "20150928",
+	                	 	"initTime" : "085008",
+	                	 	"updateUser" : "m1",
+	                	 	"updateDate" : "20170509",
+	                	 	"updateTime" : "175608"
+	                 },
+	                 {
+	                	 	"activityId" : "1003",
+	                	 	"title" : "八折甩卖",
+	                	 	"sort" : "3",
+	                	 	"img" : "SHUFFLING_PICTURE/1490272289160712.jpg",
+	                	 	"appDisplay" : "0",
+	                	 	"remark" : "",
+	                	 	"text" : "<h1 style=\"text-align: center;\">八折甩卖啊</h1><ul><li>不管你信不信反正我是信了</li></ul><p style=\"margin-left: 40px;\">短发开始的开发和思考的话费卡上的咖啡机哈萨克觉得话费卡上的咖啡机</p>",
+	                	 	"initUser" : "admin",
+	                	 	"initDate" : "20150928",
+	                	 	"initTime" : "085008",
+	                	 	"updateUser" : "m1",
+	                	 	"updateDate" : "20170509",
+	                	 	"updateTime" : "175608"
+	                 }
+	],
+	"total_num" : 3
+}

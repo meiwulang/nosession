@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjh.mall.bizapi.biz.goods.middle.dao.ActivityDao" >
+  <sql id="tableName" >
+    activity
+  </sql>
+  <resultMap id="BaseResultMap" type="com.hjh.mall.bizapi.biz.goods.middle.entity.Activity" >
+    <id column="activity_id" property="activityId" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="app_display" property="appDisplay" jdbcType="VARCHAR" />
+    <result column="init_date" property="initDate" jdbcType="VARCHAR" />
+    <result column="init_time" property="initTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+    <result column="init_user" property="initUser" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="fullColumns" >
+    activity_id, title, img, sort, text, remark, app_display, init_date, init_time, update_time, 
+    update_date, init_user, update_user
+  </sql>
+  <sql id="fullColumnsValues" >
+    #{activityId}, #{title}, #{img}, #{sort}, #{text}, #{remark}, #{appDisplay}, #{initDate}, 
+    #{initTime}, #{updateTime}, #{updateDate}, #{initUser}, #{updateUser}
+  </sql>
+  <select id="get" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="fullColumns" />
+    from activity
+    where activity_id = #{activityId}
+  </select>
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from activity
+    where activity_id = #{activityId}
+  </delete>
+  <update id="update" parameterType="com.hjh.mall.bizapi.biz.goods.middle.entity.Activity" >
+    update activity
+    <set >
+      <if test="title != null" >
+        title = #{title},
+      </if>
+      <if test="img != null" >
+        img = #{img},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort},
+      </if>
+      <if test="text != null" >
+        text = #{text},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark},
+      </if>
+      <if test="appDisplay != null" >
+        app_display = #{appDisplay},
+      </if>
+      <if test="initDate != null" >
+        init_date = #{initDate},
+      </if>
+      <if test="initTime != null" >
+        init_time = #{initTime},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate},
+      </if>
+      <if test="initUser != null" >
+        init_user = #{initUser},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser},
+      </if>
+    </set>
+    where activity_id = #{activityId}
+  </update>
+  <sql id="fullWhere" >
+    <where >
+      <if test="activityId != null" >
+         and activity_id = #{activityId}
+      </if>
+      <if test="title != null" >
+         and title = #{title}
+      </if>
+      <if test="img != null" >
+         and img = #{img}
+      </if>
+      <if test="sort != null" >
+         and sort = #{sort}
+      </if>
+      <if test="text != null" >
+         and text = #{text}
+      </if>
+      <if test="remark != null" >
+         and remark = #{remark}
+      </if>
+      <if test="appDisplay != null" >
+         and app_display = #{appDisplay}
+      </if>
+      <if test="initDate != null" >
+         and init_date = #{initDate}
+      </if>
+      <if test="initTime != null" >
+         and init_time = #{initTime}
+      </if>
+      <if test="updateTime != null" >
+         and update_time = #{updateTime}
+      </if>
+      <if test="updateDate != null" >
+         and update_date = #{updateDate}
+      </if>
+      <if test="initUser != null" >
+         and init_user = #{initUser}
+      </if>
+      <if test="updateUser != null" >
+         and update_user = #{updateUser}
+      </if>
+    </where>
+  </sql>
+  <sql id="likeWhere" >
+    <where >
+      <if test="activityId != null" >
+         and activity_id like '%${activityId}%'
+      </if>
+      <if test="title != null" >
+         and title like '%${title}%'
+      </if>
+      <if test="img != null" >
+         and img like '%${img}%'
+      </if>
+      <if test="sort != null" >
+         and sort like '%${sort}%'
+      </if>
+      <if test="text != null" >
+         and text like '%${text}%'
+      </if>
+      <if test="remark != null" >
+         and remark like '%${remark}%'
+      </if>
+      <if test="appDisplay != null" >
+         and app_display like '%${appDisplay}%'
+      </if>
+      <if test="startTime != null" >
+         and init_date &gt;=${startTime}
+      </if>
+      <if test="endTime != null" >
+         and init_date &lt;=${endTime}
+      </if>
+      <if test="updateTime != null" >
+         and update_time like '%${updateTime}%'
+      </if>
+      <if test="updateDate != null" >
+         and update_date like '%${updateDate}%'
+      </if>
+      <if test="initUser != null" >
+         and init_user like '%${initUser}%'
+      </if>
+      <if test="updateUser != null" >
+         and update_user like '%${updateUser}%'
+      </if>
+    </where>
+  </sql>
+  <select id="query" resultMap ="BaseResultMap" >
+    select <include refid="fullColumns"/> from 
+	<include refid="tableName"/> 
+	<include refid="fullWhere"/> 
+	<include refid="sortAndPage"></include>
+  </select>
+  <sql id="sortAndPage" >
+    <if test="null != sortMarkers"> order by 
+		<foreach collection="sortMarkers" item="sortMarker" separator=","> 
+			${sortMarker.field} ${sortMarker.direction} 
+		</foreach> 
+	</if> 
+	<if test="null != page"> 
+		limit #{page.offset}, #{page.page_size} 
+	</if>
+  </sql>
+  <select id="countByLike" resultType="int" >
+    select count(1) from
+	<include refid="tableName"/>
+	<include refid="likeWhere"></include>
+  </select>
+  <select id="count" resultType="int" >
+    select count(1) from
+	<include refid="tableName"/>
+	<include refid="fullWhere"></include>
+  </select>
+  <select id="queryByLike" resultType="map" >
+    select <include refid="fullColumns" /> from
+	<include refid="tableName"/>
+	<include refid="likeWhere"></include>
+	<include refid="sortAndPage"></include>
+  </select>
+  <insert id="save" useGeneratedKeys="true" >
+    insert into <include refid="tableName"/>
+	( <include refid="fullColumns"></include> )
+	values( <include refid="fullColumnsValues"></include> )
+  </insert>
+</mapper>

@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjh.mall.order.dao.OrderDao" >
+    <resultMap id="BaseResultMap" type="com.hjh.mall.order.model.OrderDomain" >
+        <id column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+        <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+        <result column="ORDER_STATUS" property="orderStatus" jdbcType="INTEGER" />
+        <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+        <result column="USER_MOBILE" property="userMobile" jdbcType="VARCHAR" />
+        <result column="SHOP_ID" property="shopId" jdbcType="INTEGER" />
+        <result column="BRAND_ID" property="brandId" jdbcType="VARCHAR" />
+        <result column="BRAND_NAME" property="brandName" jdbcType="VARCHAR" />
+        <result column="TRANSACTION_TYPE" property="transactionType" jdbcType="INTEGER" />
+        <result column="TRANSACTION_AMOUNT" property="transactionAmount" jdbcType="DECIMAL" />
+        <result column="TRANSACTION_ACTUAL_PAY_AMOUNT" property="transactionActualPayAmount" jdbcType="DECIMAL" />
+        <result column="TRANSACTION_DEPOSIT" property="transactionDeposit" jdbcType="DECIMAL" />
+        <result column="TRANSACTION_ACTUAL_PAY_BALANCE" property="transactionActualPayBalance" jdbcType="DECIMAL" />
+        <result column="POSTAGE" property="postage" jdbcType="DECIMAL" />
+        <result column="PAY_DATE" property="payDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="CHANNEL" property="channel" jdbcType="VARCHAR" />
+        <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="MODIFIED_DATE" property="modifiedDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="DEL_FLAG" property="delFlag" jdbcType="INTEGER" />
+        <result column="CONSIGNEE_NAME" property="consigneeName" jdbcType="VARCHAR" />
+        <result column="CONSIGNEE_MOBILE" property="consigneeMobile" jdbcType="VARCHAR" />
+        <result column="CONSIGNEE_TELEPHONE" property="consigneeTelephone" jdbcType="VARCHAR" />
+        <result column="CONSIGNEE_ADDRESS" property="consigneeAddress" jdbcType="VARCHAR" />
+        <result column="CONSIGNEE_PROVINCE" property="consigneeProvince" jdbcType="VARCHAR" />
+        <result column="CONSIGNEE_CITY" property="consigneeCity" jdbcType="VARCHAR" />
+        <result column="CONSIGNEE_DISTRICT" property="consigneeDistrict" jdbcType="VARCHAR" />
+        <result column="CONSIGNEE_ZIP" property="consigneeZip" jdbcType="VARCHAR" />
+        <result column="BUYER_COMMENTS" property="buyerComments" jdbcType="VARCHAR" />
+        <result column="ORDER_REMARK" property="orderRemark" jdbcType="VARCHAR" />
+
+        <result column="ESTIMATE_DELIVERY_DESC" property="estimateDeliveryDesc" jdbcType="VARCHAR" />
+        <result column="DEPOSIT_PROOF_DATE" property="depositProofDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+        <result column="BALANCE_PROOF_DATE" property="balanceProofDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+        <result column="BALANCE_DATE_COUNT" property="balanceDateCount"  jdbcType="INTEGER"/>
+        <result column="INVITE_CODE" property="inviteCode" jdbcType="VARCHAR" />
+        <result column="ACTUAL_DELIVERY_DATE" property="actualDeliveryDate" javaType="java.util.Date"  />
+
+        <result column="REFUNDING_AMOUNT" property="refundingAmount" jdbcType="DECIMAL"  />
+        <result column="REFUNDING_EXPLAIN" property="refundingExplain" jdbcType="VARCHAR"  />
+        <result column="APPLY_REFUND_DATE" property="applyRefundDate" jdbcType="TIMESTAMP" javaType="java.util.Date"  />
+        <result column="TERMINAL_DATE" property="terminalDate" jdbcType="TIMESTAMP" javaType="java.util.Date"  />
+
+    </resultMap>
+    
+	<sql id="fullWhere">
+	<where>
+        DEL_FLAG != 2
+        <if test="userId != null">
+			AND USER_ID = #{userId,jdbcType=VARCHAR}
+		</if>
+
+		<if test="orderNoLike != null">
+			AND ORDER_NO LIKE CONCAT('%',#{orderNoLike,jdbcType=VARCHAR},'%')
+		</if>
+
+        <if test="brandNameLike != null">
+            AND BRAND_NAME LIKE CONCAT('%',#{brandNameLike,jdbcType=VARCHAR},'%')
+        </if>
+
+        <if test="userNameLike != null">
+            AND USER_NAME LIKE CONCAT('%',#{userNameLike,jdbcType=VARCHAR},'%')
+        </if>
+
+        <if test="inviteCodeBegin != null">
+            AND INVITE_CODE  &gt;=  #{inviteCodeBegin,jdbcType=VARCHAR}
+        </if>
+
+        <if test="inviteCodeEnd != null">
+            AND INVITE_CODE  &lt;= #{inviteCodeEnd,jdbcType=VARCHAR}
+        </if>
+
+        <if test="estimateDeliveryDescLike != null">
+            AND ESTIMATE_DELIVERY_DESC LIKE CONCAT('%',#{estimateDeliveryDescLike,jdbcType=VARCHAR},'%')
+        </if>
+
+        <if test="createDateBegin != null">
+            <![CDATA[   AND CREATED_DATE >=  #{createDateBegin,jdbcType=TIMESTAMP}  ]]>
+        </if>
+        <if test="createDateEnd != null">
+            <![CDATA[   AND CREATED_DATE <=  #{createDateEnd,jdbcType=TIMESTAMP}  ]]>
+        </if>
+
+        <if test="deliveryDateBegin != null">
+            AND ACTUAL_DELIVERY_DATE   &gt;=  #{deliveryDateBegin,jdbcType=TIMESTAMP}
+        </if>
+        <if test="deliveryDateEnd != null">
+            AND ACTUAL_DELIVERY_DATE   &lt;=  #{deliveryDateEnd,jdbcType=TIMESTAMP}
+        </if>
+
+        <if test="transactionType != null">
+            AND TRANSACTION_TYPE =  #{transactionType.code,jdbcType=INTEGER}
+        </if>
+
+
+        <if test="orderStatus != null">
+            AND ORDER_STATUS IN
+            <foreach collection="orderStatus" item="status" index="index"
+                     open="(" close=")" separator=",">
+                #{status.code}
+            </foreach>
+		</if>
+
+        <if test="isPostageCalculation !=null and isPostageCalculation == true" >
+            AND POSTAGE IS NOT NULL
+        </if>
+        <if test="isPostageCalculation !=null and isPostageCalculation == false" >
+            AND POSTAGE IS NULL
+        </if>
+
+        <if test="haveFullPayProof !=null and haveFullPayProof == true" >
+            AND BALANCE_PROOF_DATE IS NOT NULL
+        </if>
+        <if test="haveFullPayProof !=null and haveFullPayProof == false" >
+            AND BALANCE_PROOF_DATE IS NULL
+        </if>
+
+
+        <if test="haveDepositPayProof !=null and haveDepositPayProof == true" >
+            AND DEPOSIT_PROOF_DATE IS NOT NULL
+        </if>
+        <if test="haveDepositPayProof !=null and haveDepositPayProof == false" >
+            AND DEPOSIT_PROOF_DATE IS NULL
+        </if>
+
+
+
+    </where>
+</sql>
+
+    <sql id="Base_Column_List" >
+        ORDER_ID,
+        ORDER_NO,
+        ORDER_STATUS,
+        USER_ID,
+        USER_NAME,
+        USER_MOBILE,
+        SHOP_ID,
+        BRAND_ID,
+        BRAND_NAME,
+        TRANSACTION_TYPE,
+        TRANSACTION_AMOUNT,
+        TRANSACTION_ACTUAL_PAY_AMOUNT,
+        TRANSACTION_DEPOSIT,
+        TRANSACTION_ACTUAL_PAY_BALANCE,
+        POSTAGE,
+        PAY_DATE,
+        CHANNEL,
+        CREATED_DATE,
+        MODIFIED_DATE,
+        DEL_FLAG,
+        CONSIGNEE_NAME,
+        CONSIGNEE_MOBILE,
+        CONSIGNEE_TELEPHONE,
+        CONSIGNEE_ADDRESS,
+        CONSIGNEE_PROVINCE,
+        CONSIGNEE_CITY,
+        CONSIGNEE_DISTRICT,
+        CONSIGNEE_ZIP,
+        BUYER_COMMENTS,
+        ORDER_REMARK,
+        ESTIMATE_DELIVERY_DESC,
+        DEPOSIT_PROOF_DATE,
+        BALANCE_PROOF_DATE,
+        BALANCE_DATE_COUNT,
+        INVITE_CODE,
+        ACTUAL_DELIVERY_DATE,
+        REFUNDING_AMOUNT,
+        REFUNDING_EXPLAIN,
+        APPLY_REFUND_DATE,
+        TERMINAL_DATE
+    </sql>
+
+
+    <select id="get" resultMap="BaseResultMap"  >
+        select 
+        <include refid="Base_Column_List" />
+        from t_order
+        where ORDER_ID = #{orderId,jdbcType=INTEGER}
+        AND DEL_FLAG != 2
+
+    </select>
+
+    <insert id="insert" parameterType="com.hjh.mall.order.model.OrderDomain" >
+        <selectKey resultType="java.lang.String" keyProperty="orderId" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        insert into t_order 
+        (
+            ORDER_NO,
+            ORDER_STATUS, 
+            USER_ID,
+            USER_NAME,
+            USER_MOBILE,
+            SHOP_ID,
+            BRAND_ID,
+            BRAND_NAME,
+            TRANSACTION_TYPE, 
+            TRANSACTION_AMOUNT, TRANSACTION_ACTUAL_PAY_AMOUNT, 
+            TRANSACTION_DEPOSIT, TRANSACTION_ACTUAL_PAY_BALANCE, 
+            POSTAGE, PAY_DATE, CHANNEL, 
+            CREATED_DATE, MODIFIED_DATE, DEL_FLAG, 
+            CONSIGNEE_NAME, CONSIGNEE_MOBILE, CONSIGNEE_TELEPHONE, 
+            CONSIGNEE_ADDRESS, CONSIGNEE_PROVINCE, 
+            CONSIGNEE_CITY, CONSIGNEE_DISTRICT, CONSIGNEE_ZIP, 
+            BUYER_COMMENTS, ORDER_REMARK,
+            INVITE_CODE
+        )
+        values (
+          #{orderNo,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER},
+            #{userId,jdbcType=VARCHAR},
+        #{userName,jdbcType=VARCHAR},
+        #{userMobile,jdbcType=VARCHAR},
+        #{shopId,jdbcType=INTEGER},
+          #{brandId,jdbcType=VARCHAR},
+          #{brandName,jdbcType=VARCHAR},
+          #{transactionType,jdbcType=INTEGER},
+            #{transactionAmount,jdbcType=DECIMAL},
+        #{transactionActualPayAmount,jdbcType=DECIMAL},
+            #{transactionDeposit,jdbcType=DECIMAL}, #{transactionActualPayBalance,jdbcType=DECIMAL}, 
+            #{postage,jdbcType=DECIMAL}, #{payDate,jdbcType=TIMESTAMP}, #{channel,jdbcType=VARCHAR}, 
+            #{createdDate,jdbcType=TIMESTAMP}, #{modifiedDate,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=INTEGER}, 
+            #{consigneeName,jdbcType=VARCHAR}, #{consigneeMobile,jdbcType=VARCHAR}, #{consigneeTelephone,jdbcType=VARCHAR}, 
+            #{consigneeAddress,jdbcType=VARCHAR}, #{consigneeProvince,jdbcType=VARCHAR}, 
+            #{consigneeCity,jdbcType=VARCHAR}, #{consigneeDistrict,jdbcType=VARCHAR}, #{consigneeZip,jdbcType=VARCHAR}, 
+            #{buyerComments,jdbcType=VARCHAR}, #{orderRemark,jdbcType=VARCHAR},
+            #{inviteCode,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.hjh.mall.order.model.OrderDomain" >
+        update t_order
+        <set >
+
+            <if test="orderNo != null" >
+                ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatus != null" >
+                ORDER_STATUS = #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null" >
+                USER_ID = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="shopId != null" >
+                SHOP_ID = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="transactionType != null" >
+                TRANSACTION_TYPE = #{transactionType,jdbcType=INTEGER},
+            </if>
+            <if test="transactionAmount != null" >
+                TRANSACTION_AMOUNT = #{transactionAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="transactionActualPayAmount != null" >
+                TRANSACTION_ACTUAL_PAY_AMOUNT = #{transactionActualPayAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="transactionDeposit != null" >
+                TRANSACTION_DEPOSIT = #{transactionDeposit,jdbcType=DECIMAL},
+            </if>
+            <if test="transactionActualPayBalance != null" >
+                TRANSACTION_ACTUAL_PAY_BALANCE = #{transactionActualPayBalance,jdbcType=DECIMAL},
+            </if>
+            <if test="postage != null" >
+                POSTAGE = #{postage,jdbcType=DECIMAL},
+            </if>
+            <if test="payDate != null" >
+                PAY_DATE = #{payDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="channel != null" >
+                CHANNEL = #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null" >
+                CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifiedDate != null" >
+                MODIFIED_DATE = #{modifiedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null" >
+                DEL_FLAG = #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="consigneeName != null" >
+                CONSIGNEE_NAME = #{consigneeName,jdbcType=VARCHAR},
+            </if>
+            <if test="consigneeMobile != null" >
+                CONSIGNEE_MOBILE = #{consigneeMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="consigneeTelephone != null" >
+                CONSIGNEE_TELEPHONE = #{consigneeTelephone,jdbcType=VARCHAR},
+            </if>
+            <if test="consigneeAddress != null" >
+                CONSIGNEE_ADDRESS = #{consigneeAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="consigneeProvince != null" >
+                CONSIGNEE_PROVINCE = #{consigneeProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="consigneeCity != null" >
+                CONSIGNEE_CITY = #{consigneeCity,jdbcType=VARCHAR},
+            </if>
+            <if test="consigneeDistrict != null" >
+                CONSIGNEE_DISTRICT = #{consigneeDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="consigneeZip != null" >
+                CONSIGNEE_ZIP = #{consigneeZip,jdbcType=VARCHAR},
+            </if>
+            <if test="buyerComments != null" >
+                BUYER_COMMENTS = #{buyerComments,jdbcType=VARCHAR},
+            </if>
+            <if test="orderRemark != null" >
+                ORDER_REMARK = #{orderRemark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ORDER_ID = #{orderId,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey"  >
+        delete from t_order
+        where ORDER_ID = #{orderId,jdbcType=INTEGER}
+    </delete>
+    
+    <select id="query" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select 
+      	  <include refid="Base_Column_List" />
+        from t_order
+       	 <include refid="fullWhere" />
+        ORDER BY ORDER_ID DESC
+    </select>
+    
+    <update id="deleteOrder">
+		update t_order
+			set DEL_FLAG = #{status,jdbcType=INTEGER}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+	</update>
+
+    <select id="getOrderTransactionAmount" resultType="java.math.BigDecimal"  >
+		SELECT
+			TRANSACTION_AMOUNT
+		FROM
+			t_order
+		WHERE order_id = #{orderId};
+    </select>
+    
+    <update id="updateOrderTransactionAmount">
+		update t_order
+			set TRANSACTION_AMOUNT = #{amount,jdbcType=DECIMAL}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+	</update>
+	
+	 <select id="getOrderTransactionDeposit" resultType="java.math.BigDecimal"  >
+		SELECT
+			TRANSACTION_DEPOSIT
+		FROM
+			t_order
+		WHERE order_id = #{orderId};
+    </select>
+    
+    <update id="updateOrderTransactionDeposit">
+		update t_order
+			set TRANSACTION_DEPOSIT = #{deposit}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+	</update>
+	
+    <select id="getOrderTransactionActualPayAmount" resultType="java.math.BigDecimal"  >
+		SELECT
+			TRANSACTION_ACTUAL_PAY_AMOUNT
+		FROM
+			t_order
+		WHERE order_id = #{orderId};
+    </select>
+    
+     <update id="updateOrderTransactionActualPayAmount">
+		update t_order
+			set TRANSACTION_ACTUAL_PAY_AMOUNT = #{actualPayAmount}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+	 </update>
+	
+	 <select id="getOrderTransacationActualPayBalance" resultType="java.math.BigDecimal"  >
+		SELECT
+			TRANSACTION_ACTUAL_PAY_BALANCE
+		FROM
+			t_order
+		WHERE order_id = #{orderId};
+     </select>
+    
+     <update id="updateOrderTransactionActualPayBalance">
+		update t_order
+			set TRANSACTION_ACTUAL_PAY_BALANCE = #{actualPayBalance}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+	 </update>
+	 
+	 <select id="getOrderPostage" resultType="java.math.BigDecimal"  >
+		SELECT
+			POSTAGE
+		FROM
+			t_order
+		where ORDER_ID = #{orderId,jdbcType=INTEGER}
+     </select>
+
+
+    <update id="updateOrderPostage">
+		update t_order
+			set POSTAGE = #{postage}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+	 </update>
+
+
+
+     <update id="updateOrderToUnDelivery">
+		update t_order
+			set ORDER_STATUS = #{orderStatus},
+			PAY_DATE=#{payDate}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+	 </update>
+
+    <update id="updateOrderToRefunding">
+        update t_order
+        set ORDER_STATUS = #{orderStatus},
+        APPLY_REFUND_DATE=#{applyRefundDate}
+        where ORDER_ID=#{orderId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateOrderToCancel">
+        update t_order
+        set ORDER_STATUS = #{orderStatus},
+        TERMINAL_DATE=#{cancelDate}
+        where ORDER_ID=#{orderId,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateOrderStatus">
+        update t_order
+        set ORDER_STATUS = #{orderStatus}
+        where ORDER_ID=#{orderId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateOrderToTerminal">
+        update t_order
+        set ORDER_STATUS = #{orderStatus},
+        TERMINAL_DATE = #{terminalDate}
+        where ORDER_ID=#{orderId,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateDeliveryTime">
+		update t_order
+			set ORDER_STATUS = #{orderStatus},
+			ACTUAL_DELIVERY_DATE = #{actualDeliveryDate}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+	 </update>
+	 
+     <update id="updateOrderEstimateDeliveryDesc">
+		update t_order
+			set ESTIMATE_DELIVERY_DESC = #{exceptDeliveryDesc}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+	 </update>
+	 
+     <update id="updateOrderBalanceDateCount">
+		update t_order
+			set BALANCE_DATE_COUNT = #{balanceDateCount}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+	 </update>
+	 
+     <update id="updateOrderPostageEtc">
+		update t_order
+			set POSTAGE = #{postage},
+			    ESTIMATE_DELIVERY_DESC = #{estimateDeliveryDesc},
+			    BALANCE_DATE_COUNT = #{balanceDateCount}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+	 </update>
+	 
+	 <update id="updateOrderRemark">
+		update t_order
+			set ORDER_REMARK = #{remark}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+	 </update>
+	 
+	 <select id="getOrderRemark" resultType="string" parameterType="string" >
+		SELECT
+			ORDER_REMARK
+		FROM
+			t_order
+		WHERE ORDER_ID = #{orderId,jdbcType=INTEGER}
+     </select>
+	
+	<delete id="delete">
+		delete
+			from t_order
+		where ORDER_ID=#{orderId}
+	</delete>
+
+    <select id="checkIsUserOrder" resultType="java.lang.Integer">
+
+        select count(1) from t_order
+        WHERE
+          ORDER_ID=#{orderId,jdbcType=INTEGER}
+          AND USER_ID = #{userId,jdbcType=VARCHAR}
+
+    </select>
+    
+    <select id="queryCount" resultType="java.lang.Integer">
+        select count(order_id) from t_order
+        <where>
+            DEL_FLAG != 2
+        <if test="orderStatus != null">
+            AND ORDER_STATUS IN
+            <foreach collection="orderStatus" item="status" index="index"
+                     open="(" close=")" separator=",">
+                #{status}
+            </foreach>
+		</if>
+		<if test="userId != null">
+			AND USER_ID = #{userId,jdbcType=VARCHAR}
+		</if>
+
+        <if test="isPostageCalculation !=null and isPostageCalculation == true" >
+            AND POSTAGE IS NOT NULL
+        </if>
+        <if test="isPostageCalculation !=null and isPostageCalculation == false" >
+            AND POSTAGE IS NULL
+        </if>
+
+        <if test="haveDepositPayProof !=null and haveDepositPayProof == true" >
+            AND DEPOSIT_PROOF_DATE IS NOT NULL
+        </if>
+        <if test="haveDepositPayProof !=null and haveDepositPayProof == false" >
+            AND DEPOSIT_PROOF_DATE IS NULL
+        </if>
+
+            <if test="haveFullPayProof !=null and haveFullPayProof == true" >
+                AND BALANCE_PROOF_DATE IS NOT NULL
+            </if>
+            <if test="haveFullPayProof !=null and haveFullPayProof == false" >
+                AND BALANCE_PROOF_DATE IS NULL
+            </if>
+
+
+        </where>
+    </select>
+
+
+    <update id="updateOrderDeliveryDate" >
+        update t_order
+			set ACTUAL_DELIVERY_DATE = #{deliveryDate}
+		where ORDER_ID=#{orderId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateDepositProofDate" >
+        update t_order
+        set DEPOSIT_PROOF_DATE = #{depositProofDate}
+        where ORDER_ID=#{orderId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateBalanceProofDate" >
+        update t_order
+        set BALANCE_PROOF_DATE = #{balanceProofDate}
+        where ORDER_ID=#{orderId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateRefundingInfo" >
+
+        update t_order
+        set REFUNDING_AMOUNT = #{refundingAmount},
+        REFUNDING_EXPLAIN = #{refundingExplain}
+        where ORDER_ID=#{orderId,jdbcType=INTEGER}
+
+    </update>
+
+</mapper>

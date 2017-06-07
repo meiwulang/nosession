@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.OperatorDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	operator_id,operator_name,password,
+			remark,update_version,update_user,status
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+        #{operator_id},#{operator_name},#{password},
+        #{remark},#{update_version},#{update_user},#{status}
+	</sql>
+	<sql id="fullWhere">
+		<where>	
+			<if test="operator_id !=null">
+			AND operator_id=#{operator_id}
+			</if>
+			<if test="operator_name !=null">
+			AND operator_name=#{operator_name}
+			</if>
+			<if test="password !=null">
+			AND password=#{password}
+			</if>
+
+	    <if test="remark != null">
+				AND remark = #{remark}
+		</if>
+		<if test="update_version != null">
+				AND update_version = #{update_version}
+		</if>
+		<if test="update_user != null">
+				AND update_user = #{update_user}
+		</if>
+		<if test="status != null">
+				AND status = #{status}
+		</if>		 
+		</where>
+	</sql>
+	<sql id="fullLikeWhere">
+		<where>	
+			<if test="operator_id !=null">
+			AND operator_id like CONCAT('%',#{operator_id},'%')
+			</if>
+			<if test="operator_name !=null">
+			AND operator_name like CONCAT('%',#{operator_name},'%')
+			</if>
+			<if test="password !=null">
+			AND password like CONCAT('%',#{password},'%')
+			</if>
+
+	    <if test="remark != null">
+				AND remark like CONCAT('%',#{remark},'%')
+		</if>
+		<if test="update_version != null">
+				AND update_version like CONCAT('%',#{update_version},'%')
+		</if>
+		<if test="update_user != null">
+				AND update_user like CONCAT('%',#{update_user},'%')
+		</if>
+		<if test="status != null">
+				AND status like CONCAT('%',#{status},'%')
+		</if>		 
+		</where>
+	</sql>
+	
+	<sql id="fullSet">
+		<set>	
+			<if test="operator_id !=null">
+			operator_id=#{operator_id},
+			</if>
+			<if test="operator_name !=null">
+			operator_name=#{operator_name},
+			</if>
+			<if test="password !=null">
+			password=#{password},
+			</if>
+	
+          <if test="remark != null">
+				remark = #{remark},
+		  </if>
+		  <if test="update_version != null">
+				update_version = #{update_version},
+		  </if>
+		  <if test="update_user != null">
+				update_user = #{update_user},
+		  </if>
+          <if test="status != null">
+				status = #{status},
+		</if>			  
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into operator ( 
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+	update operator 
+	<include refid="fullSet"></include>
+	where operator_id=#{operator_id}				
+	</update>
+	
+	<delete id="delete">
+	delete from operator where operator_id = #{key}
+	</delete>
+
+	<select id="get" resultType="Operator">
+		select
+		<include refid="fullColumns" />
+		from operator 
+		where 
+		operator_id = #{key}
+	</select>
+	
+	<select id="query" resultType="Operator">
+		select
+		<include refid="fullColumns" />
+		from operator 
+		<include refid="fullWhere"></include>
+	</select>
+	<select id="queryByLike" resultType="Operator">
+		select
+		<include refid="fullColumns" />
+		from operator 
+		<include refid="fullLikeWhere"></include>
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="countByLike" resultType="int">
+		select count(operator_id)
+		from operator 
+		<include refid="fullLikeWhere"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from operator
+		
+	</select>	
+	<select id="queryIdByName" resultType="string">
+		SELECT operator_id FROM operator WHERE operator_name like CONCAT('%',#{operator_name},'%');
+	</select>
+<!-- 	 查询id和name -->
+	<select id="querySimple" resultType="map">
+		SELECT operator_id,operator_name from operator
+	</select>
+	
+</mapper>

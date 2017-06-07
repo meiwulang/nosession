@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjh.mall.bizapi.biz.goods.middle.dao.ShoppingCartDetailDao" >
+  <sql id="tableName" >
+    shopping_cart_detail
+  </sql>
+  <resultMap id="BaseResultMap" type="com.hjh.mall.bizapi.biz.goods.middle.entity.ShoppingCartDetail" >
+    <id column="shopping_cart_detail_id" property="shoppingCartDetailId" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goods_name" jdbcType="VARCHAR" />
+    <result column="standard_must" property="standard_must" jdbcType="VARCHAR" />
+    <result column="optional_first" property="optional_first" jdbcType="VARCHAR" />
+    <result column="optional_second" property="optional_second" jdbcType="VARCHAR" />
+    <result column="prdt_num" property="prdt_num" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="standard_id" property="standard_id" jdbcType="VARCHAR" />
+    <result column="metadata_name" property="metadata_name" jdbcType="VARCHAR" />
+    <result column="max_sale_num" property="max_sale_num" jdbcType="INTEGER" />
+    <result column="shopping_cart_id" property="shopping_cart_id" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="fullColumns" >
+    shopping_cart_detail_id, goods_name, standard_must, optional_first, optional_second, 
+    prdt_num, price, standard_id, metadata_name,max_sale_num,shopping_cart_id
+  </sql>
+  <sql id="fullColumnsValues" >
+    #{shoppingCartDetailId}, #{goods_name}, #{standard_must}, #{optional_first}, #{optional_second}, 
+    #{prdt_num}, #{price}, #{standard_id}, #{metadata_name},#{max_sale_num},#{shopping_cart_id}
+  </sql>
+  <select id="get" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="fullColumns" />
+    from shopping_cart_detail
+    where shopping_cart_detail_id = #{shopping_cart_detail_id}
+  </select>
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from shopping_cart_detail
+    where shopping_cart_detail_id = #{shoppingCartDetailId}
+  </delete>
+  <update id="update" parameterType="com.hjh.mall.bizapi.biz.goods.middle.entity.ShoppingCartDetail" >
+    update shopping_cart_detail
+    <set >
+      <if test="goods_name != null" >
+        goods_name = #{goods_name},
+      </if>
+      <if test="standard_must != null" >
+        standard_must = #{standard_must},
+      </if>
+      <if test="optional_first != null" >
+        optional_first = #{optional_first},
+      </if>
+      <if test="optional_second != null" >
+        optional_second = #{optional_second},
+      </if>
+      <if test="prdt_num != null" >
+        prdt_num = #{prdt_num},
+      </if>
+      <if test="price != null" >
+        price = #{price},
+      </if>
+      <if test="standard_id != null" >
+        standard_id = #{standard_id},
+      </if>
+      <if test="metadata_name != null" >
+        metadata_name = #{metadata_name},
+      </if>
+      <if test="max_sale_num != null" >
+        max_sale_num = #{max_sale_num},
+      </if>
+      <if test="shopping_cart_id != null" >
+        shopping_cart_id = #{shopping_cart_id},
+      </if>
+    </set>
+    where shopping_cart_detail_id = #{shoppingCartDetailId}
+  </update>
+  <sql id="fullWhere" >
+    <where >
+      <if test="shoppingCartDetailId != null" >
+         and shopping_cart_detail_id = #{shoppingCartDetailId}
+      </if>
+      <if test="goods_name != null" >
+         and goods_name = #{goods_name}
+      </if>
+      <if test="standard_must != null" >
+         and standard_must = #{standard_must}
+      </if>
+      <if test="optional_first != null" >
+         and optional_first = #{optional_first}
+      </if>
+      <if test="optional_second != null" >
+         and optional_second = #{optional_second}
+      </if>
+      <if test="prdt_num != null" >
+         and prdt_num = #{prdt_num}
+      </if>
+      <if test="price != null" >
+         and price = #{price}
+      </if>
+      <if test="standard_id != null" >
+         and standard_id = #{standard_id}
+      </if>
+      <if test="metadata_name != null" >
+         and metadata_name = #{metadata_name}
+      </if>
+      <if test="max_sale_num != null" >
+         and  max_sale_num = #{max_sale_num}
+      </if>
+      <if test="shopping_cart_id != null" >
+         and  shopping_cart_id = #{shopping_cart_id}
+      </if>
+    </where>
+  </sql>
+  <sql id="likeWhere" >
+    <where >
+      <if test="shoppingCartDetailId != null" >
+         and shopping_cart_detail_id like '%${shoppingCartDetailId}%'
+      </if>
+      <if test="goods_name != null" >
+         and goods_name like '%${goods_name}%'
+      </if>
+      <if test="standard_must != null" >
+         and standard_must like '%${standard_must}%'
+      </if>
+      <if test="optional_first != null" >
+         and optional_first like '%${optional_first}%'
+      </if>
+      <if test="optional_second != null" >
+         and optional_second like '%${optional_second}%'
+      </if>
+      <if test="prdt_num != null" >
+         and prdt_num like '%${prdt_num}%'
+      </if>
+      <if test="price != null" >
+         and price like '%${price}%'
+      </if>
+      <if test="standard_id != null" >
+         and standard_id like '%${standard_id}%'
+      </if>
+      <if test="metadata_name != null" >
+         and metadata_name like '%${metadata_name}%'
+      </if>
+      <if test="max_sale_num != null" >
+         and  max_sale_num like '%${max_sale_num}%'
+      </if>
+    </where>
+  </sql>
+  <select id="query" resultMap="BaseResultMap" >
+    select <include refid="fullColumns"/> from 
+	<include refid="tableName"/> 
+	<include refid="fullWhere"/> 
+	<include refid="sortAndPage"></include>
+  </select>
+  <sql id="sortAndPage" >
+    <if test="null != sortMarkers"> order by 
+		<foreach collection="sortMarkers" item="sortMarker" separator=","> 
+			${sortMarker.field} ${sortMarker.direction} 
+		</foreach> 
+	</if> 
+	<if test="null != page"> 
+		limit #{page.offset}, #{page.page_size} 
+	</if>
+  </sql>
+  <select id="countByLike" resultType="int" >
+    select count(1) from
+	<include refid="tableName"/>
+	<include refid="likeWhere"></include>
+  </select>
+  <insert id="batchSave" useGeneratedKeys="true">
+		insert into shopping_cart_detail ( 
+        <include refid="fullColumns"></include>
+        ) values
+        <foreach item="item" collection="list" separator=",">
+            (#{item.shoppingCartDetailId}, #{item.goods_name}, #{item.standard_must}, #{item.optional_first}, #{item.optional_second}, 
+    		#{item.prdt_num}, #{item.price}, #{item.standard_id}, #{item.metadata_name},#{item.max_sale_num},#{item.shopping_cart_id})
+        </foreach>
+	</insert>
+	  <delete id="batchDel">
+	    delete from shopping_cart_detail
+	    where shopping_cart_detail_id in (
+     	<foreach item="item" collection="ids" separator=",">
+          #{item}
+        </foreach>
+        )
+        <if test="shopping_cart_id !=null">
+        and shopping_cart_id=#{shopping_cart_id}
+        </if>
+    	
+  </delete>
+    <select id="getshoppingCartStandards" resultType="java.lang.String" parameterType="java.lang.String" >
+   SELECT standard_id from 
+   shopping_cart_detail WHERE shopping_cart_detail_id in (
+	<foreach item="item" collection="ids" separator=",">
+		#{item}
+	</foreach>
+	)
+	</select>
+  <select id="count" resultType="int" >
+    select count(1) from
+	<include refid="tableName"/>
+	<include refid="fullWhere"></include>
+  </select>
+  <select id="queryByPks" resultMap="BaseResultMap" >
+    select  
+	<include refid="fullColumns"/>
+	from
+	<include refid="tableName"/>
+	<include refid="fullWhere"></include>
+  </select>
+  <select id="queryByLike" resultType="map" >
+    select <include refid="fullColumns" /> from
+	<include refid="tableName"/>
+	<include refid="likeWhere"></include>
+	<include refid="sortAndPage"></include>
+  </select>
+  <select id="queryBydetails" resultType="map" >
+    select <include refid="fullColumns" /> from
+	<include refid="tableName"/>
+	where 
+	shopping_cart_id =#{shopping_cart_id}
+  </select>
+  <insert id="save" useGeneratedKeys="true" >
+    insert into <include refid="tableName"/>
+	( <include refid="fullColumns"></include> )
+	values( <include refid="fullColumnsValues"></include> )
+  </insert>
+  <select id="getLastshopcartDetailListByPks" resultType="map">
+ 	SELECT
+		s.shopping_cart_id,
+		g.max_sale_num,
+		g.price,
+		g.standard_id,
+		g.standard_must,
+		g.optional_first,
+		g.optional_second,
+		s.shopping_cart_detail_id,
+		s.metadata_name,
+		s.prdt_num
+	FROM
+		shopping_cart_detail AS s ,
+		goods_standard AS g
+	WHERE
+		<if test="ids != null and ids.size() > 0">
+		s.shopping_cart_detail_id in(<foreach collection="ids" item="t" separator=",">#{t}</foreach>)  AND
+		</if>
+		s.standard_id = g.standard_id
+  </select>
+  <update id="batchUpdateDetail">
+	<foreach collection="list" item="t">
+	  update <include refid="tableName"/> 
+	  set max_sale_num=#{t.max_sale_num}, price=#{t.price},standard_id=#{t.standard_id},standard_must=#{t.standard_must},
+	  optional_first=#{t.optional_first},optional_second=#{t.optional_second},shopping_cart_id=#{t.shopping_cart_id},
+	  metadata_name=#{t.metadata_name},prdt_num=#{t.prdt_num} where shopping_cart_detail_id=#{t.shopping_cart_detail_id};
+	</foreach>
+  </update>
+</mapper>

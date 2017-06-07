@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.GoodsStandardsDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	standard_id,standard_must,optional_first,optional_second,price,
+			remark,update_version,update_user,status,init_date,init_time 
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+		#{standard_id},#{standard_must},#{optional_first},#{optional_second},#{price},
+		#{remark},#{update_version},#{update_user},#{status},#{init_date},#{init_time}
+	</sql>
+	<sql id="fullWhere">
+		<where>
+			<if test="standard_id !=null"> AND standard_id=#{standard_id}
+			</if>
+			<if test="standard_must !=null">
+				AND standard_must=#{standard_must}
+			</if>
+			<if test="optional_first !=null">
+				AND optional_first=#{optional_first}
+			</if>
+			<if test="optional_second !=null">
+				AND optional_second=#{optional_second}
+			</if>
+			<if test="price !=null">
+				AND price=#{price}
+			</if>
+			<if test="remark != null">
+				AND remark = #{remark}
+			</if>
+			<if test="update_version != null">
+				AND update_version = #{update_version}
+			</if>
+			<if test="update_user != null">
+				AND update_user = #{update_user}
+			</if>
+			<if test="status != null">
+				AND status = #{status}
+			</if>
+			<if test="init_date != null">
+				AND init_date = #{init_date}
+			</if>
+			<if test="init_time != null">
+				AND init_time = #{init_time}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="fullSet">
+		<set>
+			<if test="standard_must !=null"> standard_must=#{standard_must},
+			</if>
+			<if test="optional_first !=null">
+				optional_first=#{optional_first},
+			</if>
+			<if test="optional_second !=null">
+				optional_second=#{optional_second},
+			</if>
+			<if test="price !=null">
+				price=#{price},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>
+			<if test="update_version != null">
+				update_version = #{update_version},
+			</if>
+			<if test="update_user != null">
+				update_user = #{update_user},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="init_date != null">
+				init_date = #{init_date},
+			</if>
+			<if test="init_time != null">
+				init_time = #{init_time},
+			</if>
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into goods_standard (
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update goods_standard
+		<include refid="fullSet"></include>
+		where standard_id=#{standard_id}
+	</update>
+
+	<delete id="delete">
+		delete
+		from goods_standard
+		where standard_id=#{key}
+	</delete>
+
+	<select id="get" resultType="GoodsStandards">
+		select
+		<include refid="fullColumns" />
+		from goods_standard
+		where standard_id=#{key}
+	</select>
+
+	<select id="query" resultType="GoodsStandards">
+		select
+		<include refid="fullColumns" />
+		from goods_standard
+		<include refid="fullWhere"></include>
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from goods_standard
+		<include refid="fullWhere"></include>
+	</select>
+
+	<select id="queryByIds" resultType="map">
+		select
+		<include refid="fullColumns" />
+		from goods_standard
+		where standard_id in
+		(
+		<foreach item="item" collection="ids" separator=",">
+			#{item}
+		</foreach>
+		)
+		<if test="status != null">
+			AND status = #{status}
+		</if>
+	</select>
+
+</mapper>

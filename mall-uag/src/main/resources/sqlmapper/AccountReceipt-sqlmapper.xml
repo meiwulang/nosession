@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.AccountReceiptDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	account_id,account_logo,account_name,bank_name,account_bank_name,account_bank_no,mobile,app_display,sort,create_time,create_date,create_user,create_user_name,update_time,update_date,update_user_name,
+			remark,update_version,update_user,status
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+        #{account_id},#{account_logo},#{account_name},#{bank_name},#{account_bank_name},#{account_bank_no},#{mobile},#{app_display},#{sort},#{create_time},#{create_date},#{create_user},#{create_user_name},#{update_time},#{update_date},#{update_user_name},
+        #{remark},#{update_version},#{update_user},#{status}
+	</sql>
+	<sql id="fullWhere">
+		<where>	
+			<if test="account_id !=null">
+			AND account_id=#{account_id}
+			</if>
+			<if test="account_logo !=null">
+			AND account_logo=#{account_logo}
+			</if>
+			<if test="account_name !=null">
+			AND account_name=#{account_name}
+			</if>
+			<if test="bank_name !=null">
+			AND bank_name=#{bank_name}
+			</if>
+			<if test="account_bank_name !=null">
+			AND account_bank_name=#{account_bank_name}
+			</if>
+			<if test="account_bank_no !=null">
+			AND account_bank_no=#{account_bank_no}
+			</if>
+			<if test="mobile !=null">
+			AND mobile=#{mobile}
+			</if>
+			<if test="app_display !=null">
+			AND app_display=#{app_display}
+			</if>
+			<if test="sort !=null">
+			AND sort=#{sort}
+			</if>
+			<if test="create_time !=null">
+			AND create_time=#{create_time}
+			</if>
+			<if test="create_date !=null">
+			AND create_date=#{create_date}
+			</if>
+			<if test="create_user !=null">
+			AND create_user=#{create_user}
+			</if>
+			<if test="create_user_name !=null">
+			AND create_user_name=#{create_user_name}
+			</if>
+			<if test="update_time !=null">
+			AND update_time=#{update_time}
+			</if>
+			<if test="update_date !=null">
+			AND update_date=#{update_date}
+			</if>
+			<if test="update_user_name !=null">
+			AND update_user_name=#{update_user_name}
+			</if>
+
+	    <if test="remark != null">
+				AND remark = #{remark}
+		</if>
+		<if test="update_version != null">
+				AND update_version = #{update_version}
+		</if>
+		<if test="update_user != null">
+				AND update_user = #{update_user}
+		</if>
+		<if test="status != null">
+				AND status = #{status}
+		</if>		 
+		</where>
+	</sql>
+	
+	<sql id="fullSet">
+		<set>	
+			<if test="account_logo !=null">
+			account_logo=#{account_logo},
+			</if>
+			<if test="account_name !=null">
+			account_name=#{account_name},
+			</if>
+			<if test="bank_name !=null">
+			bank_name=#{bank_name},
+			</if>
+			<if test="account_bank_name !=null">
+			account_bank_name=#{account_bank_name},
+			</if>
+			<if test="account_bank_no !=null">
+			account_bank_no=#{account_bank_no},
+			</if>
+			<if test="mobile !=null">
+			mobile=#{mobile},
+			</if>
+			<if test="app_display !=null">
+			app_display=#{app_display},
+			</if>
+			<if test="sort !=null">
+			sort=#{sort},
+			</if>
+			<if test="create_time !=null">
+			create_time=#{create_time},
+			</if>
+			<if test="create_date !=null">
+			create_date=#{create_date},
+			</if>
+			<if test="create_user !=null">
+			create_user=#{create_user},
+			</if>
+			<if test="create_user_name !=null">
+			create_user_name=#{create_user_name},
+			</if>
+			<if test="update_time !=null">
+			update_time=#{update_time},
+			</if>
+			<if test="update_date !=null">
+			update_date=#{update_date},
+			</if>
+			<if test="update_user_name !=null">
+			update_user_name=#{update_user_name},
+			</if>
+	
+          <if test="remark != null">
+				remark = #{remark},
+		  </if>
+		  <if test="update_version != null">
+				update_version = #{update_version},
+		  </if>
+		  <if test="update_user != null">
+				update_user = #{update_user},
+		  </if>
+          <if test="status != null">
+				status = #{status},
+		</if>			  
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into account_receipt ( 
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update 	account_receipt 
+		<include refid="fullSet"></include>
+		where account_id=#{account_id}		
+	</update>
+	
+	<delete id="delete">
+		delete 
+		from account_receipt 
+		where account_id=#{key}	
+	</delete>
+
+	<select id="get" resultType="AccountReceipt">
+		select
+		<include refid="fullColumns" />
+		from account_receipt
+		where account_id=#{key}		
+	</select>
+	
+	<select id="query" resultType="AccountReceipt">
+		select
+		<include refid="fullColumns" />
+		from account_receipt 
+		<include refid="fullWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from account_receipt
+		<include refid="fullWhere"></include>
+	</select>	
+	
+	<select id="isExist" resultType="AccountReceipt">
+		select
+		<include refid="fullColumns" />
+		from account_receipt 
+		<where>
+		<if test="account_id !=null">
+			AND account_id!=#{account_id}
+		</if>
+		<if test="account_name !=null">
+			AND account_name=#{account_name}
+		</if>
+		<if test="bank_name !=null">
+			AND bank_name=#{bank_name}
+		</if>
+		<if test="account_bank_name !=null">
+			AND account_bank_name=#{account_bank_name}
+		</if>
+		<if test="account_bank_no !=null">
+			AND account_bank_no=#{account_bank_no}
+		</if>
+		<if test="sort !=null">
+			AND sort=#{sort}
+		</if>
+		</where>
+	</select>
+
+	
+</mapper>

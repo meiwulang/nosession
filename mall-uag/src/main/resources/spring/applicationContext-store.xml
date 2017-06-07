@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                          http://www.springframework.org/schema/context 
+                        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                        "
+	default-autowire="byName">
+	<context:annotation-config />
+	<context:component-scan base-package="com.hjh.mall.store" />
+
+	<bean id="fileResource" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>classpath:conf/store/store.properties</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="fileCFG"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations" ref="fileResource" />
+	</bean>
+
+	<bean id="aliYunOss" class="com.hjh.mall.store.config.AliYunOss">
+		<property name="endpoint" value="${endpoint}" />
+		<property name="accessKeyId" value="${accessKeyId}" />
+		<property name="accessKeySecret" value="${accessKeySecret}" />
+		<property name="bucketName" value="${bucketName}" />
+	</bean>
+
+</beans>

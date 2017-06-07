@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.VerifyMsgDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	verify_msg_id,
+        	mobile_tel,
+        	verify_msg,
+        	authmsg_busi_type,
+        	add_date,
+			add_time,
+			consecutive_requests,
+        	verify_date,
+        	verify_time,
+        	last_fail_date,
+        	last_fail_time,
+        	status,
+        	consecutive_failures,
+        	init_date
+	    ]]>
+	</sql>
+
+	<sql id="fullWhere">
+		<where>
+			<if test="verify_msg_id != null">
+				AND verify_msg_id = #{verify_msg_id}
+			</if>
+			<if test="mobile_tel != null">
+				AND mobile_tel = #{mobile_tel}
+			</if>
+			<if test="verify_msg != null">
+				AND verify_msg = #{verify_msg}
+			</if>
+			<if test="authmsg_busi_type != null">
+				AND authmsg_busi_type = #{authmsg_busi_type}
+			</if>
+			<if test="add_date != null">
+				AND add_date = #{add_date}
+			</if>
+			<if test="add_time != null">
+				AND add_time = #{add_time}
+			</if>
+			<if test="consecutive_requests != null">
+				AND consecutive_requests = #{consecutive_requests}
+			</if>
+			<if test="verify_date != null">
+				AND verify_date = #{verify_date}
+			</if>
+			<if test="verify_time != null">
+				AND verify_time = #{verify_time}
+			</if>
+			<if test="last_fail_date != null">
+				AND last_fail_date = #{last_fail_date}
+			</if>
+			<if test="last_fail_time != null">
+				AND last_fail_time = #{last_fail_time}
+			</if>
+			<if test="status != null">
+				AND status = #{status}
+			</if>
+			<if test="consecutive_failures != null">
+				AND consecutive_failures = #{consecutive_failures}
+			</if>
+			<if test="init_date != null">
+				AND init_date = #{init_date}
+			</if>
+		</where>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into verify_msg (
+			<include refid="fullColumns" />
+		)values(
+		#{verify_msg_id},
+		#{mobile_tel},
+		#{verify_msg},
+		#{authmsg_busi_type},
+		#{add_date},
+		#{add_time},
+		#{consecutive_requests},
+		#{verify_date},
+		#{verify_time},
+		#{last_fail_date},
+		#{last_fail_time},
+		#{status},
+		#{consecutive_failures},
+		#{init_date}
+		)
+
+	</insert>
+
+	<update id="update">
+		update verify_msg set
+		mobile_tel=#{mobile_tel},
+		verify_msg=#{verify_msg},
+		authmsg_busi_type=#{authmsg_busi_type},
+		add_date=#{add_date},
+		add_time=#{add_time},
+		consecutive_requests=#{consecutive_requests},
+		verify_date=#{verify_date},
+		verify_time=#{verify_time},
+		last_fail_date=#{last_fail_date},
+		last_fail_time=#{last_fail_time},
+		status=#{status},
+		consecutive_failures=#{consecutive_failures},
+		init_date=#{init_date}
+		where verify_msg_id = #{verify_msg_id} 
+	</update>
+
+	<delete id="delete">
+		delete from verify_msg
+		where verify_msg_id = #{verify_msg_id}
+	</delete>
+	<delete id="deleteAllVerify">
+	delete from verify_msg;
+	</delete>
+	<select id="getVerifyMsg" resultType="VerifyMsg">
+		select
+		<include refid="fullColumns" />
+		from verify_msg
+		where mobile_tel=#{mobile_tel} and authmsg_busi_type=#{authmsg_busi_type}
+		ORDER BY
+		CONCAT(add_date, add_time) DESC
+		LIMIT 1;
+	</select>
+	<select id="get" resultType="VerifyMsg">
+		select
+		<include refid="fullColumns" />
+		from verify_msg
+		where verify_msg_id = #{verify_msg_id}
+	</select>
+	<select id="count" resultType="Integer">
+		select count(1) from verify_msg
+		<include refid="fullWhere" />
+	</select>
+
+	<select id="query" resultType="VerifyMsg">
+		select
+		<include refid="fullColumns" />
+		from verify_msg
+		<include refid="fullWhere" />
+		<include refid="sortAndPage" />
+	</select>
+
+	<select id="queryAll" resultType="VerifyMsg">
+		select
+		<include refid="fullColumns" />
+		from verify_msg
+	</select>
+	<select id="getRequestsTotal" resultType="Integer">
+	select ifnull(sum(a.consecutive_requests),0) FROM(SELECT
+	verify_msg.consecutive_requests
+	FROM
+	verify_msg
+	WHERE
+	verify_msg.mobile_tel = #{mobile_tel}
+	GROUP BY
+	verify_msg.authmsg_busi_type) a
+	</select>
+	<select id="getRequestsTimes" resultType="Integer">
+	select  consecutive_requests
+	from verify_msg
+	where mobile_tel=#{mobile_tel} and authmsg_busi_type = #{authmsg_busi_type}
+	</select>
+</mapper>

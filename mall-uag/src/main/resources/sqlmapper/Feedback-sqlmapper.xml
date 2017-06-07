@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjh.mall.dao.FeedbackDao">
+
+	<sql id="fullColumns">
+        <![CDATA[
+        	feedback_id,type,content,contact,reply_content,reply_user,reply_date,init_date,init_time,
+			remark,update_version,update_user,status,source,create_user,create_user_name,create_date,create_time
+	    ]]>
+	</sql>
+	<sql id="queryfullColumns">
+        <![CDATA[
+        	feedback_id,type,content,contact,reply_content,reply_user,reply_date,
+			remark,status,source,create_user,update_user,
+			IF (
+				CONCAT(create_date, create_time) = NULL,
+				'1',
+				CONCAT(
+					SUBSTRING(create_date ,- 8, 4),
+					'-',
+					SUBSTRING(create_date ,- 4, 2),
+					'-',
+					SUBSTRING(create_date ,- 2, 2),
+					' ',
+					SUBSTRING(create_time ,- 6, 2),
+					':',
+					SUBSTRING(create_time ,- 4, 2),
+					':',
+					SUBSTRING(create_time ,- 2, 2)
+				)
+			) create_date
+	    ]]>
+	</sql>
+	<sql id="fullColumnsValues">
+        #{feedback_id},#{type},#{content},#{contact},#{reply_content},#{reply_user},#{reply_date},#{init_date},#{init_time},
+        #{remark},#{update_version},#{update_user},#{status},#{source},#{create_user},#{create_user_name},#{create_date},#{create_time}
+	</sql>
+	<sql id="fullWhere">
+		<where>	
+			<if test="feedback_id !=null">
+			AND feedback_id=#{feedback_id}
+			</if>
+			<if test="type !=null">
+			AND type=#{type}
+			</if>
+			<if test="content !=null">
+			AND content=#{content}
+			</if>
+			<if test="contact !=null">
+			AND contact=#{contact}
+			</if>
+			<if test="reply_content !=null">
+			AND reply_content=#{reply_content}
+			</if>
+			<if test="reply_user !=null">
+			AND reply_user=#{reply_user}
+			</if>
+			<if test="reply_date !=null">
+			AND reply_date=#{reply_date}
+			</if>
+			<if test="init_date !=null">
+			AND init_date=#{init_date}
+			</if>
+			<if test="init_time !=null">
+			AND init_time=#{init_time}
+			</if>
+			<if test="create_user !=null">
+			AND create_user=#{create_user}
+			</if>
+			<if test="source !=null">
+			AND source=#{source}
+			</if>
+
+	    <if test="remark != null">
+				AND remark = #{remark}
+		</if>
+		<if test="update_version != null">
+				AND update_version = #{update_version}
+		</if>
+		<if test="update_user != null">
+				AND update_user = #{update_user}
+		</if>
+		<if test="status != null">
+				AND status = #{status}
+		</if>		 
+		</where>
+	</sql>
+	
+	<sql id="fullSet">
+		<set>	
+			<if test="type !=null">
+			type=#{type},
+			</if>
+			<if test="content !=null">
+			content=#{content},
+			</if>
+			<if test="contact !=null">
+			contact=#{contact},
+			</if>
+			<if test="reply_content !=null">
+			reply_content=#{reply_content},
+			</if>
+			<if test="reply_user !=null">
+			reply_user=#{reply_user},
+			</if>
+			<if test="reply_date !=null">
+			reply_date=#{reply_date},
+			</if>
+			<if test="init_date !=null">
+			init_date=#{init_date},
+			</if>
+			<if test="init_time !=null">
+			init_time=#{init_time},
+			</if>
+	
+          <if test="remark != null">
+				remark = #{remark},
+		  </if>
+		  <if test="update_version != null">
+				update_version = #{update_version},
+		  </if>
+		  <if test="update_user != null">
+				update_user = #{update_user},
+		  </if>
+		  <if test="create_user != null">
+				create_user = #{create_user},
+		  </if>
+		  <if test="create_user_name != null">
+				create_user_name = #{create_user_name},
+		  </if>
+          <if test="status != null">
+				status = #{status},
+		</if>			  
+		</set>
+	</sql>
+	<sql id="sortAndPage">
+		<if test="null != sortMarkers">
+			order by
+			<foreach collection="sortMarkers" item="sortMarker"
+				separator=",">
+				${sortMarker.field} ${sortMarker.direction}
+			</foreach>
+		</if>
+		<if test="null != page">
+			limit #{page.offset}, #{page.page_size}
+		</if>
+	</sql>
+	<insert id="save" useGeneratedKeys="true">
+		insert into feedback ( 
+		<include refid="fullColumns"></include>
+		) values(
+		<include refid="fullColumnsValues"></include>
+		)
+
+	</insert>
+
+	<update id="update">
+		update 	feedback 
+		<include refid="fullSet"></include>
+		where feedback_id=#{feedback_id}		
+	</update>
+	
+	<delete id="delete">
+		delete 
+		from feedback 
+		where feedback_id=#{key}	
+	</delete>
+
+	<select id="get" resultType="Feedback">
+		select
+		<include refid="fullColumns" />
+		from feedback
+		where feedback_id=#{key}		
+	</select>
+	
+	<select id="query" resultType="Feedback">
+		select
+		<include refid="fullColumns" />
+		from feedback 
+		<include refid="fullWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="count" resultType="int">
+		select count(*)
+		from feedback
+		<include refid="fullWhere"></include>
+	</select>
+	<sql id="queryWhere">
+		<where>	
+			<if test="feedback_id !=null">
+			AND feedback_id=#{feedback_id}
+			</if>
+			<if test="type !=null">
+			AND type=#{type}
+			</if>
+			<if test="content !=null">
+			AND content like CONCAT('%',#{content},'%')
+			</if>
+			<if test="contact !=null">
+			AND contact like CONCAT('%',#{contact},'%')
+			</if>
+			<if test="reply_content !=null">
+			AND reply_content=#{reply_content}
+			</if>
+			<if test="reply_user !=null">
+			AND reply_user=#{reply_user}
+			</if>
+			<if test="date_end !=null">
+				AND  CONCAT(create_date,create_time) <![CDATA[<=]]> #{date_end}
+			</if>
+			<if test="date_start !=null">
+				AND CONCAT(create_date,create_time) <![CDATA[>=]]> #{date_start}
+			</if>
+		    <if test="remark != null">
+				AND remark = #{remark}
+			</if>
+			<if test="update_version != null">
+				AND update_version = #{update_version}
+			</if>
+			<if test="update_user != null">
+				AND update_user = #{update_user}
+			</if>
+			<if test="update_user_name != null">
+				AND update_user_name = CONCAT('%',#{update_user_name},'%')
+			</if>
+			<choose>
+			<when test="status != null">
+                AND status = #{status}
+            </when>
+            <otherwise>
+                AND status != "0"
+            </otherwise>
+            </choose>
+            <if test="create_user !=null">
+				AND create_user=#{create_user}
+			</if>
+			<if test="source !=null">
+				AND source=#{source}
+			</if>		 
+		</where>
+	</sql>
+	
+	<select id="findFeedbackByParm" resultType="map">
+		select
+		<include refid="queryfullColumns" />
+		from feedback 
+		<include refid="queryWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	<select id="findFeedbackCountByParm" resultType="int">
+		select count(*)
+		from feedback
+		<include refid="queryWhere"></include>
+	</select>
+	
+	<select id="queryBlur" resultType="map">
+		select
+		<include refid="fullColumns" />
+		from feedback 
+		<include refid="queryWhere"></include> 
+		<include refid="sortAndPage"></include>
+	</select>
+	
+	<select id="queryCountBlur" resultType="int">
+		select count(feedback_id)
+		from feedback
+		<include refid="queryWhere"></include>
+	</select>	
+
+	
+</mapper>

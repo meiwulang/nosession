@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title></title>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				word-break: break-all;
+			}
+			*{
+				padding: 0; margin: 0;
+			}
+			img {
+				max-width: 100%;
+				display: block;
+			}
+			p{
+				padding: 0px 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+		{{}}
+	</body>
+
+</html>

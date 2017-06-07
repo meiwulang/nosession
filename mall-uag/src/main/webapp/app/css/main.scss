@@ -1,0 +1,143 @@
+$bg-color:#f0f0f0;
+$color-blue:#20A0FF;
+$light-blue:#58B7FF;
+$color-dark:#324157;
+$color-text-dark:#bfcbd9;
+h1,h2,h3,h4,h5,h6,ol,ul,li,dl,dt,dd{
+    padding: 0;
+    margin: 0;
+    font-style: normal;
+    list-style:none;
+}
+html,body{
+  height:100%;
+}
+body{
+    padding: 0;
+    margin: 0;
+    font-family: "微软雅黑",arial;
+    font-size: 12px;
+    color: #666666;
+    background-color: $bg-color;
+}
+a{
+    text-decoration: none;
+    color: $color-blue;
+}
+
+/**
+ * 布局 
+ * **/
+.hjh-wrap{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    min-width: 1000px;
+//  min-height: 600px;
+}
+.hjh-left{
+    width: 240px;
+    height: 100%;
+    position: relative;
+    h1{
+        height: 64px;
+        background: url(../images/logo.png) 28px center no-repeat $color-dark;
+        border-bottom: 1px solid $color-text-dark;
+    }
+    .hjh-menu{
+        position: absolute;
+        top: 65px;
+        bottom: 0px;
+        width: 100%;
+        overflow: hidden;
+        overflow-y: auto;
+        background-color: #324157;
+        > ul{
+            height: 100%;
+        }
+        a{
+            color: #FFFFFF;
+            display: block;
+        }
+        a:hover{
+            color: $light-blue;
+        }
+        .is-active > a{
+            color: $color-blue;
+        }
+    }
+}
+.hjh-right{
+    overflow: hidden;
+    position: absolute;
+    left: 240px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    > .exit{
+        width: 100%;
+        height: 64px;
+        overflow: hidden;
+        background-color: $color-dark;
+        .exitBot {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            right: 86px;
+            top: 21px;
+            cursor: pointer;
+            background: url(../images/exit.png) no-repeat $color-dark;
+        }
+    }
+}
+.hjh-container{
+    position: absolute;
+//  width: 100%;
+    right: 0;
+    top: 65px;
+    bottom: 0;
+    left: 20px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.block-white{
+    overflow: hidden;
+    padding: 10px 20px;
+    background-color: #FFFFFF;
+}
+.selection-tip{
+    padding: 5px 10px; overflow: hidden; background-color: rgb(230, 243, 252); color: #666666;
+    border: 1px solid rgb(212, 240, 252); border-radius: 4px;
+    i{
+        color: #1D8CE0; margin-right: 5px; font-size: 16px; float: left;
+    }
+    span{
+        display: inline-block;
+    }
+}
+/**
+ * 主内容区域    
+ * **/
+/*面包屑*/
+.hjh-breadcrumb{
+    padding-left:22px;
+    background: url(../images/rightPos.png) left center no-repeat;
+    > div{
+        height: 40px;
+        line-height: 40px;
+    }
+    span{
+        font-size: 14px;
+    }
+}
+.el-table .cell{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    img{
+        width: 80px;
+        height: 30px;
+        display: inline-block;
+    }
+}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjh.mall.order.dao.OrderOperationLogDao">
+
+
+
+    <select id="test" resultType="java.lang.Integer">
+
+        select id from t_order_operation_log
+
+    </select>
+    
+    <resultMap id="BaseResultMap" type="com.hjh.mall.order.model.OrderOperationLogDomain" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+        <result column="ORDER_PRE_STATUS" property="orderPreStatus" jdbcType="INTEGER" />
+        <result column="ORDER_STATUS" property="orderStatus" jdbcType="INTEGER" />
+        <result column="OPERATION_MSG" property="operationMsg" jdbcType="VARCHAR" />
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+        <result column="OPERATOR_ID" property="operatorId" jdbcType="VARCHAR" />
+        <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ID, ORDER_ID, ORDER_PRE_STATUS, ORDER_STATUS, OPERATION_MSG, CREATE_TIME,OPERATOR_ID,OPERATOR_NAME
+    </sql>
+
+	<sql id="fullWhere">
+		<where>
+		<if test="orderId != null" >
+               AND ORDER_ID = #{orderId,jdbcType=INTEGER}
+            </if>
+            <if test="orderPreStatus != null" >
+                AND ORDER_PRE_STATUS = #{orderPreStatus,jdbcType=INTEGER}
+            </if>
+            <if test="orderStatus != null" >
+                AND ORDER_STATUS = #{orderStatus,jdbcType=INTEGER}
+            </if>
+            <if test="operationMsg != null" >
+                AND OPERATION_MSG = #{operationMsg,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null" >
+                AND CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+		</where>
+	</sql>
+
+
+	<select id="query" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+			<include refid="Base_Column_List" />
+		from t_order_operation_log
+			<include refid="fullWhere" />
+	</select>
+
+    <select id="getOrderOperationLog" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_order_operation_log
+        WHERE ORDER_ID = #{orderId,jdbcType=INTEGER}
+    </select>
+
+    <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_order_operation_log
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.hjh.mall.order.model.OrderOperationLogDomain" >
+        insert into t_order_operation_log (ID, ORDER_ID, ORDER_PRE_STATUS, 
+            ORDER_STATUS, OPERATION_MSG, CREATE_TIME,OPERATOR_ID,OPERATOR_NAME
+            )
+        values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{orderPreStatus,jdbcType=INTEGER}, 
+            #{orderStatus,jdbcType=INTEGER}, #{operationMsg,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{operatorId,jdbcType=VARCHAR},
+            #{operatorName,jdbcType=VARCHAR}
+
+            )
+    </insert>
+
+    <update id="update" parameterType="com.hjh.mall.order.model.OrderOperationLogDomain" >
+        update t_order_operation_log
+        <set >
+            <if test="orderId != null" >
+                ORDER_ID = #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="orderPreStatus != null" >
+                ORDER_PRE_STATUS = #{orderPreStatus,jdbcType=INTEGER},
+            </if>
+            <if test="orderStatus != null" >
+                ORDER_STATUS = #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="operationMsg != null" >
+                OPERATION_MSG = #{operationMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from t_order_operation_log
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+</mapper>

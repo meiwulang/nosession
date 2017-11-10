@@ -7,7 +7,7 @@
 		<groupId>com.hjh.mall</groupId>
 		<artifactId>mall-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../../mall-parent</relativePath>
+		<relativePath>../../../mall-parent</relativePath>
 	</parent>
 	<groupId>com.hjh.mall.common</groupId>
 	<artifactId>mall-common-es</artifactId>
@@ -26,5 +26,6 @@
 			<groupId>org.apache.solr</groupId>
 			<artifactId>solr-solrj</artifactId>
 		</dependency>
+
 	</dependencies>
 </project>

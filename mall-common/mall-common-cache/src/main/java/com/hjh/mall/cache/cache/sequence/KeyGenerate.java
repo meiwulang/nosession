@@ -67,7 +67,8 @@ public class KeyGenerate {
 	// 获取唯一序列号
 	public String getKeyGenerate(String prefix) {
 		StringBuilder builder = new StringBuilder();
-		String table_key = DateTimeUtil.toString(new Date(), DateTimeUtil.FORMAT_YYYYMMDD_NO_BREAK);
+		String table_key = DateTimeUtil.toString(new Date(),
+				DateTimeUtil.FORMAT_YYYYMMDD_NO_BREAK);
 		builder.append(prefix);
 		builder.append("_");
 		builder.append(DateTimeUtil.toString(new Date(), table_key));
@@ -75,7 +76,18 @@ public class KeyGenerate {
 		if (by == keyGenerate) {
 			cacheHelper.set(builder.toString(), String.valueOf(by), expireSecs);
 		}
-		return table_key + String.format("%0" + (length - keylength) + "d", (int) (keyGenerate));
+		return table_key + String.format("%0" + (length - keylength) + "d",
+				(int) (keyGenerate));
 	};
+
+	public static void main(String[] args) {
+		System.out.println(String.format("%012d", 2));
+		int n = 6;
+		String s = "abc";
+		System.out.println("%1$0" + (n - s.length()) + "d");
+		System.out.println(n - s.length());
+		System.out
+				.println(s + String.format("%1$0" + (n - s.length()) + "d", 0));
+	}
 
 }
